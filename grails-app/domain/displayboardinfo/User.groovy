@@ -6,6 +6,8 @@ class User {
 
 	int id;
 	UserType userType;
+	String login;
+	String password;
 	
     static constraints = {
     }
