@@ -1,5 +1,4 @@
-package displayboardinfo
-
+package displayboardinfo;
 
 
 import static org.springframework.http.HttpStatus.*

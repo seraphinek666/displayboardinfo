@@ -1,8 +1,8 @@
 modules = {
 'angular' {
-    resource url:"js/lib/angular/angular.js", nominify:true
+    resource url:"js/lib/angular.min.js"
    }
 'ui.bootstrap' {
-	resource url:"js/lib/angular-bootstrap/ui-bootstrap.js", nominify:true
+	resource url:"js/lib/bootstrap.min.js"
   }
  }
