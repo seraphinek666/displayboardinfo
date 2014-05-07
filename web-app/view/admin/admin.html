@@ -1,5 +1,5 @@
-
 <div id="wrapper">
+
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
 		style="margin-bottom: 0">
 		<div class="navbar-header" style="width: 100%;">
@@ -9,26 +9,28 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="">Panel administratora</a>
-
-
+			<a class="navbar-brand" href="index.html">Panel administratora</a>
+			
+			
 			<ul class="nav navbar-top-links navbar-right">
-
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
-						<i class="fa fa-caret-down"></i>
-				</a>
-					<ul class="dropdown-menu dropdown-user">
-						<li><a href=""><i class="fa fa-user fa-fw"></i>Ustawienia
-								użytkownika</a></li>
-						<li><a href=""><i class="fa fa-sign-out fa-fw"></i>Wyloguj
-								się</a></li>
-					</ul> <!-- /.dropdown-user --></li>
-				<!-- /.dropdown -->
-			</ul>
-
-
-
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>Ustawienia użytkownika</a>
+                        </li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Wyloguj się</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+			
+			
+			
 		</div>
 		<!-- /.navbar-header -->
 
@@ -36,22 +38,22 @@
 		<div class="navbar-default navbar-static-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="side-menu">
-
-					<li><a ui-sref=".dashboardy"><i
-							class="fa fa-dashboard fa-fw"></i> Dashboardy</a></li>
-					<li><a href=""><i class="fa fa-edit fa-fw"></i>
-							Słowniki<span class="fa arrow"></span></a>
+					
+					<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
+							Dashboardy</a></li>
+					<li><a href="#"><i class="fa fa-edit fa-fw"></i> Słowniki<span
+							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level collapse">
-							<li><a ui-sref=".uzytkownicy">Użytkownicy</a></li>
-							<li><a ui-sref=".pacjenci">Pacjenci</a></li>
-							<li><a ui-sref=".lekarze">Lekarze</a></li>
-							<li><a ui-sref=".gabinety">Gabinety</a></li>
+							<li><a>Użytkownicy</a></li>
+							<li><a>Pacjenci</a></li>
+							<li><a>Lekarze</a></li>
+							<li><a>Gabinety</a></li>
 
 
 						</ul> <!-- /.nav-second-level --></li>
-					<li><a ui-sref=".harmonogramy"><i
-							class="fa fa-table fa-fw"></i> Harmonogram przyjęć</a></li>
-
+					<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
+							Harmonogram przyjęć</a></li>
+					
 				</ul>
 				<!-- /#side-menu -->
 			</div>
@@ -61,16 +63,894 @@
 	</nav>
 
 	<div id="page-wrapper">
-
 		<div class="row">
 			<div class="col-lg-12">
-
-				<div ui-view></div>
+				<h1 class="page-header">Dashboard</h1>
 			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row -->
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
+						<div class="pull-right">
+							<div class="btn-group">
+								<button type="button"
+									class="btn btn-default btn-xs dropdown-toggle"
+									data-toggle="dropdown">
+									Actions <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu pull-right" role="menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<div id="morris-area-chart" style="position: relative;">
+							<svg height="347" version="1.1" width="978"
+								xmlns="http://www.w3.org/2000/svg"
+								style="overflow: hidden; position: relative;">
+								<desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc>
+								<defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+								<text x="50.5" y="312" text-anchor="end"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text>
+								<path fill="none" stroke="#aaaaaa" d="M63,312H953"
+									stroke-width="0.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<text x="50.5" y="240.25" text-anchor="end"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">7,500</tspan></text>
+								<path fill="none" stroke="#aaaaaa" d="M63,240.25H953"
+									stroke-width="0.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<text x="50.5" y="168.5" text-anchor="end"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">15,000</tspan></text>
+								<path fill="none" stroke="#aaaaaa" d="M63,168.5H953"
+									stroke-width="0.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<text x="50.5" y="96.75000000000003" text-anchor="end"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.500000000000028"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">22,500</tspan></text>
+								<path fill="none" stroke="#aaaaaa" d="M63,96.75000000000003H953"
+									stroke-width="0.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<text x="50.5" y="25" text-anchor="end"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">30,000</tspan></text>
+								<path fill="none" stroke="#aaaaaa" d="M63,25H953"
+									stroke-width="0.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<text x="953" y="324.5" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									transform="matrix(1,0,0,1,0,7.5)"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-06</tspan></text>
+								<text x="853.5503518809174" y="324.5" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									transform="matrix(1,0,0,1,0,7.5)"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012-03</tspan></text>
+								<text x="755.137106981925" y="324.5" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									transform="matrix(1,0,0,1,0,7.5)"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2011-12</tspan></text>
+								<text x="656.6788010733634" y="324.5" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									transform="matrix(1,0,0,1,0,7.5)"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2011-09</tspan></text>
+								<text x="557.1840919447117" y="324.5" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									transform="matrix(1,0,0,1,0,7.5)"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2011-06</tspan></text>
+								<text x="457.7344438256291" y="324.5" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									transform="matrix(1,0,0,1,0,7.5)"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2011-03</tspan></text>
+								<text x="360.4026631562959" y="324.5" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									transform="matrix(1,0,0,1,0,7.5)"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2010-12</tspan></text>
+								<text x="261.9443572477343" y="324.5" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									transform="matrix(1,0,0,1,0,7.5)"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2010-09</tspan></text>
+								<text x="162.44964811908258" y="324.5" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									transform="matrix(1,0,0,1,0,7.5)"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2010-06</tspan></text>
+								<text x="63" y="324.5" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+									font-size="12px" font-family="sans-serif" font-weight="normal"
+									transform="matrix(1,0,0,1,0,7.5)"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+								<tspan dy="4.5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2010-03</tspan></text>
+								<path fill="#7cb47c" stroke="none"
+									d="M63,261.1723C87.86241202977064,255.91063333333335,137.58723608931194,244.9903770498301,162.44964811908258,240.12563333333333C187.3233254012455,235.25868538316345,237.07067996557134,228.90513542757418,261.9443572477343,222.24553333333336C286.5589337248747,215.65530209424085,335.78808667915547,189.09273714039128,360.4026631562959,187.12630000000001C384.7356083236292,185.18236214039126,433.4014986582958,205.17383090603772,457.7344438256291,206.60403333333335C482.5968558553998,208.06535590603772,532.321679914941,197.7192121442054,557.1840919447117,198.69240000000002C582.0577692268746,199.66602881087204,631.8051237912005,231.66659633507854,656.6788010733634,214.3913C681.2933775505038,197.29595466841187,730.5225305047845,69.54909163042652,755.137106981925,61.209833333333364C779.7404182066731,52.874391630426516,828.9470406561693,135.46491434752906,853.5503518809174,147.69250000000002C878.4127639106881,160.0488560141957,928.1375879702293,156.58232500000003,953,159.5456L953,312L63,312Z"
+									fill-opacity="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></path>
+								<path fill="none" stroke="#4da74d"
+									d="M63,261.1723C87.86241202977064,255.91063333333335,137.58723608931194,244.9903770498301,162.44964811908258,240.12563333333333C187.3233254012455,235.25868538316345,237.07067996557134,228.90513542757418,261.9443572477343,222.24553333333336C286.5589337248747,215.65530209424085,335.78808667915547,189.09273714039128,360.4026631562959,187.12630000000001C384.7356083236292,185.18236214039126,433.4014986582958,205.17383090603772,457.7344438256291,206.60403333333335C482.5968558553998,208.06535590603772,532.321679914941,197.7192121442054,557.1840919447117,198.69240000000002C582.0577692268746,199.66602881087204,631.8051237912005,231.66659633507854,656.6788010733634,214.3913C681.2933775505038,197.29595466841187,730.5225305047845,69.54909163042652,755.137106981925,61.209833333333364C779.7404182066731,52.874391630426516,828.9470406561693,135.46491434752906,853.5503518809174,147.69250000000002C878.4127639106881,160.0488560141957,928.1375879702293,156.58232500000003,953,159.5456"
+									stroke-width="3"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<circle cx="63" cy="261.1723" r="2" fill="#4da74d"
+									stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="162.44964811908258" cy="240.12563333333333" r="2"
+									fill="#4da74d" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="261.9443572477343" cy="222.24553333333336" r="2"
+									fill="#4da74d" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="360.4026631562959" cy="187.12630000000001" r="2"
+									fill="#4da74d" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="457.7344438256291" cy="206.60403333333335" r="2"
+									fill="#4da74d" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="557.1840919447117" cy="198.69240000000002" r="2"
+									fill="#4da74d" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="656.6788010733634" cy="214.3913" r="2"
+									fill="#4da74d" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="755.137106981925" cy="61.209833333333364" r="2"
+									fill="#4da74d" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="853.5503518809174" cy="147.69250000000002" r="2"
+									fill="#4da74d" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="953" cy="159.5456" r="2" fill="#4da74d"
+									stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<path fill="#a7b3bc" stroke="none"
+									d="M63,286.4952666666667C87.86241202977064,280.7409166666667,137.58723608931194,268.5171625047188,162.44964811908258,263.47786666666667C187.3233254012455,258.4362875047188,237.07067996557134,248.92696666666666,261.9443572477343,246.17176666666666C286.5589337248747,243.44526666666664,335.78808667915547,243.7676682873034,360.4026631562959,241.55106666666666C384.7356083236292,239.35982662063674,433.4014986582958,231.6149211815892,457.7344438256291,228.5404C482.5968558553998,225.39897951492253,532.321679914941,216.55698369007172,557.1840919447117,216.6873C582.0577692268746,216.8176753567384,631.8051237912005,242.89876457242582,656.6788010733634,229.58316666666667C681.2933775505038,216.40627290575918,730.5225305047845,118.53030453192952,755.137106981925,110.71733333333336C779.7404182066731,102.90793786526285,828.9470406561693,158.89161778638123,853.5503518809174,167.0937C878.4127639106881,175.3821594530479,928.1375879702293,174.28305,953,176.67950000000002L953,312L63,312Z"
+									fill-opacity="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></path>
+								<path fill="none" stroke="#7a92a3"
+									d="M63,286.4952666666667C87.86241202977064,280.7409166666667,137.58723608931194,268.5171625047188,162.44964811908258,263.47786666666667C187.3233254012455,258.4362875047188,237.07067996557134,248.92696666666666,261.9443572477343,246.17176666666666C286.5589337248747,243.44526666666664,335.78808667915547,243.7676682873034,360.4026631562959,241.55106666666666C384.7356083236292,239.35982662063674,433.4014986582958,231.6149211815892,457.7344438256291,228.5404C482.5968558553998,225.39897951492253,532.321679914941,216.55698369007172,557.1840919447117,216.6873C582.0577692268746,216.8176753567384,631.8051237912005,242.89876457242582,656.6788010733634,229.58316666666667C681.2933775505038,216.40627290575918,730.5225305047845,118.53030453192952,755.137106981925,110.71733333333336C779.7404182066731,102.90793786526285,828.9470406561693,158.89161778638123,853.5503518809174,167.0937C878.4127639106881,175.3821594530479,928.1375879702293,174.28305,953,176.67950000000002"
+									stroke-width="3"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<circle cx="63" cy="286.4952666666667" r="2" fill="#7a92a3"
+									stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="162.44964811908258" cy="263.47786666666667" r="2"
+									fill="#7a92a3" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="261.9443572477343" cy="246.17176666666666" r="2"
+									fill="#7a92a3" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="360.4026631562959" cy="241.55106666666666" r="2"
+									fill="#7a92a3" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="457.7344438256291" cy="228.5404" r="2"
+									fill="#7a92a3" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="557.1840919447117" cy="216.6873" r="2"
+									fill="#7a92a3" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="656.6788010733634" cy="229.58316666666667" r="2"
+									fill="#7a92a3" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="755.137106981925" cy="110.71733333333336" r="2"
+									fill="#7a92a3" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="853.5503518809174" cy="167.0937" r="2"
+									fill="#7a92a3" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="953" cy="176.67950000000002" r="2" fill="#7a92a3"
+									stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<path fill="#2577b5" stroke="none"
+									d="M63,286.4952666666667C87.86241202977064,286.2274,137.58723608931194,288.1090333220083,162.44964811908258,285.4238C187.3233254012455,282.737349988675,237.07067996557134,266.19740453752183,261.9443572477343,265.00853333333333C286.5589337248747,263.8320462041885,335.78808667915547,278.24511754890676,360.4026631562959,275.96236666666664C384.7356083236292,273.70573421557344,433.4014986582958,249.1021788413098,457.7344438256291,246.851C482.5968558553998,244.55083717464316,532.321679914941,255.3778306719517,557.1840919447117,257.757C582.0577692268746,260.13724733861835,631.8051237912005,277.1919588132635,656.6788010733634,265.88866666666667C681.2933775505038,254.70311714659687,730.5225305047845,174.81919334897384,755.137106981925,167.80163333333334C779.7404182066731,160.7872850156405,828.9470406561693,201.8611017915433,853.5503518809174,209.76103333333333C878.4127639106881,217.74416012487663,928.1375879702293,225.94065833333332,953,231.33386666666667L953,312L63,312Z"
+									fill-opacity="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></path>
+								<path fill="none" stroke="#0b62a4"
+									d="M63,286.4952666666667C87.86241202977064,286.2274,137.58723608931194,288.1090333220083,162.44964811908258,285.4238C187.3233254012455,282.737349988675,237.07067996557134,266.19740453752183,261.9443572477343,265.00853333333333C286.5589337248747,263.8320462041885,335.78808667915547,278.24511754890676,360.4026631562959,275.96236666666664C384.7356083236292,273.70573421557344,433.4014986582958,249.1021788413098,457.7344438256291,246.851C482.5968558553998,244.55083717464316,532.321679914941,255.3778306719517,557.1840919447117,257.757C582.0577692268746,260.13724733861835,631.8051237912005,277.1919588132635,656.6788010733634,265.88866666666667C681.2933775505038,254.70311714659687,730.5225305047845,174.81919334897384,755.137106981925,167.80163333333334C779.7404182066731,160.7872850156405,828.9470406561693,201.8611017915433,853.5503518809174,209.76103333333333C878.4127639106881,217.74416012487663,928.1375879702293,225.94065833333332,953,231.33386666666667"
+									stroke-width="3"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<circle cx="63" cy="286.4952666666667" r="2" fill="#0b62a4"
+									stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="162.44964811908258" cy="285.4238" r="2"
+									fill="#0b62a4" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="261.9443572477343" cy="265.00853333333333" r="2"
+									fill="#0b62a4" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="360.4026631562959" cy="275.96236666666664" r="2"
+									fill="#0b62a4" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="457.7344438256291" cy="246.851" r="2" fill="#0b62a4"
+									stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="557.1840919447117" cy="257.757" r="2" fill="#0b62a4"
+									stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="656.6788010733634" cy="265.88866666666667" r="2"
+									fill="#0b62a4" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="755.137106981925" cy="167.80163333333334" r="2"
+									fill="#0b62a4" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="853.5503518809174" cy="209.76103333333333" r="2"
+									fill="#0b62a4" stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle>
+								<circle cx="953" cy="231.33386666666667" r="2" fill="#0b62a4"
+									stroke="#ffffff" stroke-width="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle></svg>
+							<div class="morris-hover morris-default-style"
+								style="display: none;"></div>
+						</div>
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart Example
+						<div class="pull-right">
+							<div class="btn-group">
+								<button type="button"
+									class="btn btn-default btn-xs dropdown-toggle"
+									data-toggle="dropdown">
+									Actions <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu pull-right" role="menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-4">
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover table-striped">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Date</th>
+												<th>Time</th>
+												<th>Amount</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>3326</td>
+												<td>10/21/2013</td>
+												<td>3:29 PM</td>
+												<td>$321.33</td>
+											</tr>
+											<tr>
+												<td>3325</td>
+												<td>10/21/2013</td>
+												<td>3:20 PM</td>
+												<td>$234.34</td>
+											</tr>
+											<tr>
+												<td>3324</td>
+												<td>10/21/2013</td>
+												<td>3:03 PM</td>
+												<td>$724.17</td>
+											</tr>
+											<tr>
+												<td>3323</td>
+												<td>10/21/2013</td>
+												<td>3:00 PM</td>
+												<td>$23.71</td>
+											</tr>
+											<tr>
+												<td>3322</td>
+												<td>10/21/2013</td>
+												<td>2:49 PM</td>
+												<td>$8345.23</td>
+											</tr>
+											<tr>
+												<td>3321</td>
+												<td>10/21/2013</td>
+												<td>2:23 PM</td>
+												<td>$245.12</td>
+											</tr>
+											<tr>
+												<td>3320</td>
+												<td>10/21/2013</td>
+												<td>2:15 PM</td>
+												<td>$5663.54</td>
+											</tr>
+											<tr>
+												<td>3319</td>
+												<td>10/21/2013</td>
+												<td>2:13 PM</td>
+												<td>$943.45</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- /.table-responsive -->
+							</div>
+							<!-- /.col-lg-4 (nested) -->
+							<div class="col-lg-8">
+								<div id="morris-bar-chart" style="position: relative;">
+									<svg height="347" version="1.1" width="642"
+										xmlns="http://www.w3.org/2000/svg"
+										style="overflow: hidden; position: relative; left: -0.984375px;">
+										<desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc>
+										<defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+										<text x="33.5" y="312" text-anchor="end"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text>
+										<path fill="none" stroke="#aaaaaa" d="M46,312H617"
+											stroke-width="0.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="33.5" y="240.25" text-anchor="end"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">25</tspan></text>
+										<path fill="none" stroke="#aaaaaa" d="M46,240.25H617"
+											stroke-width="0.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="33.5" y="168.5" text-anchor="end"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">50</tspan></text>
+										<path fill="none" stroke="#aaaaaa" d="M46,168.5H617"
+											stroke-width="0.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="33.5" y="96.75" text-anchor="end"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">75</tspan></text>
+										<path fill="none" stroke="#aaaaaa" d="M46,96.75H617"
+											stroke-width="0.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="33.5" y="25" text-anchor="end"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">100</tspan></text>
+										<path fill="none" stroke="#aaaaaa" d="M46,25H617"
+											stroke-width="0.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+										<text x="576.2142857142857" y="324.5" text-anchor="middle"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012</tspan></text>
+										<text x="494.64285714285717" y="324.5" text-anchor="middle"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2011</tspan></text>
+										<text x="413.07142857142856" y="324.5" text-anchor="middle"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2010</tspan></text>
+										<text x="331.5" y="324.5" text-anchor="middle"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2009</tspan></text>
+										<text x="249.92857142857142" y="324.5" text-anchor="middle"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2008</tspan></text>
+										<text x="168.35714285714286" y="324.5" text-anchor="middle"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2007</tspan></text>
+										<text x="86.78571428571428" y="324.5" text-anchor="middle"
+											font="10px &quot;Arial&quot;" stroke="none" fill="#888888"
+											font-size="12px" font-family="sans-serif"
+											font-weight="normal" transform="matrix(1,0,0,1,0,7.5)"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; line-height: normal; font-family: sans-serif;">
+										<tspan dy="4.5"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2006</tspan></text>
+										<rect x="56.19642857142857" y="25" width="29.089285714285715"
+											height="287" r="0" rx="0" ry="0" fill="#0b62a4" stroke="none"
+											fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="88.28571428571428" y="53.69999999999999"
+											width="29.089285714285715" height="258.3" r="0" rx="0" ry="0"
+											fill="#7a92a3" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="137.76785714285714" y="96.75"
+											width="29.089285714285715" height="215.25" r="0" rx="0"
+											ry="0" fill="#0b62a4" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="169.85714285714286" y="125.44999999999999"
+											width="29.089285714285715" height="186.55" r="0" rx="0"
+											ry="0" fill="#7a92a3" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="219.33928571428572" y="168.5"
+											width="29.089285714285715" height="143.5" r="0" rx="0" ry="0"
+											fill="#0b62a4" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="251.42857142857144" y="197.2"
+											width="29.089285714285715" height="114.80000000000001" r="0"
+											rx="0" ry="0" fill="#7a92a3" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="300.9107142857143" y="96.75"
+											width="29.089285714285715" height="215.25" r="0" rx="0"
+											ry="0" fill="#0b62a4" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="333" y="125.44999999999999"
+											width="29.089285714285715" height="186.55" r="0" rx="0"
+											ry="0" fill="#7a92a3" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="382.48214285714283" y="168.5"
+											width="29.089285714285715" height="143.5" r="0" rx="0" ry="0"
+											fill="#0b62a4" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="414.57142857142856" y="197.2"
+											width="29.089285714285715" height="114.80000000000001" r="0"
+											rx="0" ry="0" fill="#7a92a3" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="464.0535714285714" y="96.75"
+											width="29.089285714285715" height="215.25" r="0" rx="0"
+											ry="0" fill="#0b62a4" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="496.1428571428571" y="125.44999999999999"
+											width="29.089285714285715" height="186.55" r="0" rx="0"
+											ry="0" fill="#7a92a3" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="545.625" y="25" width="29.089285714285715"
+											height="287" r="0" rx="0" ry="0" fill="#0b62a4" stroke="none"
+											fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
+										<rect x="577.7142857142857" y="53.69999999999999"
+											width="29.089285714285715" height="258.3" r="0" rx="0" ry="0"
+											fill="#7a92a3" stroke="none" fill-opacity="1"
+											style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect></svg>
+									<div class="morris-hover morris-default-style"
+										style="display: none;"></div>
+								</div>
+							</div>
+							<!-- /.col-lg-8 (nested) -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-clock-o fa-fw"></i> Timeline
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<ul class="timeline">
+							<li>
+								<div class="timeline-badge">
+									<i class="fa fa-check"></i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Timeline Event</h4>
+										<p>
+											<small class="text-muted"><i class="fa fa-time"></i>
+												11 hours ago via Twitter</small>
+										</p>
+									</div>
+									<div class="timeline-body">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+											elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in
+											metus eu lectus aliquet egestas.</p>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-badge warning">
+									<i class="fa fa-credit-card"></i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Timeline Event</h4>
+									</div>
+									<div class="timeline-body">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+											elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in
+											metus eu lectus aliquet egestas.</p>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+											elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in
+											metus eu lectus aliquet egestas.</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge danger">
+									<i class="fa fa-credit-card"></i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Timeline Event</h4>
+									</div>
+									<div class="timeline-body">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+											elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in
+											metus eu lectus aliquet egestas.</p>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Timeline Event</h4>
+									</div>
+									<div class="timeline-body">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+											elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in
+											metus eu lectus aliquet egestas.</p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge info">
+									<i class="fa fa-save"></i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Timeline Event</h4>
+									</div>
+									<div class="timeline-body">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+											elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in
+											metus eu lectus aliquet egestas.</p>
+										<hr>
+										<div class="btn-group">
+											<button type="button"
+												class="btn btn-primary btn-sm dropdown-toggle"
+												data-toggle="dropdown">
+												<i class="fa fa-cog"></i> <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#">Action</a></li>
+												<li><a href="#">Another action</a></li>
+												<li><a href="#">Something else here</a></li>
+												<li class="divider"></li>
+												<li><a href="#">Separated link</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Timeline Event</h4>
+									</div>
+									<div class="timeline-body">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+											elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in
+											metus eu lectus aliquet egestas.</p>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-badge success">
+									<i class="fa fa-thumbs-up"></i>
+								</div>
+								<div class="timeline-panel">
+									<div class="timeline-heading">
+										<h4 class="timeline-title">Timeline Event</h4>
+									</div>
+									<div class="timeline-body">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+											elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in
+											metus eu lectus aliquet egestas.</p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-8 -->
+			<div class="col-lg-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-bell fa-fw"></i> Notifications Panel
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<div class="list-group">
+							<a href="#" class="list-group-item"> <i
+								class="fa fa-comment fa-fw"></i> New Comment <span
+								class="pull-right text-muted small"><em>4 minutes
+										ago</em> </span>
+							</a> <a href="#" class="list-group-item"> <i
+								class="fa fa-twitter fa-fw"></i> 3 New Followers <span
+								class="pull-right text-muted small"><em>12 minutes
+										ago</em> </span>
+							</a> <a href="#" class="list-group-item"> <i
+								class="fa fa-envelope fa-fw"></i> Message Sent <span
+								class="pull-right text-muted small"><em>27 minutes
+										ago</em> </span>
+							</a> <a href="#" class="list-group-item"> <i
+								class="fa fa-tasks fa-fw"></i> New Task <span
+								class="pull-right text-muted small"><em>43 minutes
+										ago</em> </span>
+							</a> <a href="#" class="list-group-item"> <i
+								class="fa fa-upload fa-fw"></i> Server Rebooted <span
+								class="pull-right text-muted small"><em>11:32 AM</em> </span>
+							</a> <a href="#" class="list-group-item"> <i
+								class="fa fa-bolt fa-fw"></i> Server Crashed! <span
+								class="pull-right text-muted small"><em>11:13 AM</em> </span>
+							</a> <a href="#" class="list-group-item"> <i
+								class="fa fa-warning fa-fw"></i> Server Not Responding <span
+								class="pull-right text-muted small"><em>10:57 AM</em> </span>
+							</a> <a href="#" class="list-group-item"> <i
+								class="fa fa-shopping-cart fa-fw"></i> New Order Placed <span
+								class="pull-right text-muted small"><em>9:49 AM</em> </span>
+							</a> <a href="#" class="list-group-item"> <i
+								class="fa fa-money fa-fw"></i> Payment Received <span
+								class="pull-right text-muted small"><em>Yesterday</em> </span>
+							</a>
+						</div>
+						<!-- /.list-group -->
+						<a href="#" class="btn btn-default btn-block">View All Alerts</a>
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
+					</div>
+					<div class="panel-body">
+						<div id="morris-donut-chart">
+							<svg height="347" version="1.1" width="458"
+								xmlns="http://www.w3.org/2000/svg"
+								style="overflow: hidden; position: relative; left: -0.984375px;">
+								<desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc>
+								<defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+								<path fill="none" stroke="#0b62a4"
+									d="M229,286.6666666666667A110.66666666666667,110.66666666666667,0,0,0,333.4852359631316,212.4684326073909"
+									stroke-width="2" opacity="0"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
+								<path fill="#0b62a4" stroke="#ffffff"
+									d="M229,289.6666666666667A113.66666666666667,113.66666666666667,0,0,0,336.3176670585177,213.45703469614546L381.0071354523872,229.05497876316204A161,161,0,0,1,229,337Z"
+									stroke-width="3"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<path fill="none" stroke="#3980b5"
+									d="M333.4852359631316,212.4684326073909A110.66666666666667,110.66666666666667,0,0,0,129.72450623569802,127.09716318080189"
+									stroke-width="2" opacity="1"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 1;"></path>
+								<path fill="#3980b5" stroke="#ffffff"
+									d="M336.3176670585177,213.45703469614546A113.66666666666667,113.66666666666667,0,0,0,127.03330309148502,125.7714838694381L80.08675935354705,102.64574477120284A166,166,0,0,1,385.72785394469736,230.70264891108633Z"
+									stroke-width="3"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<path fill="none" stroke="#679dc6"
+									d="M129.72450623569802,127.09716318080189A110.66666666666667,110.66666666666667,0,0,0,228.9652330418721,286.66666120548547"
+									stroke-width="2" opacity="0"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
+								<path fill="#679dc6" stroke="#ffffff"
+									d="M127.03330309148502,125.7714838694381A113.66666666666667,113.66666666666667,0,0,0,228.9642905640915,289.6666610574414L228.9494203591091,336.9999920549683A161,161,0,0,1,84.5720979272354,104.85521029014252Z"
+									stroke-width="3"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+								<text x="229" y="166" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#000000"
+									font-size="15px" font-weight="800"
+									transform="matrix(1.992,0,0,1.992,-227.168,-173.6)"
+									stroke-width="0.502008032128514"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: 800; font-size: 15px; line-height: normal; font-family: Arial;">
+								<tspan dy="5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">In-Store Sales</tspan></text>
+								<text x="229" y="186" text-anchor="middle"
+									font="10px &quot;Arial&quot;" stroke="none" fill="#000000"
+									font-size="14px"
+									transform="matrix(2.3056,0,0,2.3056,-298.9722,-232.3889)"
+									stroke-width="0.4337349397590361"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-family: Arial;">
+								<tspan dy="5"
+									style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">30</tspan></text></svg>
+						</div>
+						<a href="#" class="btn btn-default btn-block">View Details</a>
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+				<div class="chat-panel panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-comments fa-fw"></i> Chat
+						<div class="btn-group pull-right">
+							<button type="button"
+								class="btn btn-default btn-xs dropdown-toggle"
+								data-toggle="dropdown">
+								<i class="fa fa-chevron-down"></i>
+							</button>
+							<ul class="dropdown-menu slidedown">
+								<li><a href="#"> <i class="fa fa-refresh fa-fw"></i>
+										Refresh
+								</a></li>
+								<li><a href="#"> <i class="fa fa-check-circle fa-fw"></i>
+										Available
+								</a></li>
+								<li><a href="#"> <i class="fa fa-times fa-fw"></i> Busy
+								</a></li>
+								<li><a href="#"> <i class="fa fa-clock-o fa-fw"></i>
+										Away
+								</a></li>
+								<li class="divider"></li>
+								<li><a href="#"> <i class="fa fa-sign-out fa-fw"></i>
+										Sign Out
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<ul class="chat">
+							<li class="left clearfix"><span class="chat-img pull-left">
+									<img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar"
+									class="img-circle">
+							</span>
+								<div class="chat-body clearfix">
+									<div class="header">
+										<strong class="primary-font">Jack Sparrow</strong> <small
+											class="pull-right text-muted"> <i
+											class="fa fa-clock-o fa-fw"></i> 12 mins ago
+										</small>
+									</div>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Curabitur bibendum ornare dolor, quis ullamcorper ligula
+										sodales.</p>
+								</div></li>
+							<li class="right clearfix"><span class="chat-img pull-right">
+									<img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar"
+									class="img-circle">
+							</span>
+								<div class="chat-body clearfix">
+									<div class="header">
+										<small class=" text-muted"> <i
+											class="fa fa-clock-o fa-fw"></i> 13 mins ago
+										</small> <strong class="pull-right primary-font">Bhaumik
+											Patel</strong>
+									</div>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Curabitur bibendum ornare dolor, quis ullamcorper ligula
+										sodales.</p>
+								</div></li>
+							<li class="left clearfix"><span class="chat-img pull-left">
+									<img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar"
+									class="img-circle">
+							</span>
+								<div class="chat-body clearfix">
+									<div class="header">
+										<strong class="primary-font">Jack Sparrow</strong> <small
+											class="pull-right text-muted"> <i
+											class="fa fa-clock-o fa-fw"></i> 14 mins ago
+										</small>
+									</div>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Curabitur bibendum ornare dolor, quis ullamcorper ligula
+										sodales.</p>
+								</div></li>
+							<li class="right clearfix"><span class="chat-img pull-right">
+									<img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar"
+									class="img-circle">
+							</span>
+								<div class="chat-body clearfix">
+									<div class="header">
+										<small class=" text-muted"> <i
+											class="fa fa-clock-o fa-fw"></i> 15 mins ago
+										</small> <strong class="pull-right primary-font">Bhaumik
+											Patel</strong>
+									</div>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Curabitur bibendum ornare dolor, quis ullamcorper ligula
+										sodales.</p>
+								</div></li>
+						</ul>
+					</div>
+					<!-- /.panel-body -->
+					<div class="panel-footer">
+						<div class="input-group">
+							<input id="btn-input" type="text" class="form-control input-sm"
+								placeholder="Type your message here..."> <span
+								class="input-group-btn">
+								<button class="btn btn-warning btn-sm" id="btn-chat">
+									Send</button>
+							</span>
+						</div>
+					</div>
+					<!-- /.panel-footer -->
+				</div>
+				<!-- /.panel .chat-panel -->
+			</div>
+			<!-- /.col-lg-4 -->
 		</div>
 		<!-- /.row -->
 	</div>
 	<!-- /#page-wrapper -->
+
 </div>
 <script src="js/lib/raphael-2.1.0.min.js"></script>
 <script src="js/lib/morris.js"></script>
