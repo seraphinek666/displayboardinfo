@@ -9,22 +9,30 @@ var app = angular.module('app', [ 'ngRoute', 'ui.bootstrap',
 app.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', {
-			templateUrl: 'view/main/main.html',
-			controller: "MainController"
+			templateUrl: '/displayboardinfo/view/dummy/dummy.html',
+            controller: "DummyController"
 		})
         .when('/login', {
-            templateUrl: 'view/login/login.html',
+            templateUrl: '/displayboardinfo/view/login/login.html',
             controller: "LoginController"
         })
-        .when('/admin', {
-            templateUrl: 'view/admin/admin.html',
-            controller: "AdminController"
+         .when('/user', {
+            templateUrl: '/displayboardinfo/view/user/user.html',
+            controller: "UserController"
         })
-        .when('/client', {
-            templateUrl: 'view/client/client.html',
-            controller: "ClientController"
+        .when('/patient', {
+            templateUrl: '/displayboardinfo/view/patient/patient.html',
+            controller: "PatientController"
         })
-		.otherwise({ redirectTo : "/"});
+        .when('/physician', {
+            templateUrl: '/displayboardinfo/view/physician/physician.html',
+            controller: "PhysicianController"
+        })
+         .when('/room', {
+            templateUrl: '/displayboardinfo/view/room/room.html',
+            controller: "RoomController"
+        })
+       	.otherwise({ redirectTo : "/"});
 }]);
 
 // TŁUMACZENIA (przykładowe)
