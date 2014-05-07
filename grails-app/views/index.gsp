@@ -22,9 +22,9 @@
 </head>
 
 <body>
-<div class="container">
-    <div ui-view></div>
-</div> 
+	<div class="container">
+		<div ui-view></div>
+	</div>
 	<script src="js/lib/jquery-2.1.0.min.js"></script>
 	<script src="js/lib/angular.min.js"></script>
 	<script src="js/lib/angular-route.min.js"></script>
@@ -32,17 +32,18 @@
 	<script src="js/lib/angular-cookies.js"></script>
 	<script src="js/lib/angular-sanitize.js"></script>
 	<script src="js/lib/bootstrap.min.js"></script>
-    <script src="js/lib/angular-ui-router.js"></script>
+	<script src="js/lib/angular-ui-router.js"></script>
 	<script
 		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 
 	<script src="js/ng-app/directive/Dialog.js"></script>
+	
 	<script src="js/ng-app/application.js"></script>
 	<script src="js/ng-app/service/BaseService.js"></script>
 	<script src="js/ng-app/controllers/AdminController.js"></script>
 	<script src="js/ng-app/controllers/ClientController.js"></script>
 	<script src="js/ng-app/controllers/MainController.js"></script>
 	<script src="js/ng-app/controllers/LoginController.js"></script>
-
+	<script src="js/ng-app/controllers/UserController.js"></script>
 </body>
 </html>
