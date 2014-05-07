@@ -6,8 +6,6 @@
 <title>DisplayBoardInfo</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 
 <link rel="stylesheet"
 	href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">
@@ -22,9 +20,10 @@
 </head>
 
 <body>
-<div class="container">
-    <div ui-view></div>
-</div> 
+
+	<div ng-view></div>
+
+
 	<script src="js/lib/jquery-2.1.0.min.js"></script>
 	<script src="js/lib/angular.min.js"></script>
 	<script src="js/lib/angular-route.min.js"></script>
@@ -32,7 +31,6 @@
 	<script src="js/lib/angular-cookies.js"></script>
 	<script src="js/lib/angular-sanitize.js"></script>
 	<script src="js/lib/bootstrap.min.js"></script>
-    <script src="js/lib/angular-ui-router.js"></script>
 	<script
 		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 
