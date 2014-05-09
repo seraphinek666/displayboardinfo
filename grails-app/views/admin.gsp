@@ -16,6 +16,10 @@
 <link rel="stylesheet"
 	href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 <link rel="stylesheet"
+	href="${resource(dir: 'css', file: 'ng-table.css')}" type="text/css">
+<link rel="stylesheet"
+	href="${resource(dir: 'css', file: 'adminPanel.css')}" type="text/css">
+<link rel="stylesheet"
 	href="${resource(dir: 'font-awesome/css', file: 'font-awesome.min.css')}"
 	type="text/css">
 
@@ -102,6 +106,8 @@
 	<script src="/displayboardinfo/js/lib/angular-cookies.js"></script>
 	<script src="/displayboardinfo/js/lib/angular-sanitize.js"></script>
 	<script src="/displayboardinfo/js/lib/bootstrap.min.js"></script>
+	<script src="/displayboardinfo/js/lib/ng-table.js"></script>
+	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
 	<script
 		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 
