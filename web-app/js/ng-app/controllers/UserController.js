@@ -1,49 +1,37 @@
 app.controller('UserController', function ($scope, $routeParams, $location, $translate, BaseService, $dialogs, $cookieStore, $filter, ngTableParams, $modal) {
 
+	
+	$scope.users = [];
+	
 	// to wywala apkę na "list" więc zakomentowałem
-	 /*
-		 * BaseService.post(DisplayBoardInfo.config.url.user.list).then(function(response) {
-		 * $scope.users = response; });
-		 */
+	 
+	BaseService.post(DisplayBoardInfo.config.url.user.list).then(function(response) {
+	  $scope.users = response; 
+	});
+		 
     
-	// syfne dane testowe a'la mock
-	 var data = [{name: "wMoroni", surname: "Moroni", pesel: 158956},
-	                {name: "Tiancum", surname: "Moroni", pesel: 258956},
-	                {name: "Jacob", surname: "Moroni", pesel: 358956},
-	                {name: "Nephi", surname: "Moroni", pesel: 458956},
-	                {name: "Enos", surname: "Moroni", pesel: 458956},
-	                {name: "Tiancum", surname: "Moroni", pesel: 458956},
-	                {name: "Jacob", surname: "Moroni", pesel: 458956},
-	                {name: "Nephi", surname: "aMoroni", pesel: 458956},
-	                {name: "Enos", surname: "Moroni", pesel: 458956},
-	                {name: "Tiancum", surname: "Mofgroni", pesel: 458956},
-	                {name: "Jacob", surname: "Moroni", pesel: 458956},
-	                {name: "Nephi", surname: "Moroni", pesel: 458956},
-	                {name: "Enos", surname: "Moroni", pesel: 458956},
-	                {name: "Tiancum", surname: "Moroni", pesel: 458956},
-	                {name: "Jacob", surname: "Moroni", pesel: 458956},
-	                {name: "Nephi", surname: "Moroni", pesel: 458956},
-	                {name: "Enos", surname: "Moroni", pesel: 458956}];
-
+	
+	
+	
 	 $scope.tableParams = new ngTableParams({
 	        page: 1,            // show first page
 	        count: 10,          // count per page
 	        filter: {
-	            name: ''       // initial filter
+	            login: ''       // initial filter
 	        },
 	        sorting: {
-	            surname: 'asc'     // initial sorting
+	            login: 'asc'     // initial sorting
 	        }
 	    }, {
-	        total: data.length, // length of data
+	        total: $scope.users.length, // length of data
 	        getData: function($defer, params) {
 	            // use build-in angular filter
 	            var filteredData = params.filter() ?
-	                    $filter('filter')(data, params.filter()) :
-	                    data;
+	                    $filter('filter')($scope.users, params.filter()) :
+	                    	$scope.users;
 	            var orderedData = params.sorting() ?
 	                    $filter('orderBy')(filteredData, params.orderBy()) :
-	                    data;
+	                    	$scope.users;
 
 	            params.total(orderedData.length); // set total for recalc
 													// pagination
@@ -54,6 +42,17 @@ app.controller('UserController', function ($scope, $routeParams, $location, $tra
 	 $scope.delete = function (index) {
 	      $scope.tableParams.data.splice(index,1);
 	 }
+	 
+	 
+	 $scope.removeItems = function() {
+	        $scope.items = null;
+	        BaseService.post($scope.config.remove, $scope.selectedItems).then(function(response) {
+	            $scope.selectedItem = null;
+	            $scope.loadItemList();
+	        });
+	    },
+	 
+	 
 	 
 	 $scope.saveUserChanges = function () {
 	      // zastąp mnie połączeniem z backendem
@@ -66,7 +65,7 @@ app.controller('UserController', function ($scope, $routeParams, $location, $tra
 		    });
 		    
 		    modalInstance.result.then(function (user) {
-		      console.log(user.pesel)	//tu mam model usera z danymi z modala
+		      console.log(user.pesel)	// tu mam model usera z danymi z modala
 		    });
 		  };
 		  

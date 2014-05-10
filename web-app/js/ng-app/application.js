@@ -75,9 +75,12 @@ var DisplayBoardInfo = {};
 
 DisplayBoardInfo.config = {
 	url : {
-		login : {
-			get : '/authorize/login',
-			set : '/authorize/logout'
+		user : {
+			list : '/displayboardinfo/user/list/'
+		},
+		patient : {
+			list : '/displayboardinfo/patient/list/',
+			save : '/displayboardinfo/patient/save/'
 		}
 	},
 	column : {
