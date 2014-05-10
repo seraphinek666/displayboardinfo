@@ -25,6 +25,18 @@
 	href="${resource(dir: 'font-awesome/css', file: 'font-awesome.min.css')}"
 	type="text/css">
 
+<style type="text/css">
+
+#page-wrapper {
+    position: inherit;
+    margin: 0px 0px 0px 250px;
+    padding: 0px 30px;
+    border-left: 1px solid #E7E7E7;
+    height: auto;
+    min-height: 550px;
+    overflow: auto;
+}
+</style>
 </head>
 
 <body ng-controller="AdminController">
