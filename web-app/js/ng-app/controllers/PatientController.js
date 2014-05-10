@@ -47,7 +47,6 @@ app.controller('PatientController', function ($scope, $routeParams, $location, $
 
 	 $scope.removePatient = function() {
 		 BaseService.post(DisplayBoardInfo.config.url.patient.remove, { patient: $scope.patient}).then(function(response) {
-			 console.log(response);
 			 $scope.reloadList();
 	     });
 	    };
