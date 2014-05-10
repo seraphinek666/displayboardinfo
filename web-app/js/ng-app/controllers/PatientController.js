@@ -1,8 +1,8 @@
-app.controller('PatientController', function ($scope, $routeParams, $location, $translate, BaseService, $dialogs, $cookieStore, $filter, ngTableParams, $modal) {
+app.controller('PatientController', function ($scope, $routeParams, $location, $translate, BaseService, $dialogs, $cookieStore, $filter, ngTableParams, $modal, toaster) {
 
 
 	$scope.patients = [];
-	
+	$scope.patientsLocal = [];
 		 
 	BaseService.post(DisplayBoardInfo.config.url.patient.list).then(function(response) {
 		  $scope.patients = response; 
@@ -10,15 +10,11 @@ app.controller('PatientController', function ($scope, $routeParams, $location, $
 	
 	$scope.reloadList = function() {
 		BaseService.post(DisplayBoardInfo.config.url.patient.list).then(function(response) {
-			  $scope.patients = response; 
+			 $scope.patients = response;
+			 $scope.tableParams.reload();
 			});
-		
-		// TODO zrób odświeżanie listy na GUI, bo obiekty przychodza ale cos mi nie dziala
 	}
-	
-	
-	
-	
+
 	 $scope.tableParams = new ngTableParams({
 	        page: 1,            // show first page
 	        count: 10,          // count per page
@@ -26,37 +22,35 @@ app.controller('PatientController', function ($scope, $routeParams, $location, $
 	            name: ''       // initial filter
 	        },
 	        sorting: {
-	        	name: 'asc'     // initial sorting
+	        	surname: 'asc'     // initial sorting
 	        }
 	    }, {
 	        total: $scope.patients.length, // length of data
 	        getData: function($defer, params) {
 	            // use build-in angular filter
+	        	
 	            var filteredData = params.filter() ?
 	                    $filter('filter')($scope.patients, params.filter()) :
 	                    	$scope.patients;
 	            var orderedData = params.sorting() ?
 	                    $filter('orderBy')(filteredData, params.orderBy()) :
 	                    	$scope.patients;
-
+	                    
+	            $scope.patientsLocal = orderedData;       
 	            params.total(orderedData.length); // set total for recalc
-													// pagination
-	            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
+	            $scope.patientsLocal = $scope.patientsLocal.slice((params.page() - 1) * params.count(), params.page() * params.count());
+	            $defer.resolve($scope.patientsLocal.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 	        }
 	 });
 	 
-	 $scope.delete = function (index) {
-	      $scope.tableParams.data.splice(index,1);
-	 };
-	 
-	 
+
 	 $scope.removePatient = function() {
 		 BaseService.post(DisplayBoardInfo.config.url.patient.remove, { patient: $scope.patient}).then(function(response) {
+			 console.log(response);
 			 $scope.reloadList();
 	     });
 	    };
-	 
-	 
 	 
 	 $scope.savePatientChanges = function () {
 		 BaseService.post(DisplayBoardInfo.config.url.patient.save, { patient: $scope.patient}).then(function(response) {
@@ -70,9 +64,8 @@ app.controller('PatientController', function ($scope, $routeParams, $location, $
 		      controller: ModalInstanceCtrl
 		    });
 		    
-		    modalInstance.result.then(function (patient) {
-		      console.log(patient.pesel)	// tu mam model patienta z danymi z
-											// modala
+		    modalInstance.result.then(function ($patient) {
+		      $scope.reloadList();
 		    });
 		  };
 		  
@@ -83,9 +76,7 @@ app.controller('PatientController', function ($scope, $routeParams, $location, $
 			$scope.addPatient = function () {
 				$modalInstance.close($scope.patient);
 				 BaseService.post(DisplayBoardInfo.config.url.patient.save, { patient: $scope.patient}).then(function(response) {
-					// TODO jakoś odświeżyć listę metoda z kontrolera nadrzednego ?
 			     });
-				
 			};
 
 			$scope.cancelModal = function () {$modalInstance.dismiss('cancelled')};

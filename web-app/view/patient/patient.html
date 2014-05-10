@@ -5,7 +5,7 @@
     <button class="btn btn-warning dictionaryHeaderButtons" ng-click="launchModal()">Dodaj pacjenta</button>
     </div>
     <table ng-table="tableParams" show-filter="true" class="table">
-            <tr ng-repeat="patient in $scope.patients">
+            <tr ng-repeat="patient in patientsLocal">
             	<td data-title="'Nazwisko'" sortable="'surname'" filter="{ 'surname': 'text' }">
                 	<span ng-if="!patient.$edit">{{patient.surname}}</span>
                 	<div ng-if="patient.$edit"><input class="form-control" type="text" ng-model="patient.surname" /></div>
@@ -16,12 +16,13 @@
             	</td>
             	<td data-title="'Pesel'" sortable="'pesel'" filter="{ 'pesel': 'text' }">
                 	<span ng-if="!patient.$edit">{{patient.pesel}}</span>
-                	<div ng-if="patient.$edit"><input class="form-control" type="number" ng-model="patient.pesel" /></div>
+                	<div ng-if="patient.$edit"><input class="form-control" type="text" ng-model="patient.pesel" /></div>
             	</td>
             	<td data-title="'Akcje'">
                 	<a ng-if="!patient.$edit" href="" class="btn btn-primary btn-xs" ng-click="patient.$edit = true">Edytuj</a>
                 	<a ng-if="patient.$edit" href="" class="btn btn-primary btn-xs" ng-click="patient.$edit = false; savePatientChanges()">Zapisz</a>
-                	<a href="" class="btn btn-danger btn-xs" ng-click="delete($index)">Usuń</a>
+                	<a ng-if="patient.$edit" href="" class="btn btn-danger btn-xs" ng-click="patient.$edit = false">Anuluj</a>
+                	<a ng-if="!patient.$edit" href="" class="btn btn-danger btn-xs" ng-click="removePatient($index)">Usuń</a>
             	</td>
             </tr>
     </table>
