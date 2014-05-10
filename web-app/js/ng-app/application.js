@@ -80,7 +80,8 @@ DisplayBoardInfo.config = {
 		},
 		patient : {
 			list : '/displayboardinfo/patient/list/',
-			save : '/displayboardinfo/patient/save/'
+			save : '/displayboardinfo/patient/save/',
+			remove : '/displayboardinfo/patient/delete/'
 		}
 	},
 	column : {

@@ -3,6 +3,9 @@ package displayboardinfo
 
 
 import static org.springframework.http.HttpStatus.*
+
+import java.awt.Toolkit;
+
 import grails.converters.JSON
 import grails.transaction.Transactional
 
@@ -17,7 +20,7 @@ class PatientController {
 	def save() {		
 		Patient patientInstance = request.JSON.patient;				
 		try {
-			patientInstance.save(flush:true);
+			patientInstance.save();
 			render 'Success' 
 		} catch (Exception e) {
 			response.status = 500
@@ -29,7 +32,8 @@ class PatientController {
 	def delete() {
 		Patient patientInstance = request.JSON.patient;
 		try {
-			patientInstance.delete(flush:true);
+			Patient toDelete = Patient.find{patient -> id == patientInstance.id};
+			toDelete.delete();
 			render 'Success'
 		} catch (Exception e) {
 			response.status = 500

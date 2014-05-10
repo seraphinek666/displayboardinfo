@@ -45,14 +45,20 @@ app.controller('PatientController', function ($scope, $routeParams, $location, $
 	 });
 	 
 
-	 $scope.removePatient = function() {
-		 BaseService.post(DisplayBoardInfo.config.url.patient.remove, { patient: $scope.patient}).then(function(response) {
+	 $scope.removePatient = function(patientToRemove) {
+		 BaseService.post(DisplayBoardInfo.config.url.patient.remove, { patient: patientToRemove}).then(function(response) {
 			 $scope.reloadList();
 	     });
 	    };
 	 
 	 $scope.savePatientChanges = function () {
 		 BaseService.post(DisplayBoardInfo.config.url.patient.save, { patient: $scope.patient}).then(function(response) {
+			 $scope.reloadList();
+	     });
+	 };
+	 
+	 $scope.savePatientChanges = function (patientToSave) {
+		 BaseService.post(DisplayBoardInfo.config.url.patient.save, { patient: patientToSave}).then(function(response) {
 			 $scope.reloadList();
 	     });
 	 };
@@ -64,7 +70,7 @@ app.controller('PatientController', function ($scope, $routeParams, $location, $
 		    });
 		    
 		    modalInstance.result.then(function ($patient) {
-		      $scope.reloadList();
+		    	$scope.reloadList()
 		    });
 		  };
 		  
