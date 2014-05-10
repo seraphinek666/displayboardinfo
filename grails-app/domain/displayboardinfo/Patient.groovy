@@ -11,4 +11,6 @@ class Patient {
 	
     static constraints = {
     }
+	
+//	static mapping = { id generator: 'assigned' }
 }

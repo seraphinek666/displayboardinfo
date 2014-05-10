@@ -57,8 +57,8 @@ app.controller('PatientController', function ($scope, $routeParams, $location, $
 	     });
 	 };
 	 
-	 $scope.savePatientChanges = function (patientToSave) {
-		 BaseService.post(DisplayBoardInfo.config.url.patient.save, { patient: patientToSave}).then(function(response) {
+	 $scope.updatePatient = function (patientToUpdate) {
+		 BaseService.post(DisplayBoardInfo.config.url.patient.update, { patient: patientToUpdate}).then(function(response) {
 			 $scope.reloadList();
 	     });
 	 };
@@ -76,7 +76,7 @@ app.controller('PatientController', function ($scope, $routeParams, $location, $
 		  
 		  
 	var ModalInstanceCtrl = function ($scope, $modalInstance) {
-			$scope.patient = {name : '', surname:'', pesel:''};
+			$scope.patient = {name : '', surname:'', pesel:'', id:''};
 		
 			$scope.addPatient = function () {
 				$modalInstance.close($scope.patient);

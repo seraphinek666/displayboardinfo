@@ -18,7 +18,7 @@ class PatientController {
 
 	@Transactional
 	def save() {		
-		Patient patientInstance = request.JSON.patient;				
+		Patient patientInstance = request.JSON.patient;		
 		try {
 			patientInstance.save();
 			render 'Success' 
@@ -29,10 +29,26 @@ class PatientController {
 	}
 
 	@Transactional
-	def delete() {
-		Patient patientInstance = request.JSON.patient;
+	def update() {
+		def json = request.JSON;
 		try {
-			Patient toDelete = Patient.find{patient -> id == patientInstance.id};
+			Patient toUpdate = Patient.find{patient -> id == json.patient.id};
+			toUpdate.name = json.patient.name;
+			toUpdate.surname = json.patient.surname;
+			toUpdate.pesel = json.patient.pesel;
+			toUpdate.save();
+			render 'Success'
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}
+	
+	@Transactional
+	def delete() {
+		def json = request.JSON;
+		try {
+			Patient toDelete = Patient.find{patient -> id == json.patient.id};
 			toDelete.delete();
 			render 'Success'
 		} catch (Exception e) {

@@ -81,6 +81,7 @@ DisplayBoardInfo.config = {
 		patient : {
 			list : '/displayboardinfo/patient/list/',
 			save : '/displayboardinfo/patient/save/',
+			update : '/displayboardinfo/patient/update/',
 			remove : '/displayboardinfo/patient/delete/'
 		}
 	},

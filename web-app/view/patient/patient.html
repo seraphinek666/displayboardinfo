@@ -6,6 +6,7 @@
     </div>
     <table ng-table="tableParams" show-filter="true" class="table">
             <tr ng-repeat="patient in patientsLocal">
+           	 
             	<td data-title="'Nazwisko'" sortable="'surname'" filter="{ 'surname': 'text' }">
                 	<span ng-if="!patient.$edit">{{patient.surname}}</span>
                 	<div ng-if="patient.$edit"><input class="form-control" type="text" ng-model="patient.surname" /></div>
@@ -20,7 +21,7 @@
             	</td>
             	<td data-title="'Akcje'">
                 	<a ng-if="!patient.$edit" href="" class="btn btn-primary btn-xs" ng-click="patient.$edit = true">Edytuj</a>
-                	<a ng-if="patient.$edit" href="" class="btn btn-primary btn-xs" ng-click="patient.$edit = false; savePatientChanges(patient)">Zapisz</a>
+                	<a ng-if="patient.$edit" href="" class="btn btn-primary btn-xs" ng-click="patient.$edit = false; updatePatient(patient)">Zapisz</a>
                 	<a ng-if="patient.$edit" href="" class="btn btn-danger btn-xs" ng-click="patient.$edit = false">Anuluj</a>
                 	<a ng-if="!patient.$edit" href="" class="btn btn-danger btn-xs" ng-click="removePatient(patient)">Usuń</a>
             	</td>
