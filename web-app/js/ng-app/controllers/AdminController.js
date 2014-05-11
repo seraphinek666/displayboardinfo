@@ -23,5 +23,13 @@ app.controller('AdminController', function ($scope, $routeParams, $location, $tr
 	 $scope.loadRoomsView = function() {
 		 $location.path('/room');
 	 }
+	 
+	 $scope.loadDummyView = function() {
+		 $location.path('/');
+	 }
+	 
+	 $scope.loadLoginView = function() {
+		 $location.path('/login');
+	 }
    
 });

@@ -13,8 +13,10 @@ app.config([ '$routeProvider', function($routeProvider) {
             controller: "DummyController"
 		})
         .when('/login', {
-            templateUrl: '/displayboardinfo/view/login/login.html',
-            controller: "LoginController"
+//            templateUrl: 'displayboardinfo/login',
+            redirectTo: function () {	
+            	return "displayboardinfo/login";
+            }
         })
          .when('/user', {
             templateUrl: '/displayboardinfo/view/user/user.html',

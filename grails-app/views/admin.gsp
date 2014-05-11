@@ -51,7 +51,8 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.html">Panel administratora</a>
+			<a class="navbar-brand" href="javascript:void(0);"
+						ng-click="loadDummyView()">Panel administratora</a>
 
 
 			<ul class="nav navbar-top-links navbar-right">
@@ -63,7 +64,8 @@
 					<ul class="dropdown-menu dropdown-user">
 						<li><a href="#"><i class="fa fa-user fa-fw"></i>Ustawienia
 								użytkownika</a></li>
-						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Wyloguj
+						<li><a href="javascript:void(0);"
+						ng-click="loadLoginView()"><i class="fa fa-sign-out fa-fw"></i>Wyloguj
 								się</a></li>
 					</ul> <!-- /.dropdown-user --></li>
 				<!-- /.dropdown -->
