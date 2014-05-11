@@ -87,6 +87,12 @@ DisplayBoardInfo.config = {
 			update : '/displayboardinfo/patient/update/',
 			remove : '/displayboardinfo/patient/delete/'
 		}
+		patient : {
+			list : '/displayboardinfo/physician/list/',
+			save : '/displayboardinfo/physician/save/',
+			update : '/displayboardinfo/physician/update/',
+			remove : '/displayboardinfo/physician/delete/'
+		}
 	},
 	column : {
 		user : [ {
