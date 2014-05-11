@@ -86,8 +86,8 @@ DisplayBoardInfo.config = {
 			save : '/displayboardinfo/patient/save/',
 			update : '/displayboardinfo/patient/update/',
 			remove : '/displayboardinfo/patient/delete/'
-		}
-		patient : {
+		},
+		physician : {
 			list : '/displayboardinfo/physician/list/',
 			save : '/displayboardinfo/physician/save/',
 			update : '/displayboardinfo/physician/update/',
