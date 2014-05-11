@@ -41,7 +41,6 @@ app.controller('UserController', function ($scope, $routeParams, $location, $tra
             params.total(orderedData.length); // set total for recalc
 
             $scope.usersLocal = $scope.usersLocal.slice((params.page() - 1) * params.count(), params.page() * params.count());
-            console.log($scope.usersLocal);
             $defer.resolve($scope.usersLocal.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
     });
