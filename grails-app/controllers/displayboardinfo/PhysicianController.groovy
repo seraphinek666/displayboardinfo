@@ -4,7 +4,7 @@ import static org.springframework.http.HttpStatus.*
 
 import java.awt.Toolkit;
 
-import grails.converters.JSON
+import grails.converters.JSON;
 import grails.transaction.Transactional
 
 @Transactional
@@ -31,12 +31,11 @@ class PhysicianController {
 		def json = request.JSON;
 		try {
 			Physician toUpdate = Physician.find{physician -> id == json.physician.id};
-			toUpdate.name = json.patient.name;
-			toUpdate.surname = json.patient.surname;
-			toUpdate.title = json.patient.title;
-			toUpdate.speciality = json.patient.speciality;
-			toUpdate.pesel = json.patient.pesel;
-			toUpdate.user = json.patient.user;
+			toUpdate.name = json.physician.name;
+			toUpdate.surname = json.physician.surname;
+			toUpdate.title = json.physician.title;
+			toUpdate.specialisation = json.physician.specialisation;
+			toUpdate.user = new User(json.physician.user)
 			toUpdate.save();
 			render 'Success'
 		} catch (Exception e) {

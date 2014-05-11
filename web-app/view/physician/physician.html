@@ -1,17 +1,42 @@
-<div ng-controller="PhysicianController" class="Absolute-Center"
-	style="height: 100px;">
-
-	<!--     <div class="container-fluid loginDIV" style="width:300px" ng-controller="LoginController" ng-init="init()"> -->
-
-	<!--         <form name="myForm" role="form" novalidate class="crudForm"> -->
-	<!--             Bind the value of this text input to CameraController.code -->
-	<!--             <my-input type="text" label="LOGIN.NAME" tip="TOOLTIP.LOGIN" value="item.login" minlength="3" maxlength="65" required="true" disabled="false" label-class="control-label" input-class="control-label"></my-input> -->
-	<!--             <my-input type="password" label="LOGIN.PASSWORD" tip="TOOLTIP.PASSWORD" value="item.password" minlength="3" required="true" disabled="false" label-class="control-label" input-class="control-label"></my-input> -->
-
-	<!--             <button type="submit" class="btn btn-sm btn-success" ng-disabled="myForm.$invalid || !myForm.$dirty" ng-click="login()">{{ 'BUTTON.LOGIN' | translate }}</button> -->
-	<!--         </form> -->
-
-	<!--     </div> -->
-	<img src="/displayboardinfo/images/in_construction1.jpg" />
+<div ng-controller="PhysicianController" class="Absolute-Center" style="height: 100px;">    
+	<div class="dictionaryButtons">
+    <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right dictionaryHeaderButtons">Wyczyść sortowanie</button>
+    <button ng-click="tableParams.filter({})" class="btn btn-default pull-right dictionaryHeaderButtons">Wyczyść filtrowanie</button>
+    <button class="btn btn-warning dictionaryHeaderButtons" ng-click="launchModal()">Dodaj lekarza</button>
+    </div>
+    <table ng-table="tableParams" show-filter="true" class="table">
+            <tr ng-repeat="physician in physiciansLocal">
+           	 
+            	<td data-title="'Nazwisko'" sortable="'surname'" filter="{ 'surname': 'text' }">
+                	<span ng-if="!physician.$edit">{{physician.surname}}</span>
+                	<div ng-if="physician.$edit"><input class="form-control" type="text" ng-model="physician.surname" /></div>
+            	</td>
+            	<td data-title="'Imię'" sortable="'name'" filter="{ 'name': 'text' }">
+                	<span ng-if="!physician.$edit">{{physician.name}}</span>
+                	<div ng-if="physician.$edit"><input class="form-control" type="text" ng-model="physician.name" /></div>
+            	</td>
+            	<td data-title="'Tytuł'" sortable="'title'" filter="{ 'title': 'text' }">
+                	<span ng-if="!physician.$edit">{{physician.title}}</span>
+                	<div ng-if="physician.$edit"><input class="form-control" type="text" ng-model="physician.title" /></div>
+            	</td>
+            	<td data-title="'Specialność'" sortable="'specialisation'" filter="{ 'specialisation': 'text' }">
+                	<span ng-if="!physician.$edit">{{physician.specialisation}}</span>
+                	<div ng-if="physician.$edit"><input class="form-control" type="text" ng-model="physician.specialisation" /></div>
+            	</td>
+            	<td data-title="'Użytkownik'">
+                	<span ng-if="!physician.$edit">{{getUserObject(physician.user.id).login}}</span>
+                	<div ng-if="physician.$edit"><select class="form-control" ng-model="physician.user" 
+                		ng-options="user as user.login for user in users">
+                		<option value="" style="display:none">{{getUserObject(physician.user.id).login}}</option></select>
+                	</div>
+            	</td>
+            	<td data-title="'Akcje'">
+                	<a ng-if="!physician.$edit" href="" class="btn btn-primary btn-xs" ng-click="fetchUsers(); physician.$edit = true">Edytuj</a>
+                	<a ng-if="physician.$edit" href="" class="btn btn-primary btn-xs" ng-click="user.$edit = false; updatePhysician(physician)">Zapisz</a>
+                	<a ng-if="physician.$edit" href="" class="btn btn-danger btn-xs" ng-click="user.$edit = false; reloadList()">Anuluj</a>
+                	<a ng-if="!physician.$edit" href="" class="btn btn-danger btn-xs" ng-click="removePhysician(physician)">Usuń</a>
+            	</td>
+            </tr>
+    </table>
 
 </div>
