@@ -22,7 +22,7 @@
             	<td data-title="'Akcje'">
                 	<a ng-if="!patient.$edit" href="" class="btn btn-primary btn-xs" ng-click="patient.$edit = true">Edytuj</a>
                 	<a ng-if="patient.$edit" href="" class="btn btn-primary btn-xs" ng-click="patient.$edit = false; updatePatient(patient)">Zapisz</a>
-                	<a ng-if="patient.$edit" href="" class="btn btn-danger btn-xs" ng-click="patient.$edit = false">Anuluj</a>
+                	<a ng-if="patient.$edit" href="" class="btn btn-danger btn-xs" ng-click="patient.$edit = false; reloadList()">Anuluj</a>
                 	<a ng-if="!patient.$edit" href="" class="btn btn-danger btn-xs" ng-click="removePatient(patient)">Usuń</a>
             	</td>
             </tr>
