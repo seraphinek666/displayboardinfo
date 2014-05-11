@@ -5,23 +5,24 @@
     <button class="btn btn-warning dictionaryHeaderButtons" ng-click="launchModal()">Dodaj użytkownika</button>
     </div>
     <table ng-table="tableParams" show-filter="true" class="table">
-            <tr ng-repeat="user in $data">
-            	<td data-title="'Nazwisko'" sortable="'surname'" filter="{ 'surname': 'text' }">
-                	<span ng-if="!user.$edit">{{user.surname}}</span>
-                	<div ng-if="user.$edit"><input class="form-control" type="text" ng-model="user.surname" /></div>
+            <tr ng-repeat="user in usersLocal">
+           	 
+            	<td data-title="'Login'" sortable="'login'" filter="{ 'login': 'text' }">
+                	<span ng-if="!user.$edit">{{user.login}}</span>
+                	<div ng-if="user.$edit"><input class="form-control" type="text" ng-model="user.login" /></div>
             	</td>
-            	<td data-title="'Imię'" sortable="'name'" filter="{ 'name': 'text' }">
-                	<span ng-if="!user.$edit">{{user.name}}</span>
-                	<div ng-if="user.$edit"><input class="form-control" type="text" ng-model="user.name" /></div>
-            	</td>
-            	<td data-title="'Pesel'" sortable="'pesel'" filter="{ 'pesel': 'text' }">
-                	<span ng-if="!user.$edit">{{user.pesel}}</span>
-                	<div ng-if="user.$edit"><input class="form-control" type="number" ng-model="user.pesel" /></div>
+            	<td data-title="'Typ'" sortable="'userType.name'" filter="{ 'userType.name': 'text' }">
+                	<span ng-if="!user.$edit">{{user.userType.name}}</span>
+                	<div ng-if="user.$edit"><select class="form-control" ng-model="user.userType" 
+                		ng-options="userType.type as userType.type for userType in userTypes">
+                		<option value="" style="display:none">{{user.userType.name}}</option></select>
+                	</div>
             	</td>
             	<td data-title="'Akcje'">
                 	<a ng-if="!user.$edit" href="" class="btn btn-primary btn-xs" ng-click="user.$edit = true">Edytuj</a>
-                	<a ng-if="user.$edit" href="" class="btn btn-primary btn-xs" ng-click="user.$edit = false; saveUserChanges()">Zapisz</a>
-                	<a href="" class="btn btn-danger btn-xs" ng-click="delete($index)">Usuń</a>
+                	<a ng-if="user.$edit" href="" class="btn btn-primary btn-xs" ng-click="user.$edit = false; updateUser(user)">Zapisz</a>
+                	<a ng-if="user.$edit" href="" class="btn btn-danger btn-xs" ng-click="user.$edit = false; reloadList()">Anuluj</a>
+                	<a ng-if="!user.$edit" href="" class="btn btn-danger btn-xs" ng-click="removeUser(user)">Usuń</a>
             	</td>
             </tr>
     </table>

@@ -1,7 +1,7 @@
 // W TYM PLIKU KONFIGURUJEMY PROPERTIESY I INICJALIZUJEMY MODUŁ
 
 var app = angular.module('app', [ 'ngRoute', 'ui.bootstrap',
-		'pascalprecht.translate', 'dialogs', 'ngCookies', 'ngTable', 'toaster' ]);
+		'pascalprecht.translate', 'dialogs', 'ngCookies', 'ngTable', 'toaster', 'angular-md5' ]);
 
 
 //ROUTING KONTROLER -> WIDOK
@@ -76,7 +76,10 @@ var DisplayBoardInfo = {};
 DisplayBoardInfo.config = {
 	url : {
 		user : {
-			list : '/displayboardinfo/user/list/'
+			list : '/displayboardinfo/user/list/',
+			save : '/displayboardinfo/user/save/',
+			update : '/displayboardinfo/user/update/',
+			remove : '/displayboardinfo/user/delete/'
 		},
 		patient : {
 			list : '/displayboardinfo/patient/list/',

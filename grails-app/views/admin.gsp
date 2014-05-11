@@ -122,6 +122,7 @@
 	<script src="/displayboardinfo/js/lib/bootstrap.min.js"></script>
 	<script src="/displayboardinfo/js/lib/ng-table.js"></script>
 	<script src="/displayboardinfo/js/lib/toaster.js"></script>
+	<script src="/displayboardinfo/js/lib/angular-md5.js"></script>
 	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
 	<script
 		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>

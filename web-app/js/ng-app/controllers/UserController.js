@@ -1,62 +1,71 @@
-app.controller('UserController', function ($scope, $routeParams, $location, $translate, BaseService, $dialogs, $cookieStore, $filter, ngTableParams, $modal) {
+app.controller('UserController', function ($scope, $routeParams, $location, $translate, BaseService, $dialogs, $cookieStore, $filter, ngTableParams, $modal, md5) {
 
 	
 	$scope.users = [];
-	
-	// to wywala apkę na "list" więc zakomentowałem
+	$scope.usersLocal = [];
+	$scope.userTypes = [{id:'1', type:'Administrator'},{id:'2', type:'Lekarz'},{id:'3', type:'Asystentka'}]
 	 
 	BaseService.post(DisplayBoardInfo.config.url.user.list).then(function(response) {
 	  $scope.users = response; 
 	});
-		 
-    
 	
+	$scope.reloadList = function() {
+		BaseService.post(DisplayBoardInfo.config.url.user.list).then(function(response) {
+			 $scope.users = response;
+			 $scope.tableParams.reload();
+			});
+	}
 	
-	
-	 $scope.tableParams = new ngTableParams({
-	        page: 1,            // show first page
-	        count: 10,          // count per page
-	        filter: {
-	            login: ''       // initial filter
-	        },
-	        sorting: {
-	            login: 'asc'     // initial sorting
-	        }
-	    }, {
-	        total: $scope.users.length, // length of data
-	        getData: function($defer, params) {
-	            // use build-in angular filter
-	            var filteredData = params.filter() ?
-	                    $filter('filter')($scope.users, params.filter()) :
-	                    	$scope.users;
-	            var orderedData = params.sorting() ?
-	                    $filter('orderBy')(filteredData, params.orderBy()) :
-	                    	$scope.users;
+	$scope.tableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 10,          // count per page
+        filter: {
+            login: ''       // initial filter
+        },
+        sorting: {
+        	login: 'asc'     // initial sorting
+        }
+    }, {
+        total: $scope.users.length, // length of data
+        getData: function($defer, params) {
+            // use build-in angular filter
+        	
+            var filteredData = params.filter() ?
+                    $filter('filter')($scope.users, params.filter()) :
+                    	$scope.users;
+            var orderedData = params.sorting() ?
+                    $filter('orderBy')(filteredData, params.orderBy()) :
+                    	$scope.users;
+                    
+            $scope.usersLocal = orderedData;       
+            params.total(orderedData.length); // set total for recalc
 
-	            params.total(orderedData.length); // set total for recalc
-													// pagination
-	            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-	        }
-	 });
+            $scope.usersLocal = $scope.usersLocal.slice((params.page() - 1) * params.count(), params.page() * params.count());
+            console.log($scope.usersLocal);
+            $defer.resolve($scope.usersLocal.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+    });
 	 
-	 $scope.delete = function (index) {
-	      $scope.tableParams.data.splice(index,1);
-	 }
-	 
-	 
-	 $scope.removeItems = function() {
-	        $scope.items = null;
-	        BaseService.post($scope.config.remove, $scope.selectedItems).then(function(response) {
-	            $scope.selectedItem = null;
-	            $scope.loadItemList();
-	        });
-	    },
-	 
-	 
+	$scope.removeUser = function(userToRemove) {
+		 BaseService.post(DisplayBoardInfo.config.url.user.remove, { user: userToRemove}).then(function(response) {
+			 $scope.reloadList();
+	     });
+	    };
 	 
 	 $scope.saveUserChanges = function () {
-	      // zastąp mnie połączeniem z backendem
-	 }
+		 BaseService.post(DisplayBoardInfo.config.url.user.save, { user: $scope.user}).then(function(response) {
+			 $scope.reloadList();
+	     });
+	 };
+	 
+	 $scope.updateUser = function (userToUpdate) {
+		 if (!(typeof userToUpdate.userType == 'string' || userToUpdate.userType instanceof String))
+			 userToUpdate.userType = userToUpdate.userType.name;
+		 
+		 BaseService.post(DisplayBoardInfo.config.url.user.update, { user: userToUpdate}).then(function(response) {
+			 $scope.reloadList();
+	     });
+	 };
 	 
 	 $scope.launchModal = function () {
 		    var modalInstance = $modal.open({
@@ -64,17 +73,34 @@ app.controller('UserController', function ($scope, $routeParams, $location, $tra
 		      controller: ModalInstanceCtrl
 		    });
 		    
-		    modalInstance.result.then(function (user) {
-		      console.log(user.pesel)	// tu mam model usera z danymi z modala
+		    modalInstance.result.then(function ($user) {
+		    	$scope.reloadList()
 		    });
 		  };
 		  
-		  
 	var ModalInstanceCtrl = function ($scope, $modalInstance) {
-			$scope.user = {name : '', surname:'', pesel:''};
+			$scope.user = {login : '', password:'', userType:''};
+			$scope.userTypes = [{id:'1', type:'Administrator'},{id:'2', type:'Lekarz'},{id:'3', type:'Asystentka'}]
 		
-			$scope.addUser = function () {$modalInstance.close($scope.user)};
+			$scope.checkIfLoginExist = function(){
+				 //$scope.user.login
+				return false;
+				 //return true; - true oznacza, że login już istnieje i zostanie ustawiony komunikat w modalu 
+			}
+			
+			$scope.addUser = function () {
+				userExist = $scope.checkIfLoginExist(); 
+				if (!userExist){
+					$modalInstance.close($scope.user);
+					
+					$scope.user.password = md5.createHash($scope.user.password);
+					BaseService.post(DisplayBoardInfo.config.url.user.save, { user: $scope.user}).then(function(response) {
+				     });
+				 }
+				 return userExist;
+			};
 
 			$scope.cancelModal = function () {$modalInstance.dismiss('cancelled')};
+			
 	};
 });
