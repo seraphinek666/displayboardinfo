@@ -94,6 +94,12 @@ DisplayBoardInfo.config = {
 			save : '/displayboardinfo/physician/save/',
 			update : '/displayboardinfo/physician/update/',
 			remove : '/displayboardinfo/physician/delete/'
+		},
+		room : {
+			list : '/displayboardinfo/room/list/',
+			save : '/displayboardinfo/room/save/',
+			update : '/displayboardinfo/room/update/',
+			remove : '/displayboardinfo/room/delete/'
 		}
 	},
 	column : {

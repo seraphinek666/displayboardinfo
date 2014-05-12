@@ -1,17 +1,27 @@
-<div ng-controller="RoomController" class="Absolute-Center"
-	style="height: 100px;">
-
-	<!--     <div class="container-fluid loginDIV" style="width:300px" ng-controller="LoginController" ng-init="init()"> -->
-
-	<!--         <form name="myForm" role="form" novalidate class="crudForm"> -->
-	<!--             Bind the value of this text input to CameraController.code -->
-	<!--             <my-input type="text" label="LOGIN.NAME" tip="TOOLTIP.LOGIN" value="item.login" minlength="3" maxlength="65" required="true" disabled="false" label-class="control-label" input-class="control-label"></my-input> -->
-	<!--             <my-input type="password" label="LOGIN.PASSWORD" tip="TOOLTIP.PASSWORD" value="item.password" minlength="3" required="true" disabled="false" label-class="control-label" input-class="control-label"></my-input> -->
-
-	<!--             <button type="submit" class="btn btn-sm btn-success" ng-disabled="myForm.$invalid || !myForm.$dirty" ng-click="login()">{{ 'BUTTON.LOGIN' | translate }}</button> -->
-	<!--         </form> -->
-
-	<!--     </div> -->
-	<img src="/displayboardinfo/images/in_construction1.jpg" />
+<div ng-controller="RoomController" class="Absolute-Center" style="height: 100px;">    
+	<div class="dictionaryButtons">
+    <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right dictionaryHeaderButtons">Wyczyść sortowanie</button>
+    <button ng-click="tableParams.filter({})" class="btn btn-default pull-right dictionaryHeaderButtons">Wyczyść filtrowanie</button>
+    <button class="btn btn-warning dictionaryHeaderButtons" ng-click="launchModal()">Dodaj gabinet</button>
+    </div>
+    <table ng-table="tableParams" show-filter="true" class="table">
+            <tr ng-repeat="room in roomsLocal">
+           	 
+            	<td data-title="'Numer gabinetu'" sortable="'number'" filter="{ 'number': 'text' }">
+                	<span ng-if="!room.$edit">{{room.number}}</span>
+                	<div ng-if="room.$edit"><input class="form-control" type="text" ng-model="room.number" /></div>
+            	</td>
+            	<td data-title="'Piętro'" sortable="'floor'" filter="{ 'floor': 'text' }">
+                	<span ng-if="!room.$edit">{{room.floor}}</span>
+                	<div ng-if="room.$edit"><input class="form-control" type="text" ng-model="room.floor" /></div>
+            	</td>
+            	<td data-title="'Akcje'">
+                	<a ng-if="!room.$edit" href="" class="btn btn-primary btn-xs" ng-click="room.$edit = true">Edytuj</a>
+                	<a ng-if="room.$edit" href="" class="btn btn-primary btn-xs" ng-click="room.$edit = false; updateRoom(room)">Zapisz</a>
+                	<a ng-if="room.$edit" href="" class="btn btn-danger btn-xs" ng-click="room.$edit = false; reloadList()">Anuluj</a>
+                	<a ng-if="!room.$edit" href="" class="btn btn-danger btn-xs" ng-click="removeRoom(room)">Usuń</a>
+            	</td>
+            </tr>
+    </table>
 
 </div>

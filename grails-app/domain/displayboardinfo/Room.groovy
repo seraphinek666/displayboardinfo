@@ -3,8 +3,8 @@ package displayboardinfo
 class Room {
 
 	int id;
-	int number;
-	int floor;
+	String number;
+	String floor;
 	
     static constraints = {
     }
