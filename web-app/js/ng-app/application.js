@@ -77,6 +77,9 @@ var DisplayBoardInfo = {};
 
 DisplayBoardInfo.config = {
 	url : {
+		login : {
+			authorize : '/displayboardinfo/login/authorize/'
+		},
 		user : {
 			list : '/displayboardinfo/user/list/',
 			save : '/displayboardinfo/user/save/',

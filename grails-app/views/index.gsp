@@ -41,7 +41,7 @@ body
 </head>
 <body>
 	<div class="redirectPanel">			
-		<a class="btn btn-default btn-lg btn-block" href="admin/" role="button">
+		<a class="btn btn-default btn-lg btn-block" href="login/" role="button">
 			<i class="fa fa-keyboard-o fa-fw"></i> Administrator
 		</a>
 		<a class="btn btn-default btn-lg btn-block" href="client/" role="button">

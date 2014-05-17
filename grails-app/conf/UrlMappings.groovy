@@ -6,6 +6,12 @@ class UrlMappings {
                 // apply constraints here
             }
         }
+		
+//		'/admin' {
+//			controller = "redirect"
+//			destination = "/login"
+//		}
+//	
 
         "/"(view:"/index")
         "500"(view:'/error')
