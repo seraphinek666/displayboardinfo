@@ -98,7 +98,7 @@
 							<li><a href="javascript:void(0);"
 								ng-click="loadRoomsView()">Gabinety</a></li>
 						</ul> <!-- /.nav-second-level --></li>
-					<li><a href="tjavascript:void(0);"
+					<li><a href="javascript:void(0);"
 							ng-click="loadTablesView()"><i class="fa fa-table fa-fw"></i>
 							Harmonogram przyjęć</a></li>
 				</ul>
