@@ -31,5 +31,9 @@ app.controller('AdminController', function ($scope, $routeParams, $location, $tr
 	 $scope.loadLoginView = function() {
 		 $location.path('/login');
 	 }
+	 
+	 $scope.loadTablesView = function() {
+		 $location.path('/tables');
+	 }
    
 });

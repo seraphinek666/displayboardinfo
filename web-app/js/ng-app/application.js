@@ -34,6 +34,10 @@ app.config([ '$routeProvider', function($routeProvider) {
             templateUrl: '/displayboardinfo/view/room/room.html',
             controller: "RoomController"
         })
+         .when('/tables', {
+            templateUrl: '/displayboardinfo/view/tables/tables.html',
+            controller: "TablesController"
+        })
        	.otherwise({ redirectTo : "/"});
 }]);
 
