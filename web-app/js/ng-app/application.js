@@ -1,7 +1,7 @@
 // W TYM PLIKU KONFIGURUJEMY PROPERTIESY I INICJALIZUJEMY MODUŁ
 
 var app = angular.module('app', [ 'ngRoute', 'ui.bootstrap',
-		'pascalprecht.translate', 'dialogs', 'ngCookies', 'ngTable', 'toaster', 'angular-md5' ]);
+		'pascalprecht.translate', 'dialogs', 'ngCookies', 'ngTable', 'toaster', 'angular-md5']);
 
 
 //ROUTING KONTROLER -> WIDOK
@@ -37,6 +37,10 @@ app.config([ '$routeProvider', function($routeProvider) {
          .when('/tables', {
             templateUrl: '/displayboardinfo/view/tables/tables.html',
             controller: "TablesController"
+        })
+         .when('/dashboard', {
+            templateUrl: '/displayboardinfo/view/dashboard/dashboard.html',
+            controller: "DashboardController"
         })
        	.otherwise({ redirectTo : "/"});
 }]);

@@ -35,5 +35,9 @@ app.controller('AdminController', function ($scope, $routeParams, $location, $tr
 	 $scope.loadTablesView = function() {
 		 $location.path('/tables');
 	 }
+	 
+	 $scope.loadDashboardView = function() {
+		 $location.path('/dashboard');
+	 }
    
 });

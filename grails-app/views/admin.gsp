@@ -83,7 +83,8 @@
 			<div class="sidebar-collapse">
 				<ul class="nav" id="side-menu">
 
-					<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
+					<li><a href="javascript:void(0);"
+					ng-click="loadDashboardView()"><i class="fa fa-dashboard fa-fw"></i>
 							Dashboardy</a></li>
 					<li><a href="javascript:void(0);"
 						ng-click="expandOrCollapse()"><i class="fa fa-edit fa-fw"></i>
@@ -146,6 +147,7 @@
 	<script src="/displayboardinfo/js/ng-app/controllers/PhysicianController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/RoomController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/DummyController.js"></script>
+	<script src="/displayboardinfo/js/ng-app/controllers/DashboardController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/TablesController.js"></script>
 </body>
 </html>
