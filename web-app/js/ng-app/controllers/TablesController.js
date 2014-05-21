@@ -1,15 +1,114 @@
 app.controller('TablesController', function ($scope, $routeParams, $location, $translate, BaseService, $dialogs, $cookieStore) {
 
-	$scope.events = [
-	                 { id:1, text:"Task A-12458",
-	                   start_date: new Date(2014, 4, 20),
-	                   end_date: new Date(2014, 4, 21) },
-	                 { id:2, text:"Task A-83473",
-	                   start_date: new Date(2014, 4, 21 ),
-	                   end_date: new Date(2014, 4, 22 ) }
-	               ];
-
-	$scope.scheduler = { date : new Date() };
+	$scope.physicians = [];
+	$scope.patients = [];
+	$scope.rooms = [];
+	
+	$scope.selectedPhysicianID = -1;
+	$scope.selectedRoomID = -1;
+	$scope.selectedPatientID = -1;
+	
+	$scope.physicianEvents = [];
+	$scope.roomEvents = [];
+	
+	$scope.fetchPhysicians = function() {
+		BaseService.post(DisplayBoardInfo.config.url.physician.list).then(function(response) {
+			 $scope.physicians = response;
+			 $scope.physicians = $scope.physicians.sort('surname');
+			});
+	};
+	
+	$scope.fetchPatients = function() {
+		BaseService.post(DisplayBoardInfo.config.url.patient.list).then(function(response) {
+			 $scope.patients = response;
+			 $scope.patients = $scope.patients.sort('surname');
+		});
+	};
+	
+	$scope.fetchRooms = function() {
+		BaseService.post(DisplayBoardInfo.config.url.room.list).then(function(response) {
+			 $scope.rooms = response;
+			 $scope.rooms = $scope.rooms.sort('number');
+		});
+	};
+	
+	$scope.setSelectedPhysicianID = function(selectedPhysician){
+		if(typeof selectedPhysician === 'undefined'){
+			$scope.selectedPhysicianID = -1;
+		} else {
+			$scope.selectedPhysicianID = selectedPhysician;
+		}
+	}
+	
+	$scope.setSelectedPatientID = function(selectedPatient){
+		if(typeof selectedPatient === 'undefined'){
+			$scope.selectedPatientID = -1;
+		} else {
+			$scope.selectedPatientID = selectedPatient;
+		}
+	}
+	
+	$scope.setSelectedRoomID = function(selectedRoom){
+		if(typeof selectedRoom === 'undefined'){
+			$scope.selectedRoomID = -1;
+		} else {
+			$scope.selectedRoomID = selectedRoom;
+		}
+	}
+	
+	$scope.fetchPhysicians();
+	$scope.fetchPatients();
+	$scope.fetchRooms();
+	
+	$scope.test = function() {
+		console.log('test');
+	}
+	
+	$scope.fetchPhysicianEvents = function(physicianID) {
+		if(typeof physicianID === 'undefined'){
+			$scope.physicianEvents = [];
+		} else {
+			BaseService.post(DisplayBoardInfo.config.url.physician.list).then(function(response) {
+			 //$scope.physicianEvents = response;
+				/*$scope.physicianEvents = [
+				  	                 { patient_id:1, physician_id:1, room_id:1,
+				  	                   start_date: new Date(2014, 4, 20),
+				  	                   end_date: new Date(2014, 4, 21) },
+				  	                 { patient_id:1, physician_id:2, room_id:1,
+				  	                   start_date: new Date(2014, 4, 21 ),
+				  	                   end_date: new Date(2014, 4, 22 ) }
+				  	               ];*/
+				$scope.physicianEvents = [
+				  	                 { id:1, text:"physician A-12458",
+				  	                   start_date: new Date(2014, 4, 20),
+				  	                   end_date: new Date(2014, 4, 21) },
+				  	                 { id:2, text:"physician A-83473",
+				  	                   start_date: new Date(2014, 4, 21 ),
+				  	                   end_date: new Date(2014, 4, 22 ) }
+				  	               ];
+				});
+		}
+	}
+	
+	$scope.fetchRoomEvents = function(roomID) {
+		if(typeof roomID === 'undefined'){
+			$scope.roomEvents = [];
+		} else {
+			BaseService.post(DisplayBoardInfo.config.url.physician.list).then(function(response) {
+				//$scope.roomEvents = response;
+				$scope.roomEvents = [
+				  	                 { id:1, text:"Room A-12458",
+				  	                   start_date: new Date(2014, 4, 20),
+				  	                   end_date: new Date(2014, 4, 21) },
+				  	                 { id:2, text:"Room A-83473",
+				  	                   start_date: new Date(2014, 4, 21 ),
+				  	                   end_date: new Date(2014, 4, 22 ) }
+				  	               ];
+				});
+		}
+	}
+	
+	
 	
 });
 

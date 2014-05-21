@@ -1,5 +1,34 @@
-<div ng-controller="TablesController" class="Absolute-Center">    
-      <div data="events" dhx-scheduler style="height:800px; width:800px;">
+<div ng-controller="TablesController" class="Absolute-Center">   
+	  <div>
+	  	<table class="adminTables">
+	  		<tr>
+	  			<td><label class="control-label" for="physician">Lekarz:</label>
+	  			<td><label class="control-label" for="room">Gabinet:</label>
+	  			<td><label class="control-label" for="patient">Pacjent:</label> 
+	  		</tr>
+	  		<tr> 
+				<td class="adminTablesTD"><select class="form-control" name="physician" id="physician"
+                	ng-model="selectedPhysician" 
+                	ng-options="physician.id as physician.title+' '+physician.name+' '+physician.surname for physician in physicians"
+    				ng-change="setSelectedPhysicianID(selectedPhysician); fetchPhysicianEvents(selectedPhysician);" required>
+                		<option value="">--Wybierz lekarza--</option>
+            		</select>
+            	<td class="adminTablesTD"><select class="form-control" name="room" id="room"
+                	ng-model="selectedRoom" 
+                	ng-options="room.id as room.number+' /piętro '+room.floor for room in rooms"
+    				ng-change="setSelectedRoomID(selectedRoom); fetchRoomEvents(selectedRoom);" required>
+                		<option value="">--Wybierz gabinetu--</option>
+            		</select>
+            	<td><select class="form-control" name="patient" id="patient"
+                	ng-model="selectedPatient" 
+                	ng-options="patient.id as patient.surname+' '+patient.name for patient in patients"
+    				ng-change="setSelectedPatientID(selectedPatient)" required>
+                		<option value="">--Wybierz pacjenta--</option>
+            		</select>
+            </tr>
+         </table>
+	  </div> 
+       <div data="physicianEvents" dhx-scheduler style="height:800px; width:800px;">
 		<div class="dhx_cal_prev_button">&nbsp;</div>
 		<div class="dhx_cal_next_button">&nbsp;</div>
 		<div class="dhx_cal_today_button"></div>
@@ -10,6 +39,8 @@
 
 		<div dhx-template="event_bar_text">
 			<strong>#{{event.id}}</strong>: {{event.text | uppercase}}
+			<!-- <strong>LALA</strong>: {{event.text | uppercase}} -- nie działa-->
 		</div>
-	</div>
+	  </div>
+	  
 </div>

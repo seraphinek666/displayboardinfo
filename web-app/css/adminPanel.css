@@ -7,3 +7,13 @@
 	color:red;
 	font-style: italic;
 }
+
+.adminTables {
+	width:800px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+.adminTablesTD {
+	padding:0 15px 0 0;
+}
