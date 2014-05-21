@@ -26,6 +26,9 @@
 <link rel="stylesheet"
 	href="${resource(dir: 'font-awesome/css', file: 'font-awesome.min.css')}"
 	type="text/css">
+	<link rel="stylesheet"
+	href="${resource(dir: 'css', file: 'angular-ui-dashboard.css')}"
+	type="text/css">
 
 <style type="text/css">
 
@@ -134,6 +137,10 @@
 	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
 	<script
 		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+	
+	<script src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
+	<script src="/displayboardinfo/js/lib/angular-ui-dashboard.js"></script>
+
 
 	<script src="/displayboardinfo/js/ng-app/directive/Dialog.js"></script>
 
