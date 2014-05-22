@@ -41,6 +41,21 @@
     min-height: 550px;
     overflow: auto;
 }
+
+.included_content{
+	border-style: solid;
+	border-width: medium;
+	height: 200px;
+	width: 100%;
+	margin: auto;
+}
+
+.example_panel{
+	border-style: dotted;
+	border-width: medium;
+	height: 100%;
+}
+
 </style>
 </head>
 
@@ -88,7 +103,7 @@
 
 					<li><a href="javascript:void(0);"
 					ng-click="loadDashboardView()"><i class="fa fa-dashboard fa-fw"></i>
-							Dashboardy</a></li>
+							Tablice</a></li>
 					<li><a href="javascript:void(0);"
 						ng-click="expandOrCollapse()"><i class="fa fa-edit fa-fw"></i>
 							Słowniki<span class="fa arrow"></span></a>
@@ -141,7 +156,6 @@
 	<script src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
 	<script src="/displayboardinfo/js/lib/angular-ui-dashboard.js"></script>
 
-
 	<script src="/displayboardinfo/js/ng-app/directive/Dialog.js"></script>
 
 	<script src="/displayboardinfo/js/ng-app/application.js"></script>
@@ -156,5 +170,6 @@
 	<script src="/displayboardinfo/js/ng-app/controllers/DummyController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/DashboardController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/TablesController.js"></script>
+	
 </body>
 </html>

@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="container-fluid">
+   		<div class="included_content">
+    		<div class="example_panel" style="height: 30%; width: 100%">
+    			<select ng-model="selectedComponents[0]" ng-options="item.name for item in components"></select>
+    			<span ng-switch on="selectedComponents[0].name">
+    			<select ng-switch-when="lekarz" ng-model="selectedComponents[2]" ng-options="doc.name for doc in doctors"></select>
+    			</span>
+    		</div>
+    		<div class="example_panel" style="height: 70%; width: 100%">
+    			<select ng-model="selectedComponents[1]" ng-options="item.name for item in components"></select>
+    			<span ng-switch on="selectedComponents[1].name">
+    			<select ng-switch-when="lekarz" ng-model="selectedComponents[3]" ng-options="doc.name for doc in doctors"></select>
+    			</span>
+    		</div>
+   		</div>
+   	</div>
+   </div>
