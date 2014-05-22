@@ -1,8 +1,22 @@
-<div ng-controller="DashboardController" class="Absolute-Center" style="height: 100px;">    
-<p>test</p>
-<div class="row">
-    <div class="col-md-12">
-        <div dashboard="dashboardOptions" class="dashboard-container"></div>
-    </div>
-</div>
+<div ng-controller="DashboardController" class="Absolute-Center">    
+	<div class="dictionaryButtons">
+	<button ng-click="tableParams.sorting({})" class="btn btn-default pull-right dictionaryHeaderButtons">Wyczyść sortowanie</button>
+    <button ng-click="tableParams.filter({})" class="btn btn-default pull-right dictionaryHeaderButtons">Wyczyść filtrowanie</button>
+    <button class="btn btn-warning dictionaryHeaderButtons" ng-click="launchModal()">Dodaj talicę</button>
+	</div>
+	<table ng-table="tableParams" show-filter="true" class="table">
+            <tr ng-repeat="dashboard in dashboardsLocal">
+           	 
+            	<td data-title="'Nazwa'" sortable="'name'" filter="{ 'name': 'text' }">
+                	<span ng-if="!dashboard.$edit">{{dashboard.name}}</span>
+                	<div ng-if="dashboard.$edit"><input class="form-control" type="text" ng-model="dashboard.name" /></div>
+            	</td>
+            	<td data-title="'Akcje'">
+                	<a ng-if="!dashboard.$edit" href="" class="btn btn-primary btn-xs" ng-click="">Edytuj</a>
+                	<a ng-if="dashboard.$edit" href="" class="btn btn-primary btn-xs" ng-click="">Zapisz</a>
+                	<a ng-if="dashboard.$edit" href="" class="btn btn-danger btn-xs" ng-click="">Anuluj</a>
+                	<a ng-if="!dashboard.$edit" href="" class="btn btn-danger btn-xs" ng-click="">Usuń</a>
+            	</td>
+            </tr>
+    </table>
 </div>

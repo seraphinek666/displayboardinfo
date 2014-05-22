@@ -1,0 +1,23 @@
+<div class="modal-header">
+	<h3 class="modal-title">Dodawanie nowej tablicy</h3>
+</div>
+<form ng-submit="submit()">
+	<div class="modal-body">
+		<div class="form-group input-group-lg">
+			<label class="control-label" for="name">Nazwa tablicy:</label> 
+			<input type="text" class="form-control" name="name" id="name" ng-model="dashboard.name" required>
+		</div>
+		<div class="form-group">
+			<select ng-model="template" ng-options="item.name for item in templates"></select>
+		</div>
+		<div class="form-group">
+			<div ng-include="template.url"></div> 
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" ng-click="cancelModal()">Anuluj</button>
+		<button type="button" class="btn btn-primary" ng-click="addDashboard()"
+			ng-disabled="(nameDialog.$dirty && nameDialog.$invalid) || nameDialog.$pristine">Dodaj</button>
+	</div>
+
+</form>
