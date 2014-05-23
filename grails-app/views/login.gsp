@@ -12,32 +12,34 @@
 
 <style type="text/css">
 .form-signin {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0px auto;
+	max-width: 330px;
+	padding: 15px;
+	margin: 0px auto;
 }
-.form-signin-heading{
-	text-align:center;
+
+.form-signin-heading {
+	text-align: center;
 }
 </style>
 
 </head>
 <body ng-controller="LoginController">
-<div class="container">
-<form class="form-signin" ng-submit="login()" role="form">
-	<h2 class="form-signin-heading">Zaloguj się</h2>
-	<input class="form-control" name="username" ng-model="username" required="" placeholder="Login"></input>
-	<input type="password" name="password" class="form-control" ng-model="password" required="" placeholder="Hasło"></input>
-	<label class="checkbox">
-		<input type="checkbox" value="remember-me"></input>
-		Zapamiętaj
-	</label>
-	<button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
-</form>
-</div>
+	<div class="container">
+		<form class="form-signin">
+			<h2 class="form-signin-heading">Zaloguj się</h2>
+			<input class="form-control" name="username" ng-model="username"
+				required="" placeholder="Login"></input> <input type="password"
+				name="password" class="form-control" ng-model="password" required=""
+				placeholder="Hasło"></input> <label class="checkbox"> <input
+				type="checkbox" value="remember-me"></input> Zapamiętaj
+			</label>
+			<button class="btn btn-lg btn-primary btn-block" ng-click="login()"
+				type="submit">Zaloguj</button>
+		</form>
+	</div>
 
 
-<script src="/displayboardinfo/js/lib/jquery-2.1.0.min.js"></script>
+		<script src="/displayboardinfo/js/lib/jquery-2.1.0.min.js"></script>
 	<script src="/displayboardinfo/js/lib/raphael-2.1.0.min.js"></script>
 	<script src="/displayboardinfo/js/lib/morris.js"></script>
 	<script src="/displayboardinfo/js/lib/jquery.metisMenu.js"></script>
@@ -52,13 +54,23 @@
 	<script src="/displayboardinfo/js/lib/ng-table.js"></script>
 	<script src="/displayboardinfo/js/lib/toaster.js"></script>
 	<script src="/displayboardinfo/js/lib/angular-md5.js"></script>
+	<script src="/displayboardinfo/js/lib/dhtmlxscheduler.js"></script>
+	<script src="/displayboardinfo/js/lib/dhtmlxscheduler_minical.js"></script>
+	
 	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
 	<script
 		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+	
+	<script src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
+	<script src="/displayboardinfo/js/lib/angular-ui-dashboard.js"></script>
+
 	<script src="/displayboardinfo/js/ng-app/directive/Dialog.js"></script>
+
 	<script src="/displayboardinfo/js/ng-app/application.js"></script>
 	<script src="/displayboardinfo/js/ng-app/service/BaseService.js"></script>
+	
 	<script src="/displayboardinfo/js/ng-app/controllers/LoginController.js"></script>
+	
 
 </body>
 </html>
