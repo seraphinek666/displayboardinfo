@@ -161,7 +161,6 @@
 		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 	
 	<script src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
-	<script src="/displayboardinfo/js/lib/angular-ui-dashboard.js"></script>
 
 	<script src="/displayboardinfo/js/ng-app/directive/Dialog.js"></script>
 
