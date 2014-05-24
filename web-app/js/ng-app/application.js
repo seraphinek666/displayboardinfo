@@ -1,7 +1,7 @@
 // W TYM PLIKU KONFIGURUJEMY PROPERTIESY I INICJALIZUJEMY MODUŁ
 
 var app = angular.module('app', [ 'ngRoute', 'ui.bootstrap',
-		'pascalprecht.translate', 'dialogs', 'ngCookies', 'ngTable', 'toaster']);
+		'pascalprecht.translate', 'dialogs', 'ngCookies', 'ngTable', 'toaster', 'angular-md5', 'ui.calendar']);
 
 
 //ROUTING KONTROLER -> WIDOK
