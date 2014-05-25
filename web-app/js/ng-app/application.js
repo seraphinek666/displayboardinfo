@@ -111,6 +111,13 @@ DisplayBoardInfo.config = {
 			save : '/displayboardinfo/room/save/',
 			update : '/displayboardinfo/room/update/',
 			remove : '/displayboardinfo/room/delete/'
+		},
+		term : {
+			listPhysEvents : '/displayboardinfo/term/listPhysEvents/',
+			listRoomEvents : '/displayboardinfo/term/listRoomEvents/',
+			save : '/displayboardinfo/term/save/',
+			update : '/displayboardinfo/term/update/',
+			remove : '/displayboardinfo/term/delete/'
 		}
 	},
 	column : {

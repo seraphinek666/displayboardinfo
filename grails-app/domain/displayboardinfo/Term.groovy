@@ -4,13 +4,20 @@ import java.sql.Timestamp;
 
 class Term {
 
-	int id;
-	Timestamp time;
+	int id_term;
+	Timestamp start;
+	Timestamp end;
+	String title;
 	Physician physician;
 	Room room;
 	Patient patient;
+	Boolean allDay;
 	
 	
     static constraints = {
     }
+	
+	static mapping = {
+		id name: 'id_term'
+	}
 }
