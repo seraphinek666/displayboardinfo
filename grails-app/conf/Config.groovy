@@ -113,4 +113,16 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+
+	appenders {
+		// console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+		// file name:'file', file:'app.log'
+	}
+
+	// By default, messages are logged at the warn level to the console and the app.log
+	root {
+		warn 'stdout'
+		// warn 'stdout','file'
+		additivity = true
+	}
 }

@@ -1,0 +1,3 @@
+events = {
+    'termList' browser: true
+}

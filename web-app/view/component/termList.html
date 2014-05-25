@@ -1,0 +1,16 @@
+<div>
+	<script type="text/javascript">
+		try {
+			var grailsEvents = new grails.Events("http://localhost:8080/displayboardinfo/", {
+				transport : "sse"
+			});
+			grailsEvents.on('termList', function(data) {
+				window.console && console.log("Aktualizacja wizyt!");
+				// TODO aktualizacja
+			});
+		} catch (error) {
+			console.log("ERROR: " + error.toString());
+		}
+	</script>
+
+</div>
