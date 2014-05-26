@@ -40,6 +40,7 @@ grails.project.dependency.resolution = {
         mavenLocal()
         grailsCentral()
         mavenCentral()
+		mavenRepo "https://oss.sonatype.org/content/repositories/snapshots/"
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -81,3 +82,4 @@ grails.project.dependency.resolution = {
 		compile ":events-push:1.0.M7"
     }
 }
+

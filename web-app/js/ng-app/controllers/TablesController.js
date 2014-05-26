@@ -17,12 +17,14 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 	$scope.physicianEventsSource = {
 			color: 'green',
 			textColor: 'white',
+			className: '1',
 			events:[]
 	}
 	
 	$scope.roomEventsSource = {
 			color: 'DarkViolet',
 			textColor: 'white',
+			className: '2',
 			events: []
 	};
 	
@@ -56,7 +58,7 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 	//#########################################################################################
 
 	$scope.setSelectedPhysician = function(selectedPhysician){
-		if(typeof selectedPhysician === 'undefined'){
+		if(typeof selectedPhysician === 'undefined' || selectedPhysician === null){
 			$scope.selectedPhysician = null;
 			$scope.physicianEventsSource.events = []
 		} else {
@@ -65,7 +67,7 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 	}
 	
 	$scope.setSelectedRoomID = function(selectedRoom){
-		if(typeof selectedRoom === 'undefined'){
+		if(typeof selectedRoom === 'undefined' || selectedRoom === null){
 			$scope.selectedRoom = null;
 			$scope.roomEventsSource.events = []
 		} else {
@@ -74,7 +76,7 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 	}
 
 	$scope.setSelectedPatient = function(selectedPatient){
-		if(typeof selectedPatient === 'undefined'){
+		if(typeof selectedPatient === 'undefined' || selectedPatient === null){
 			$scope.selectedPatient = null;
 		} else {
 			$scope.selectedPatient = selectedPatient;
@@ -84,32 +86,37 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 	//#########################################################################################
 
 	$scope.fetchRoomEvents = function(room) {
-		if(typeof room === 'undefined'){
-			$scope.roomEvents = [];
+		if(typeof room === 'undefined' || room === null){
+			$scope.roomEventsSource.events = [];
 		} else {
 			BaseService.post(DisplayBoardInfo.config.url.term.listRoomEvents, { room_id: room.id}).then(function(response) {
-				//$scope.roomEventsSource.events = response;
-				for (r in response){
-					$scope.roomEventsSource.events.push(r);
+				$scope.roomEventsSource.events = response;
+				for (i=0; i<response.length; i++) {
+					$scope.roomEventsSource.events[i].id = i;
+					$scope.roomEventsSource.events[i].start = new Date($scope.roomEventsSource.events[i].start);
+					$scope.roomEventsSource.events[i].end = new Date($scope.roomEventsSource.events[i].end);
 				}
-				console.log($scope.roomEventsSource.events);
 			});
 		}
+		
+		$scope.selectedEvent = null;
 	};
 	
 	$scope.fetchPhysicianEvents = function(physician) {
-		if(typeof physician === 'undefined'){
-			$scope.physicianEvents = [];
+		if(typeof physician === 'undefined' || physician === null){
+			$scope.physicianEventsSource.events = [];
 		} else {
 			BaseService.post(DisplayBoardInfo.config.url.term.listPhysEvents, { physician_id: physician.id }).then(function(response) {
-				//$scope.physicianEventsSource.events = response;
-				console.log(response);
-				for (r in response) {
-					$scope.physicianEventsSource.events.push(r);
+				$scope.physicianEventsSource.events = response;
+				for (i=0; i<response.length; i++) {
+					$scope.physicianEventsSource.events[i].id = i+100000;
+					$scope.physicianEventsSource.events[i].start = new Date($scope.physicianEventsSource.events[i].start);
+					$scope.physicianEventsSource.events[i].end = new Date($scope.physicianEventsSource.events[i].end);
 				}
-				console.log($scope.physicianEventsSource.events);
 			});
 		}
+		
+		$scope.selectedEvent = null;
 	};
 	
 	//#########################################################################################
@@ -127,18 +134,16 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 				selectable: true,
 				selectHelper: true,
 				select: function(start, end, allDay) {
-					//var title = prompt('Event Title:');
-					/*if (true) {
-						$scope.myCalendar1.fullCalendar('renderEvent',
-							{
-								start: start,
-								end: end,
-								allDay: allDay
-							}
-						);
+					if (($scope.selectedPhysician === null || $scope.selectedPatient === null || $scope.selectedRoom === null)
+							|| (typeof $scope.selectedPhysician === 'undefined' || typeof $scope.selectedPatient === 'undefined' || typeof $scope.selectedRoom === 'undefined')){
+						$scope.myCalendar1.fullCalendar('unselect');
+						$scope.selectedEvent = null;
+						alert('Aby dodać wizytę należy wybrać lekarza, pacjenta i gabinet');
+					} else {
+						$scope.myCalendar1.fullCalendar('unselect');
+						$scope.saveEvent(start, end, allDay);
+						$scope.selectedEvent = null;
 					}
-					$scope.myCalendar1.fullCalendar('unselect');*/
-					$scope.saveEvent(start, end, allDay);
 				},
 				axisFormat: 'HH:mm',
 				timeFormat: {
@@ -154,16 +159,45 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 					$scope.myCalendar1.fullCalendar('updateEvent', event);
 					$scope.selectedEvent = event;
 					$scope.canEditDelete = true;
-					console.log(event);
 				},
-				eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
-					
+				eventDrop: function(event, allDay, jsEvent, ui, view){
+					$scope.updateEvent(event, allDay, jsEvent, ui, view);
+					$scope.selectedEvent = null;
 				},
-				eventResize: function(event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
-					
+				eventResize: function(event, allDay, jsEvent, ui, view){
+					$scope.updateEvent(event, allDay, jsEvent, ui, view);
+					$scope.selectedEvent = null;
 				}
 			}
 	};
+	
+	$scope.eventSources = [$scope.roomEventsSource, $scope.physicianEventsSource];
+	
+	//#########################################################################################
+	
+	$scope.updateEvent = function(event, allDay, jsEvent, ui, view){
+		$scope.termToUpdate = {
+				id_term : event.id_term, 
+				title: event.title, 
+				physician: event.physician, 
+				room: event.room, 
+				patient: event.patient, 
+				start: event.start.getTime(), 
+				end: event.end, 
+				allDay: event.allDay
+		};
+		
+		if ($scope.termToUpdate.end == null){
+			$scope.termToUpdate.end = $scope.termToUpdate.start
+		} else {
+			$scope.termToUpdate.end = $scope.termToUpdate.end.getTime();
+		}
+		
+		BaseService.post(DisplayBoardInfo.config.url.term.update, { term: $scope.termToUpdate}).then(function(response) {
+			$scope.fetchPhysicianEvents($scope.selectedPhysician);
+			$scope.fetchRoomEvents($scope.selectedRoom);
+		});
+	}
 	
 	$scope.saveEvent = function(start, end, allDay){
 		$scope.termToSave = {
@@ -181,6 +215,24 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 			$scope.fetchRoomEvents($scope.selectedRoom);
 		});
 	}
+	
+	$scope.removeEvent = function(){
+		if($scope.selectedEvent == null) {
+			alert('Proszę najpierw zaznaczyć wydarzenie.');
+		} else {
+			var remove = window.confirm('Czy napewno chcesz usunąć zdarzenie?');
+			if (remove == true) 
+			{
+				BaseService.post(DisplayBoardInfo.config.url.term.remove, { term: $scope.selectedEvent }).then(function(response) {
+					$scope.fetchPhysicianEvents($scope.selectedPhysician);
+					$scope.fetchRoomEvents($scope.selectedRoom);
+				}); 
+			}
+			$scope.selectedEvent = null;
+		}
+	}
+	
+	//#########################################################################################
 	
 	$scope.getEventTitle = function(physicianID, roomID, patientID) {
 		return $scope.getPhysicianDescription(physicianID)+"; "
@@ -223,60 +275,72 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 				return $scope.patients[i].pesel; 
 			} 
 		 }
-		 
 		 return 'Błąd - brak pacjenta'
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+	//#########################################################################################
 	
 	$scope.launchModal = function () {
-		$scope.fetchPhysicians();
+		/*$scope.fetchPhysicians();
 		$scope.fetchPatients();
-		$scope.fetchRooms();
+		$scope.fetchRooms();*/
+		if($scope.selectedEvent == null) {
+			alert('Proszę najpierw zaznaczyć wydarzenie.');
+		} else {
 		
-	    var modalInstance = $modal.open({
-	      templateUrl: '/displayboardinfo/view/tables/editTermModal.html',
-	      controller: ModalInstanceCtrl,
-	      resolve: {
-	    	  selectedEvent : function(){
-	    		  return $scope.selectedEvent;
-	    	  },
-	    	  physicians : function(){
-	    		  return $scope.physicians;
-	    	  },
-	    	  patients : function(){
-	    		  return $scope.patients;
-	    	  },
-	    	  rooms : function(){
-	    		  return $scope.rooms;
-	    	  }
-	      }
-	    });
-	    
-	    modalInstance.result.then(function ($term) {
-	    	$scope.reloadList()
-	    });
+		    var modalInstance = $modal.open({
+		      templateUrl: '/displayboardinfo/view/tables/editTermModal.html',
+		      controller: ModalInstanceCtrl,
+		      resolve: {
+		    	  selectedEvent : function(){
+		    		  return $scope.selectedEvent;
+		    	  },
+		    	  physicians : function(){
+		    		  return $scope.physicians;
+		    	  },
+		    	  patients : function(){
+		    		  return $scope.patients;
+		    	  },
+		    	  rooms : function(){
+		    		  return $scope.rooms;
+		    	  }
+		      }
+		    });
+		    
+		    modalInstance.result.then(function ($term) {
+		    	$scope.fetchPhysicianEvents($scope.selectedPhysician);
+				$scope.fetchRoomEvents($scope.selectedRoom);
+		    });
+		}
 	  };
 	  
 	var ModalInstanceCtrl = function ($scope, $modalInstance, selectedEvent, physicians, patients, rooms) {
-			$scope.term = {id_term : selectedEvent.id_term, title: selectedEvent.title, physician_id: selectedEvent.physician_id, 
-					room_id: selectedEvent.room_id, patient_id: selectedEvent.patient_id, start: selectedEvent.start, end: selectedEvent.end, allDay: selectedEvent.allDay};
 			$scope.selectedEvent = selectedEvent;
 			$scope.physicians = physicians;
 			$scope.patients = patients;
 			$scope.rooms = rooms;
 			
+			$scope.term = {
+					id_term : selectedEvent.id_term, 
+					title: selectedEvent.title, 
+					physician: selectedEvent.physician, 
+					room: selectedEvent.room, 
+					patient: selectedEvent.patient, 
+					start: selectedEvent.start.getTime(), 
+					end: selectedEvent.end, 
+					allDay: selectedEvent.allDay
+			};
+			
 			$scope.saveTerm = function () {
-				$scope.term.title = $scope.getPhysicianDescription($scope.term.physician_id)+"; "
-					+$scope.getPatientPesel($scope.term.patient_id)+"; "+$scope.getRoomDescription($scope.term.room_id)
+				$scope.term.title = $scope.getPhysicianDescription($scope.term.physician.id)+"; "
+					+$scope.getPatientPesel($scope.term.patient.id)+"; "+$scope.getRoomDescription($scope.term.room.id)
+				if ($scope.term.end == null){
+					$scope.term.end = $scope.term.start
+				} else {
+					$scope.term.end = $scope.term.end.getTime()
+				}
 				$modalInstance.close($scope.term);
-				BaseService.post(DisplayBoardInfo.config.url.term.update, { term: $scope.term}).then(function(response) {
+				BaseService.post(DisplayBoardInfo.config.url.term.update, { term: $scope.term }).then(function(response) {
 				});
 			};
 	
@@ -321,47 +385,8 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 				 
 				 return 'Błąd - brak pacjenta'
 			}
+			
+			
 	};
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/* add and removes an event source of choice */
-	$scope.addRemoveEventSource = function(sources,source) {
-		var canAdd = 0;
-		angular.forEach(sources,function(value, key){
-			if(sources[key] === source){
-				sources.splice(key,1);
-				canAdd = 1;
-			}
-		});
-		if(canAdd === 0){
-			sources.push(source);
-		}
-	};
-	/* add custom event */
-	$scope.addEvent = function() {
-		$scope.events.push({
-			title: 'Open Sesame',
-			start: new Date(y, m, 28),
-			end: new Date(y, m, 29),
-			className: ['openSesame']
-		});
-	};
-	/* remove event */
-	$scope.remove = function(index) {
-		$scope.events.splice(index,1);
-	};
-
-	$scope.eventSources = [$scope.roomEventsSource, $scope.physicianEventsSource];
-
 
 });

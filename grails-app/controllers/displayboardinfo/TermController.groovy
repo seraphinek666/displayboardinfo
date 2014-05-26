@@ -3,6 +3,7 @@ package displayboardinfo
 
 
 import static org.springframework.http.HttpStatus.*
+import java.sql.Timestamp;
 import grails.transaction.Transactional
 
 import java.awt.Toolkit;
@@ -19,12 +20,6 @@ class TermController {
 		Physician physicianToGet = Physician.find{physician -> id == json.physician_id};
 		try {
 			def terms = Term.findAllByPhysician(physicianToGet);
-			/*for(t in terms){
-				System.out.println("1 "+t.start);
-				t.start = new Date((long)(t.start.getTime() + (t.start.getNanos() / 1000000)));
-				t.end = new Date((long)(t.end.getTime() + (t.end.getNanos() / 1000000)));
-				System.out.println("2 " + t.start);
-			}*/
 			render Term.findAllByPhysician(physicianToGet) as JSON;
 		} catch (Exception e) {
 			response.status = 500
@@ -36,11 +31,6 @@ class TermController {
 		def json = request.JSON;
 		Room roomToGet = Room.find{room -> id == json.room_id};
 		try {
-			//def terms = Term.findAllByRoom(roomToGet);
-			/*for(t in terms){
-				t.start = new Date((long)(t.start.getTime() + (t.start.getNanos() / 1000000)));
-				t.end = new Date((long)(t.end.getTime() + (t.end.getNanos() / 1000000)));
-			}*/
 			render Term.findAllByRoom(roomToGet) as JSON;
 		} catch (Exception e) {
 			response.status = 500
@@ -64,13 +54,17 @@ class TermController {
 	def update() {
 		def json = request.JSON;
 		try {
-			Term toUpdate = Term.find{term -> id_term == json.term.id};
-			toUpdate.start = json.term.start;
-			toUpdate.end = json.term.end;
+			Term toUpdate = Term.find{term -> id_term == json.term.id_term};
+			Physician physician = Physician.find{physician -> id == json.term.physician.id};
+			Patient patient = Patient.find{patient -> id == json.term.patient.id};
+			Room room = Room.find{room -> id == json.term.room.id};
+			
+			toUpdate.start = new Timestamp(json.term.start);
+			toUpdate.end = new Timestamp(json.term.end);
 			toUpdate.title = json.term.title;
-			toUpdate.physician = new Physician(json.term.physician)
-			toUpdate.room = new Room(json.term.room)
-			toUpdate.patient = new Patient(json.term.patient)
+			toUpdate.physician = physician;
+			toUpdate.room = room;
+			toUpdate.patient = patient;
 			toUpdate.allDay = json.term.allDay;
 			toUpdate.save();
 			render 'Success'
@@ -84,7 +78,7 @@ class TermController {
 	def delete() {
 		def json = request.JSON;
 		try {
-			Term toDelete = Term.find{term -> id == json.term.id};
+			Term toDelete = Term.find{term -> id_term == json.term.id_term};
 			toDelete.delete();
 			render 'Success'
 		} catch (Exception e) {

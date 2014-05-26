@@ -17,3 +17,8 @@
 .adminTablesTD {
 	padding:0 15px 0 0;
 }
+
+.eventActions {
+	text-align: right;
+	padding-top: 10px;
+}
