@@ -153,8 +153,9 @@
 	<script src="/displayboardinfo/js/lib/angular-md5.js"></script>
 	<script src="/displayboardinfo/js/lib/dhtmlxscheduler.js"></script>
 	<script src="/displayboardinfo/js/lib/dhtmlxscheduler_minical.js"></script>
-	<script src="/displayboardinfo/js/lib/calendar.js"></script>
+	
 	<script src="/displayboardinfo/js/lib/jquery-ui.custom.min.js"></script>
+	<script src="/displayboardinfo/js/lib/calendar.js"></script>
 	<script src="/displayboardinfo/js/lib/fullcalendar.min.js"></script>
 	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
 	<script

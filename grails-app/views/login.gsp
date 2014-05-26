@@ -57,20 +57,29 @@
 	<script src="/displayboardinfo/js/lib/dhtmlxscheduler.js"></script>
 	<script src="/displayboardinfo/js/lib/dhtmlxscheduler_minical.js"></script>
 	
+	<script src="/displayboardinfo/js/lib/jquery-ui.custom.min.js"></script>
+	<script src="/displayboardinfo/js/lib/calendar.js"></script>
+	<script src="/displayboardinfo/js/lib/fullcalendar.min.js"></script>
 	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
 	<script
 		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 	
 	<script src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
-	<script src="/displayboardinfo/js/lib/angular-ui-dashboard.js"></script>
 
 	<script src="/displayboardinfo/js/ng-app/directive/Dialog.js"></script>
 
 	<script src="/displayboardinfo/js/ng-app/application.js"></script>
 	<script src="/displayboardinfo/js/ng-app/service/BaseService.js"></script>
-	
+	<script src="/displayboardinfo/js/ng-app/controllers/AdminController.js"></script>
+	<script src="/displayboardinfo/js/ng-app/controllers/ClientController.js"></script>	
 	<script src="/displayboardinfo/js/ng-app/controllers/LoginController.js"></script>
-	
+	<script src="/displayboardinfo/js/ng-app/controllers/UserController.js"></script>
+	<script src="/displayboardinfo/js/ng-app/controllers/PatientController.js"></script>
+	<script src="/displayboardinfo/js/ng-app/controllers/PhysicianController.js"></script>
+	<script src="/displayboardinfo/js/ng-app/controllers/RoomController.js"></script>
+	<script src="/displayboardinfo/js/ng-app/controllers/DummyController.js"></script>
+	<script src="/displayboardinfo/js/ng-app/controllers/DashboardController.js"></script>
+	<script src="/displayboardinfo/js/ng-app/controllers/TablesController.js"></script>
 
 </body>
 </html>
