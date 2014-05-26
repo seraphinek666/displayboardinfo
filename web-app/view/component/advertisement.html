@@ -1,0 +1,40 @@
+
+<div class="panel panel-danger"
+	style="width: 500px; float: left; margin: 10px;">
+	<div class="panel-heading">
+		<h3 class="panel-title">Przestrzeń reklamowa</h3>
+	</div>
+	<div id="advertisement" class="panel-body">
+		<!-- it works the same with all jquery version from 1.x to 2.x -->
+		<div id="slider1_container"
+			style="position: relative; top: 0px; left: 0px; width: 300px; height: 300px;">
+			<!-- Slides Container -->
+			<div u="slides"
+				style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px; width: 300px; height: 300px;">
+				<div>
+					<img u="1" src="/displayboardinfo/images/ad/1.jpg" />
+				</div>
+				<div>
+					<img u="2" src="/displayboardinfo/images/ad/2.jpg" />
+				</div>
+				<div>
+					<img u="3" src="/displayboardinfo/images/ad/3.jpg" />
+				</div>
+				<div>
+					<img u="4" src="/displayboardinfo/images/ad/4.jpg" />
+				</div>
+			</div>
+		</div>
+		<script>
+			$(function() {
+				var options = {
+					$AutoPlay : true
+				};
+				var jssor_slider1 = new $JssorSlider$('slider1_container',
+						options);
+			});
+		</script>
+	</div>
+</div>
+
+
