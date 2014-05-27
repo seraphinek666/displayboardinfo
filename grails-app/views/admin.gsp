@@ -128,6 +128,9 @@
 					<li><a href="javascript:void(0);"
 							ng-click="loadTablesView()"><i class="fa fa-table fa-fw"></i>
 							Harmonogram przyjęć</a></li>
+					<li><a href="javascript:void(0);"
+							ng-click="loadDayScheduleView()"><i class="fa fa-table fa-fw"></i>
+							Harmonogram dnia</a></li>
 				</ul>
 				<!-- /#side-menu -->
 			</div>
@@ -176,6 +179,7 @@
 	<script src="/displayboardinfo/js/ng-app/controllers/LoginController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/UserController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/PatientController.js"></script>
+	<script src="/displayboardinfo/js/ng-app/controllers/DayScheduleController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/PhysicianController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/RoomController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/DummyController.js"></script>

@@ -38,6 +38,10 @@ app.config([ '$routeProvider', function($routeProvider) {
             templateUrl: '/displayboardinfo/view/tables/tables.html',
             controller: "TablesController"
         })
+        .when('/daySchedule', {
+            templateUrl: '/displayboardinfo/view/daySchedule/daySchedule.html',
+            controller: "DayScheduleController"
+        })
          .when('/dashboard', {
             templateUrl: '/displayboardinfo/view/dashboard/dashboard.html',
             controller: "DashboardController"
@@ -114,6 +118,7 @@ DisplayBoardInfo.config = {
 		},
 		term : {
 			listPhysEvents : '/displayboardinfo/term/listPhysEvents/',
+			listPhysEventsByDay : '/displayboardinfo/term/listPhysEventsByDay/',
 			listRoomEvents : '/displayboardinfo/term/listRoomEvents/',
 			save : '/displayboardinfo/term/save/',
 			update : '/displayboardinfo/term/update/',

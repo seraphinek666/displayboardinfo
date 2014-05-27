@@ -36,6 +36,10 @@ app.controller('AdminController', function ($scope, $routeParams, $location, $tr
 		 $location.path('/tables');
 	 }
 	 
+	 $scope.loadDayScheduleView = function() {
+		 $location.path('/daySchedule');
+	 }
+	 
 	 $scope.loadDashboardView = function() {
 		 $location.path('/dashboard');
 	 }

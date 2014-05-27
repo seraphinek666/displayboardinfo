@@ -12,6 +12,7 @@ class Term {
 	Room room;
 	Patient patient;
 	Boolean allDay;
+	Boolean completed;
 	
 	
     static constraints = {

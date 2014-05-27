@@ -57,7 +57,7 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 	
 	//#########################################################################################
 
-	$scope.setSelectedPhysician = function(selectedPhysician){
+	$scope.setSelectedPhysicianID = function(selectedPhysician){
 		if(typeof selectedPhysician === 'undefined' || selectedPhysician === null){
 			$scope.selectedPhysician = null;
 			$scope.physicianEventsSource.events = []
@@ -75,7 +75,7 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 		}
 	}
 
-	$scope.setSelectedPatient = function(selectedPatient){
+	$scope.setSelectedPatientID = function(selectedPatient){
 		if(typeof selectedPatient === 'undefined' || selectedPatient === null){
 			$scope.selectedPatient = null;
 		} else {
@@ -153,10 +153,12 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 				monthNamesShort:["Sty","Lut","Marz","Kwie","Maj","Czer","Lip","Sier","Wrze","Paź","Lis","Gru"],
 				dayNames:["Niedziela","Poniedziałek","Wtorek","Środa","Czwartek","Piątek","Sobota"],
 				dayNamesShort:["Niedz","Pon","Wt","Śr","Czw","Pt","Sob"],
+				complete: function(){alert('complete');},
 				eventClick: function(event, allDay, jsEvent, view, dupa ){
 					event.color = 'red';
 					event.textColor = 'yellow';
 					$scope.myCalendar1.fullCalendar('updateEvent', event);
+					console.log($scope.selectedEvent);
 					$scope.selectedEvent = event;
 					$scope.canEditDelete = true;
 				},
@@ -184,7 +186,8 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 				patient: event.patient, 
 				start: event.start.getTime(), 
 				end: event.end, 
-				allDay: event.allDay
+				allDay: event.allDay,
+				completed: event.completed
 		};
 		
 		if ($scope.termToUpdate.end == null){
@@ -207,7 +210,8 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 				patient: $scope.selectedPatient, 
 				start: start.getTime(), 
 				end: end.getTime(), 
-				allDay: allDay
+				allDay: allDay,
+				completed: false
 		};
 		
 		BaseService.post(DisplayBoardInfo.config.url.term.save, { term: $scope.termToSave }).then(function(response) {
@@ -328,7 +332,8 @@ app.controller('TablesController', function ($scope, $routeParams, $location, $t
 					patient: selectedEvent.patient, 
 					start: selectedEvent.start.getTime(), 
 					end: selectedEvent.end, 
-					allDay: selectedEvent.allDay
+					allDay: selectedEvent.allDay,
+					completed: event.completed
 			};
 			
 			$scope.saveTerm = function () {
