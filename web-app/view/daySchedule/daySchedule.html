@@ -1,0 +1,37 @@
+<div ng-controller="DayScheduleController" class="Absolute-Center">   		
+	<div class="dailySchedulePhysician">
+	  <label class="control-label" for="physician">Lekarz:</label>
+	  <table><tr>
+	  <td><select class="form-control physicianSelectInDailySchedule" name="physician" id="physician"
+          	ng-model="selectedPhysician" 
+           	ng-options="physician as physician.title+' '+physician.name+' '+physician.surname for physician in physicians"
+    		ng-change="fetchEvents(selectedPhysician);" required>
+            <option value="">--Wybierz lekarza--</option>
+      </select></td>
+      <td>sdsf</td>
+      </tr></table>
+    </div>
+    <table ng-table="tableParams" class="table">
+            <tr ng-repeat="event in physicianEventsLocal">
+           	 
+            	<td data-title="'Zakończona'" class="completedCheckbox">
+                	<input type="checkbox" ng-model="event.completed" ng-click="closeEvent(event)" />
+            	</td>
+            	<td data-title="'Od'" sortable="'startTime'">
+                	<span>{{event.startTime + ' '+ event.startDate}}</span>
+            	</td>
+            	<td data-title="'Do'" sortable="'endTime'">
+                	<span>{{event.endTime + ' '+ event.endDate}}</span>
+            	</td>
+            	<td data-title="'PESEL pacjenta'">
+                	<span>{{getPatientObject(event.patient.id).pesel}}</span>
+            	</td>
+            	<td data-title="'Pacjent'">
+                	<span>{{getPatientObject(event.patient.id).name + " " + getPatientObject(event.patient.id).surname}}</span>
+            	</td>
+            	<td data-title="'Gabinet'">
+                	<span>{{getRoomObject(event.room.id).number + " /piętro " + getRoomObject(event.room.id).floor}}</span>
+            	</td>
+            </tr>
+    </table>
+</div>
