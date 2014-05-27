@@ -3,10 +3,14 @@ package displayboardinfo
 
 
 import static org.springframework.http.HttpStatus.*
+
 import java.sql.Timestamp;
+
 import grails.transaction.Transactional
 
 import java.awt.Toolkit;
+
+import org.apache.ivy.core.event.download.StartArtifactDownloadEvent;
 
 import grails.converters.JSON
 import groovy.ui.SystemOutputInterceptor;
@@ -19,7 +23,6 @@ class TermController {
 		def json = request.JSON;
 		Physician physicianToGet = Physician.find{physician -> id == json.physician_id};
 		try {
-			def terms = Term.findAllByPhysician(physicianToGet);
 			render Term.findAllByPhysician(physicianToGet) as JSON;
 		} catch (Exception e) {
 			response.status = 500
@@ -66,6 +69,7 @@ class TermController {
 			toUpdate.room = room;
 			toUpdate.patient = patient;
 			toUpdate.allDay = json.term.allDay;
+			toUpdate.completed = json.term.completed;
 			toUpdate.save();
 			render 'Success'
 		} catch (Exception e) {
