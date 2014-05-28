@@ -7,10 +7,6 @@ app.controller('DashboardController', function($scope, $routeParams, $location,
 	$scope.dashboardsLocal = [];
 	$scope.physicians = [];
 	$scope.rooms = [];
-		
-	BaseService.post(DisplayBoardInfo.config.url.physician.list).then(function(response) {
-		  $scope.physicians = response; 
-		});
 	
 	$scope.fetchPhysicians = function() {
 		BaseService.post(DisplayBoardInfo.config.url.physician.list).then(function(response) {
@@ -36,6 +32,9 @@ app.controller('DashboardController', function($scope, $routeParams, $location,
 		      resolve: {
 		    	  physicians : function(){
 		    		  return $scope.physicians;
+		    	  },
+		    	  rooms : function(){
+		    		  return $scope.rooms;
 		    	  }
 		      }
 		});
@@ -46,11 +45,11 @@ app.controller('DashboardController', function($scope, $routeParams, $location,
 		});
 	};
 
-	var ModalInstanceCtrl = function($scope, $modalInstance, physicians) {
+	var ModalInstanceCtrl = function($scope, $modalInstance, physicians, rooms) {
+		
 		$scope.dashboard = {
 			name : '',
-			component : '',
-			physician : '',
+			components : [],
 			template : ''
 		};
 		
@@ -73,8 +72,38 @@ app.controller('DashboardController', function($scope, $routeParams, $location,
 		
 		$scope.components= [{name: 'zegar'},{name: 'lekarz'},{name: 'gabinet'},{name: 'reklama'}];
 		$scope.physicians = physicians;
+		$scope.rooms = rooms;
+		
+		$scope.clear = function(position){
+			position.config = '';
+		};
+		$scope.clearAll = function(){
+			$scope.west.type = '';
+			$scope.west.config = '';
+			$scope.east.type = '';
+			$scope.east.config = '';
+			$scope.north.type = '';
+			$scope.north.config = '';
+			$scope.south.type = '';
+			$scope.south.config = '';
+		};
+		
 		$scope.addDashboard = function() {
-			$modalInstance.close($scope.dashboard);
+			//$modalInstance.close($scope.dashboard);
+			
+			if($scope.west.type){
+				$scope.dashboard.components.push($scope.west);
+			}
+			if($scope.east.type){
+				$scope.dashboard.components.push($scope.east);
+			}
+			if($scope.north.type){
+				$scope.dashboard.components.push($scope.north);
+			}
+			if($scope.south.type){
+				$scope.dashboard.components.push($scope.south);
+			}
+				
 //			BaseService.post(DisplayBoardInfo.config.url.patient.save, {
 //				patient : $scope.patient
 //			}).then(function(response) {

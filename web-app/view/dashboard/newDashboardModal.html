@@ -3,12 +3,13 @@
 </div>
 <form ng-submit="submit()">
 	<div class="modal-body">
+	<ng-form name="dashboardDialog" novalidate role="form">
 		<div class="form-group input-group-lg">
 			<label class="control-label" for="name">Nazwa tablicy:</label> 
 			<input type="text" class="form-control" name="name" id="name" ng-model="dashboard.name" required>
 		</div>
 		<div class="form-group">
-			<select ng-model="dashboard.template" ng-options="item.name for item in templates">
+			<select ng-model="dashboard.template" ng-options="item.name for item in templates" ng-change="clearAll()"  required>
 			<option value="">--Wybierz układ--</option>
 			</select>
 		</div>
@@ -19,7 +20,7 @@
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default" ng-click="cancelModal()">Anuluj</button>
 		<button type="button" class="btn btn-primary" ng-click="addDashboard()"
-			ng-disabled="(nameDialog.$dirty && nameDialog.$invalid) || nameDialog.$pristine">Dodaj</button>
+			ng-disabled="(dashboardDialog.$dirty && dashboardDialog.$invalid) || dashboardDialog.$pristine">Dodaj</button>
 	</div>
 
 </form>

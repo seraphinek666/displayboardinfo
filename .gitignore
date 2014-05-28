@@ -2,3 +2,4 @@
 /target-eclipse
 /.settings
 /bin
+web-app/WEB-INF/atmosphere-decorators.xml
