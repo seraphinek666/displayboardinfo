@@ -17,10 +17,19 @@ app.controller('PhysicianController', function ($scope, $routeParams, $location,
 	
 	$scope.fetchUsers = function() {
 		BaseService.post(DisplayBoardInfo.config.url.user.list).then(function(response) {
-			 $scope.users = response;
+			$scope.users = response;
 			});
 	}
+	
+	$scope.fetchUsers2 = function() {
+		BaseService.post(DisplayBoardInfo.config.url.user.list).then(function(response) {
+			 
+			});
+	}
+	
 	$scope.fetchUsers();
+	
+	$scope.fetchUsers2();
 	
 	$scope.tableParams = new ngTableParams({
         page: 1,            // show first page

@@ -58,6 +58,10 @@
 	border-style: dotted;
 	border-width: medium;
 	height: 100%;
+	float:left;
+}
+.example_panel select{
+	width: 100%;
 }
 
 </style>
