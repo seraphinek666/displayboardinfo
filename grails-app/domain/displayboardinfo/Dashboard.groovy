@@ -6,7 +6,8 @@ import displayboardinfo.types.DashboardType
 class Dashboard {
 
 	int id;
-	DashboardType type;
+	String template;
+	String name;
 	Map<String,Component> components;
 	
     static constraints = {
