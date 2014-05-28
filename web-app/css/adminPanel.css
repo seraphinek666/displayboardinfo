@@ -35,3 +35,12 @@
 .completedCheckbox{
 	text-align: center;
 }
+
+.dailyScheduleSetupTable{
+	width: 100%;
+	margin: 0px;
+}
+
+.currentDay{
+	text-align: right;
+}

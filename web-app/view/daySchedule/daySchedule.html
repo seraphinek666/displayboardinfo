@@ -1,14 +1,14 @@
 <div ng-controller="DayScheduleController" class="Absolute-Center">   		
 	<div class="dailySchedulePhysician">
 	  <label class="control-label" for="physician">Lekarz:</label>
-	  <table><tr>
+	  <table class="dailyScheduleSetupTable"><tr>
 	  <td><select class="form-control physicianSelectInDailySchedule" name="physician" id="physician"
           	ng-model="selectedPhysician" 
            	ng-options="physician as physician.title+' '+physician.name+' '+physician.surname for physician in physicians"
     		ng-change="fetchEvents(selectedPhysician);" required>
             <option value="">--Wybierz lekarza--</option>
       </select></td>
-      <td>sdsf</td>
+      <td class="currentDay"><h1>{{currentDay}}</h1></td>
       </tr></table>
     </div>
     <table ng-table="tableParams" class="table">

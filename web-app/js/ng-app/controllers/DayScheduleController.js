@@ -7,6 +7,7 @@ app.controller('DayScheduleController', function ($scope, $routeParams, $locatio
 	$scope.selectedPhysician = null;
 	$scope.patients = [];
 	$scope.rooms = [];
+	$scope.currentDay = new Date().toISOString().slice(0,10);
 	
 	$scope.reloadList = function() {
 		BaseService.post(DisplayBoardInfo.config.url.patient.list).then(function(response) {
