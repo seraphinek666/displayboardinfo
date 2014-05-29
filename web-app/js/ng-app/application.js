@@ -145,3 +145,58 @@ DisplayBoardInfo.config = {
 
 DisplayBoardInfo.lastView = "";
 
+function ($routeProvider, $locationProvider, $httpProvider) {
+    var interceptor = [
+        '$rootScope', '$q', function (scope, $q) {
+
+            function success(response) {
+                return response;
+            }
+
+            function error(response) {
+                var status = response.status;
+
+                if (status == 401) {
+                    var deferred = $q.defer();
+                    var req = {
+                        config: response.config,
+                        deferred: deferred
+                    };
+                    window.location = "/";
+                }
+
+                if (status == 404) {
+                    var deferred = $q.defer();
+                    var req = {
+                        config: response.config,
+                        deferred: deferred
+                    };
+                    window.location = "#/404";
+                }
+                // otherwise
+                //return $q.reject(response);
+                window.location = "#/500";
+            }
+
+            return function (promise) {
+                return promise.then(success, error);
+            };
+
+        }
+    ];
+    $httpProvider.responseInterceptors.push(interceptor);
+});
+
+// routes
+app.config(function($routeProvider, $locationProvider) {
+    $routeProvider
+        .when('/404', {
+            templateUrl: '/app/html/inserts/error404.html',
+            controller: 'RouteCtrl'
+        })
+        .when('/500', {
+            templateUrl: '/app/html/inserts/error404.html',
+            controller: 'RouteCtrl'
+        })
+
+   };

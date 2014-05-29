@@ -37,7 +37,7 @@ Potrzebuję metod do zapisu do bazy i do pobrania z bazy dashboardów. Jak to b�
 
     @Transactional
     def save() {
-		def json = request.JSON;
+		def json = request.JSON.dashboard;
 		Dashboard dashboard = new Dashboard();
 
 		System.out.println(json);

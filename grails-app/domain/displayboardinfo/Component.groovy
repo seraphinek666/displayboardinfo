@@ -5,9 +5,10 @@ import displayboardinfo.types.ComponentType;
 class Component {
 
 	int id;
-	ComponentType componentType;
+	ComponentType type;
 	String configuration;
 	
     static constraints = {
+		configuration nullable:true
     }
 }
