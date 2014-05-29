@@ -123,6 +123,9 @@ DisplayBoardInfo.config = {
 			save : '/displayboardinfo/term/save/',
 			update : '/displayboardinfo/term/update/',
 			remove : '/displayboardinfo/term/delete/'
+		},
+		dashboard : {
+			save : '/displayboardinfo/dashboard/save/'
 		}
 	},
 	column : {

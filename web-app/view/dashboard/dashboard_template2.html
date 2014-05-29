@@ -2,11 +2,11 @@
 	<div class="container-fluid">
    		<div class="included_content">
     		<div class="example_panel" style="height: 30%; width: 100%">
-    			<select ng-model="north.type" ng-options="item.name as item.name for item in components" ng-change="clear(north)" required>
+    			<select ng-model="north.type" ng-options="item.type as item.name for item in components" ng-change="clear(north)" required>
     			<option value="">--Wybierz komponent--</option>
     			</select>
     			<div ng-switch on="north.type">
-    			<select ng-switch-when="lekarz" ng-model="north.config" ng-options="physician.id as (physician.title+' '+physician.name.substring(0,1)+'. '+physician.surname) for physician in physicians" required>
+    			<select ng-switch-when="PhysiciansTermList" ng-model="north.config" ng-options="physician.id as (physician.title+' '+physician.name.substring(0,1)+'. '+physician.surname) for physician in physicians" required>
     			<option value="">--Wybierz lekarza--</option>
     			</select>
     			<select ng-switch-when="gabinet" ng-model="north.config" ng-options="room.id as room.number for room in rooms" required>
@@ -15,11 +15,11 @@
    				</div>	
     		</div>
     		<div class="example_panel" style="height: 70%; width: 100%">
-    			<select ng-model="south.type" ng-options="item.name as item.name for item in components" ng-change="clear(south)" required>
+    			<select ng-model="south.type" ng-options="item.type as item.name for item in components" ng-change="clear(south)" required>
     			<option value="">--Wybierz komponent--</option>
     			</select>
     			<div ng-switch on="south.type">
-    			<select ng-switch-when="lekarz" ng-model="south.config" ng-options="physician.id as (physician.title+' '+physician.name.substring(0,1)+'. '+physician.surname) for physician in physicians" required>
+    			<select ng-switch-when="PhysiciansTermList" ng-model="south.config" ng-options="physician.id as (physician.title+' '+physician.name.substring(0,1)+'. '+physician.surname) for physician in physicians" required>
     			<option value="">--Wybierz lekarza--</option>
     			</select>
     			<select ng-switch-when="gabinet" ng-model="south.config" ng-options="room.id as room.number for room in rooms" required>

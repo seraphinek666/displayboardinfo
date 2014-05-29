@@ -54,23 +54,34 @@ app.controller('DashboardController', function($scope, $routeParams, $location,
 		};
 		
 		$scope.west = {
+			location : 'west',
 			type:'',
 			config:''
 		};
 		$scope.east = {
+			location : 'east',
 			type:'',
 			config:''
 		};
 		$scope.north = {
+			location : 'north',
 			type:'',
 			config:''	
 		};
 		$scope.south = {
+			location : 'south',
 			type:'',
 			config:''	
 		};
 		
-		$scope.components= [{name: 'zegar'},{name: 'lekarz'},{name: 'gabinet'},{name: 'reklama'}];
+		$scope.components= [
+		{name: 'zegar',type:'ClockWidget'},
+		{name: 'lekarz',type:'PhysiciansTermList'},
+		{name: 'gabinet',type:'CalendarWidget'},
+		{name: 'reklama',type:'AdvertisementArea'},
+		{name: 'informacje',type:'InfoArea'}
+		];
+		
 		$scope.physicians = physicians;
 		$scope.rooms = rooms;
 		
@@ -89,8 +100,6 @@ app.controller('DashboardController', function($scope, $routeParams, $location,
 		};
 		
 		$scope.addDashboard = function() {
-			//$modalInstance.close($scope.dashboard);
-			
 			if($scope.west.type){
 				$scope.dashboard.components.push($scope.west);
 			}
@@ -103,11 +112,12 @@ app.controller('DashboardController', function($scope, $routeParams, $location,
 			if($scope.south.type){
 				$scope.dashboard.components.push($scope.south);
 			}
-				
-//			BaseService.post(DisplayBoardInfo.config.url.patient.save, {
-//				patient : $scope.patient
-//			}).then(function(response) {
-//			});
+			
+			BaseService.post(DisplayBoardInfo.config.url.dashboard.save, { dashboard: $scope.dashboard}).then(function(response) {
+		    });
+
+			$modalInstance.close($scope.dashboard);
+			
 		};
 
 		$scope.cancelModal = function() {

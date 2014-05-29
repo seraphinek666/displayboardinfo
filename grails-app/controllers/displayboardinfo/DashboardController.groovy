@@ -39,6 +39,9 @@ Potrzebuję metod do zapisu do bazy i do pobrania z bazy dashboardów. Jak to b�
     def save() {
 		def json = request.JSON;
 		Dashboard dashboard = new Dashboard();
+
+		System.out.println(json);
+
 		dashboard.name = json.name;
 		dashboard.template = json.template.name;
 		dashboard.components = new HashMap<String, Component>();
