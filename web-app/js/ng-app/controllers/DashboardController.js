@@ -53,6 +53,10 @@ app.controller('DashboardController', function($scope, $routeParams, $location,
 			template : ''
 		};
 		
+		$scope.test = {
+			name : 'nazwa'	
+		};
+		
 		$scope.west = {
 			location : 'west',
 			type:'',
