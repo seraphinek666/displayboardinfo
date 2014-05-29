@@ -9,13 +9,14 @@ var app = angular.module('app', [ 'ngRoute', 'ui.bootstrap',
 app.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', {
-			templateUrl: '/displayboardinfo/view/dummy/dummy.html',
-            controller: "DummyController"
+            redirectTo: function () {	
+            	return "/displayboardinfo/login";
+            }
 		})
         .when('/login', {
 //            templateUrl: 'displayboardinfo/login',
             redirectTo: function () {	
-            	return "displayboardinfo/login";
+            	return "/displayboardinfo/login";
             }
         })
          .when('/user', {
@@ -145,58 +146,21 @@ DisplayBoardInfo.config = {
 
 DisplayBoardInfo.lastView = "";
 
-function ($routeProvider, $locationProvider, $httpProvider) {
-    var interceptor = [
-        '$rootScope', '$q', function (scope, $q) {
-
-            function success(response) {
-                return response;
+app.factory('httpRequestInterceptor', function ($q, $location) {
+    return {
+        'responseError': function(rejection) {
+            // do something on error
+            if(rejection.status === 401){
+            	window.location = '/displayboardinfo/login';
+                return $q.reject(rejection);
             }
-
-            function error(response) {
-                var status = response.status;
-
-                if (status == 401) {
-                    var deferred = $q.defer();
-                    var req = {
-                        config: response.config,
-                        deferred: deferred
-                    };
-                    window.location = "/";
-                }
-
-                if (status == 404) {
-                    var deferred = $q.defer();
-                    var req = {
-                        config: response.config,
-                        deferred: deferred
-                    };
-                    window.location = "#/404";
-                }
-                // otherwise
-                //return $q.reject(response);
-                window.location = "#/500";
-            }
-
-            return function (promise) {
-                return promise.then(success, error);
-            };
-
-        }
-    ];
-    $httpProvider.responseInterceptors.push(interceptor);
+         }
+     };
 });
 
-// routes
-app.config(function($routeProvider, $locationProvider) {
-    $routeProvider
-        .when('/404', {
-            templateUrl: '/app/html/inserts/error404.html',
-            controller: 'RouteCtrl'
-        })
-        .when('/500', {
-            templateUrl: '/app/html/inserts/error404.html',
-            controller: 'RouteCtrl'
-        })
 
-   };
+// app.js
+
+app.config( function ($httpProvider, $interpolateProvider, $routeProvider) {
+    $httpProvider.interceptors.push('httpRequestInterceptor');
+});
