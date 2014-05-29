@@ -9,13 +9,14 @@ var app = angular.module('app', [ 'ngRoute', 'ui.bootstrap',
 app.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', {
-			templateUrl: '/displayboardinfo/view/dummy/dummy.html',
-            controller: "DummyController"
+            redirectTo: function () {	
+            	return "/displayboardinfo/login";
+            }
 		})
         .when('/login', {
 //            templateUrl: 'displayboardinfo/login',
             redirectTo: function () {	
-            	return "displayboardinfo/login";
+            	return "/displayboardinfo/login";
             }
         })
          .when('/user', {
@@ -148,3 +149,21 @@ DisplayBoardInfo.config = {
 
 DisplayBoardInfo.lastView = "";
 
+app.factory('httpRequestInterceptor', function ($q, $location) {
+    return {
+        'responseError': function(rejection) {
+            // do something on error
+            if(rejection.status === 401){
+            	window.location = '/displayboardinfo/login';
+                return $q.reject(rejection);
+            }
+         }
+     };
+});
+
+
+// app.js
+
+app.config( function ($httpProvider, $interpolateProvider, $routeProvider) {
+    $httpProvider.interceptors.push('httpRequestInterceptor');
+});
