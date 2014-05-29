@@ -22,31 +22,33 @@
 <link rel="stylesheet"
 	href="${resource(dir: 'css', file: 'adminPanel.css')}" type="text/css">
 <link rel="stylesheet"
-	href="${resource(dir: 'css', file: 'dhtmlxscheduler.css')}" type="text/css">
+	href="${resource(dir: 'css', file: 'dhtmlxscheduler.css')}"
+	type="text/css">
 <link rel="stylesheet"
-	href="${resource(dir: 'css', file: 'fullcalendar.css')}" type="text/css">
+	href="${resource(dir: 'css', file: 'fullcalendar.css')}"
+	type="text/css">
 <link rel="stylesheet"
-	href="${resource(dir: 'css', file: 'fullcalendar.print.css')}" type="text/css">	
+	href="${resource(dir: 'css', file: 'fullcalendar.print.css')}"
+	type="text/css">
 <link rel="stylesheet"
 	href="${resource(dir: 'font-awesome/css', file: 'font-awesome.min.css')}"
 	type="text/css">
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="${resource(dir: 'css', file: 'angular-ui-dashboard.css')}"
 	type="text/css">
 
 <style type="text/css">
-
 #page-wrapper {
-    position: inherit;
-    margin: 0px 0px 0px 250px;
-    padding: 0px 30px;
-    border-left: 1px solid #E7E7E7;
-    height: auto;
-    min-height: 550px;
-    overflow: auto;
+	position: inherit;
+	margin: 0px 0px 0px 250px;
+	padding: 0px 30px;
+	border-left: 1px solid #E7E7E7;
+	height: auto;
+	min-height: 550px;
+	overflow: auto;
 }
 
-.included_content{
+.included_content {
 	border-style: solid;
 	border-width: medium;
 	height: 200px;
@@ -54,20 +56,20 @@
 	margin: auto;
 }
 
-.example_panel{
+.example_panel {
 	border-style: dotted;
 	border-width: medium;
 	height: 100%;
-	float:left;
-}
-.example_panel select{
-	width: 100%;
+	float: left;
 }
 
+.example_panel select {
+	width: 100%;
+}
 </style>
 </head>
 
-<body ng-controller="AdminController">
+<body ng-controller="AdminController" ng-init="loadTablesView()">
 
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
@@ -80,7 +82,7 @@
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="javascript:void(0);"
-						ng-click="loadDummyView()">Panel administratora</a>
+				ng-click="loadDummyView()">Panel administratora</a>
 
 
 			<ul class="nav navbar-top-links navbar-right">
@@ -92,9 +94,8 @@
 					<ul class="dropdown-menu dropdown-user">
 						<li><a href="#"><i class="fa fa-user fa-fw"></i>Ustawienia
 								użytkownika</a></li>
-						<li><a href="javascript:void(0);"
-						ng-click="loadLoginView()"><i class="fa fa-sign-out fa-fw"></i>Wyloguj
-								się</a></li>
+						<li><a href="javascript:void(0);" ng-click="loadLoginView()"><i
+								class="fa fa-sign-out fa-fw"></i>Wyloguj się</a></li>
 					</ul> <!-- /.dropdown-user --></li>
 				<!-- /.dropdown -->
 			</ul>
@@ -110,26 +111,23 @@
 				<ul class="nav" id="side-menu">
 
 					<li><a href="javascript:void(0);"
-					ng-click="loadDashboardView()"><i class="fa fa-dashboard fa-fw"></i>
-							Tablice</a></li>
+						ng-click="loadDashboardView()"><i
+							class="fa fa-dashboard fa-fw"></i> Tablice</a></li>
 					<li><a href="javascript:void(0);"
 						ng-click="expandOrCollapse()"><i class="fa fa-edit fa-fw"></i>
 							Słowniki<span class="fa arrow"></span></a>
 						<ul id="dictionaryMenu" class="nav nav-second-level collapse">
-							<li><a href="javascript:void(0);"
-								ng-click="loadUsersView()">Użytkownicy</a></li>
+							<li><a href="javascript:void(0);" ng-click="loadUsersView()">Użytkownicy</a></li>
 							<li><a href="javascript:void(0);"
 								ng-click="loadPatientsView()">Pacjenci</a></li>
 							<li><a href="javascript:void(0);"
 								ng-click="loadPhysiciansView()">Lekarze</a></li>
-							<li><a href="javascript:void(0);"
-								ng-click="loadRoomsView()">Gabinety</a></li>
+							<li><a href="javascript:void(0);" ng-click="loadRoomsView()">Gabinety</a></li>
 						</ul> <!-- /.nav-second-level --></li>
+					<li><a href="javascript:void(0);" ng-click="loadTablesView()"><i
+							class="fa fa-table fa-fw"></i> Harmonogram przyjęć</a></li>
 					<li><a href="javascript:void(0);"
-							ng-click="loadTablesView()"><i class="fa fa-table fa-fw"></i>
-							Harmonogram przyjęć</a></li>
-					<li><a href="javascript:void(0);"
-							ng-click="loadDayScheduleView()"><i class="fa fa-table fa-fw"></i>
+						ng-click="loadDayScheduleView()"><i class="fa fa-table fa-fw"></i>
 							Harmonogram dnia</a></li>
 				</ul>
 				<!-- /#side-menu -->
@@ -160,31 +158,42 @@
 	<script src="/displayboardinfo/js/lib/angular-md5.js"></script>
 	<script src="/displayboardinfo/js/lib/dhtmlxscheduler.js"></script>
 	<script src="/displayboardinfo/js/lib/dhtmlxscheduler_minical.js"></script>
-	
+
 	<script src="/displayboardinfo/js/lib/jquery-ui.custom.min.js"></script>
 	<script src="/displayboardinfo/js/lib/calendar.js"></script>
 	<script src="/displayboardinfo/js/lib/fullcalendar.min.js"></script>
 	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
 	<script
 		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
-	
-	<script src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
+
+	<script
+		src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
 
 	<script src="/displayboardinfo/js/ng-app/directive/Dialog.js"></script>
 
 	<script src="/displayboardinfo/js/ng-app/application.js"></script>
 	<script src="/displayboardinfo/js/ng-app/service/BaseService.js"></script>
-	<script src="/displayboardinfo/js/ng-app/controllers/AdminController.js"></script>
-	<script src="/displayboardinfo/js/ng-app/controllers/ClientController.js"></script>	
-	<script src="/displayboardinfo/js/ng-app/controllers/LoginController.js"></script>
+	<script
+		src="/displayboardinfo/js/ng-app/controllers/AdminController.js"></script>
+	<script
+		src="/displayboardinfo/js/ng-app/controllers/ClientController.js"></script>
+	<script
+		src="/displayboardinfo/js/ng-app/controllers/LoginController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/UserController.js"></script>
-	<script src="/displayboardinfo/js/ng-app/controllers/PatientController.js"></script>
-	<script src="/displayboardinfo/js/ng-app/controllers/DayScheduleController.js"></script>
-	<script src="/displayboardinfo/js/ng-app/controllers/PhysicianController.js"></script>
+	<script
+		src="/displayboardinfo/js/ng-app/controllers/PatientController.js"></script>
+	<script
+		src="/displayboardinfo/js/ng-app/controllers/DayScheduleController.js"></script>
+	<script
+		src="/displayboardinfo/js/ng-app/controllers/PhysicianController.js"></script>
 	<script src="/displayboardinfo/js/ng-app/controllers/RoomController.js"></script>
-	<script src="/displayboardinfo/js/ng-app/controllers/DummyController.js"></script>
-	<script src="/displayboardinfo/js/ng-app/controllers/DashboardController.js"></script>
-	<script src="/displayboardinfo/js/ng-app/controllers/TablesController.js"></script>
-	
+	<script
+		src="/displayboardinfo/js/ng-app/controllers/DummyController.js"></script>
+	<script
+		src="/displayboardinfo/js/ng-app/controllers/DashboardController.js"></script>
+	<script
+		src="/displayboardinfo/js/ng-app/controllers/TablesController.js"></script>
+
+
 </body>
 </html>
