@@ -44,15 +44,16 @@ Potrzebuję metod do zapisu do bazy i do pobrania z bazy dashboardów. Jak to b�
 
 		dashboard.name = json.name;
 		dashboard.template = json.template.name;
-		dashboard.components = new HashMap<String, Component>();
+		dashboard.save();
+		
 		for(component in json.components) {
 			Component componentToSave = new Component();
 			componentToSave.type = component.type;
-			componentToSave.configuration = component.configuration;
-			componentToSave.save();
-			dashboard.components.put(component.location, componentToSave);			
+			componentToSave.configuration = component.config;
+			componentToSave.dashboard = dashboard;
+			componentToSave.save();			
 		}
-		dashboard.save();
+	
     }
 
 	def getDashboardById() {
