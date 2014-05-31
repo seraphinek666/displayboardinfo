@@ -1,5 +1,7 @@
 <div class="modal-header">
-	<h3 class="modal-title">Dodawanie nowej tablicy</h3>
+	<h3 ng-if="variant=='add'" class="modal-title">Dodawanie nowej tablicy</h3>
+	<h3 ng-if="variant=='edit'" class="modal-title">Edycja tablicy</h3>
+	
 </div>
 <form ng-submit="submit()">
 	<div class="modal-body">
@@ -19,7 +21,9 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default" ng-click="cancelModal()">Anuluj</button>
-		<button type="button" class="btn btn-primary" ng-click="addDashboard()"
+		<button ng-if="variant=='add'"  type="button" class="btn btn-primary" ng-click="addDashboard()"
 			ng-disabled="(dashboardDialog.$dirty && dashboardDialog.$invalid) || dashboardDialog.$pristine">Dodaj</button>
+		<button ng-if="variant=='edit'" type="button" class="btn btn-primary" ng-click="updateDashboard(dashboard)"
+			ng-disabled="(dashboardDialog.$dirty && dashboardDialog.$invalid) || dashboardDialog.$pristine">Zapisz</button>
 	</div>
 </form>

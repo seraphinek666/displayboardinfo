@@ -30,12 +30,6 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					 $scope.reloadList();
 			     });
 			    };
-			    
-			 $scope.updateDashboard = function (dashboardToUpdate) {
-				 BaseService.post(DisplayBoardInfo.config.url.dashboard.update, { dashboard: dashboardToUpdate}).then(function(response) {
-					 $scope.reloadList();
-			     });
-			 };
 		
 			$scope.fetchPhysicians();
 
@@ -160,6 +154,15 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					$scope.south.config = '';
 				};
 				
+				 $scope.updateDashboard = function (dashboardToUpdate) {
+					 BaseService.post(DisplayBoardInfo.config.url.dashboard.update, { dashboard: dashboardToUpdate}).then(function(response) {
+						 $scope.reloadList();
+				     });
+					 
+					 $modalInstance.close($scope.dashboard);
+				 };
+				
+				
 				$scope.addDashboard = function() {
 					if ($scope.west.type) {
 						$scope.dashboard.components.push($scope.west);
@@ -180,8 +183,6 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 								dashboard : $scope.dashboard
 							}).then(function(response) {
 					});
-
-					$modalInstance.close($scope.dashboard);
 
 				};
 
