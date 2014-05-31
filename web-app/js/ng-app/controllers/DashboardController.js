@@ -30,7 +30,13 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					 $scope.reloadList();
 			     });
 			    };
-			
+			    
+			 $scope.updateDashboard = function (dashboardToUpdate) {
+				 BaseService.post(DisplayBoardInfo.config.url.dashboard.update, { dashboard: dashboardToUpdate}).then(function(response) {
+					 $scope.reloadList();
+			     });
+			 };
+		
 			$scope.fetchPhysicians();
 
 			$scope.tableParams = new ngTableParams({
@@ -63,6 +69,19 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 				}
 			});
 
+			$scope.editModal = function(dashboardToEdit) {
+				var modalInstance = $modal
+				.open({
+					templateUrl : '/displayboardinfo/view/dashboard/newDashboardModal.html',
+					controller : ModalInstanceCtrl,
+					resolve : {
+						physicians : function() {
+							return $scope.physicians;
+						}
+					}
+				});
+			}; 
+			
 			$scope.launchModal = function() {
 				$scope.fetchPhysicians();
 
