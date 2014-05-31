@@ -69,7 +69,10 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 				}
 			});
 
-			$scope.editModal = function(dashboardToEdit) {
+			
+			$scope.launchEditModal = function(dashboardToEdit) {
+				$scope.dashboardToEdit = dashboardToEdit;
+				$scope.fetchPhysicians();
 				var modalInstance = $modal
 				.open({
 					templateUrl : '/displayboardinfo/view/dashboard/newDashboardModal.html',
@@ -77,10 +80,17 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					resolve : {
 						physicians : function() {
 							return $scope.physicians;
+						},
+						dashboardToEdit : function() {
+							return $scope.dashboardToEdit;
 						}
 					}
 				});
-			}; 
+
+		modalInstance.result.then(function($dashboard) {
+			$scope.reloadList()
+		});
+			}
 			
 			$scope.launchModal = function() {
 				$scope.fetchPhysicians();
@@ -92,6 +102,9 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 							resolve : {
 								physicians : function() {
 									return $scope.physicians;
+								},
+								dashboardToEdit : function() {
+									return '';
 								}
 							}
 						});
@@ -100,16 +113,16 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					$scope.reloadList()
 				});
 			};
-
+			
 			var ModalInstanceCtrl = function($scope, $modalInstance,
-					physicians) {
-
+					physicians, dashboardToEdit) {
+				
 				$scope.dashboard = {
 					name : '',
 					components : [],
 					template : ''
 				};
-
+				
 				$scope.west = {
 					location : 'west',
 					type : '',
@@ -131,23 +144,6 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					config : ''
 				};
 
-				$scope.components = [ {
-					name : 'zegar',
-					type : 'ClockWidget'
-				}, {
-					name : 'lekarz',
-					type : 'PhysiciansTermList'
-				}, {
-					name : 'gabinet',
-					type : 'CalendarWidget'
-				}, {
-					name : 'reklama',
-					type : 'AdvertisementArea'
-				}, {
-					name : 'informacje',
-					type : 'InfoArea'
-				} ];
-
 				$scope.physicians = physicians;
 
 				$scope.clear = function(position) {
@@ -163,7 +159,7 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					$scope.south.type = '';
 					$scope.south.config = '';
 				};
-
+				
 				$scope.addDashboard = function() {
 					if ($scope.west.type) {
 						$scope.dashboard.components.push($scope.west);
@@ -227,5 +223,46 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 							name : 'template8',
 							url : '/displayboardinfo/view/dashboard/dashboard_template8.html'
 						} ];
+				
+				$scope.components = [ {
+					name : 'zegar',
+					type : 'ClockWidget'
+				}, {
+					name : 'lekarz',
+					type : 'PhysiciansTermList'
+				}, {
+					name : 'gabinet',
+					type : 'CalendarWidget'
+				}, {
+					name : 'reklama',
+					type : 'AdvertisementArea'
+				}, {
+					name : 'informacje',
+					type : 'InfoArea'
+				} ];
+				
+				if(dashboardToEdit)
+				{
+					$scope.variant = 'edit';
+					$scope.dashboard.name = dashboardToEdit.name;
+					
+					for (var i = 0; i < $scope.templates.length; i++){
+						if($scope.templates[i].name==dashboardToEdit.template)
+						{
+							$scope.dashboard.template = $scope.templates[i]; 
+						}
+					}
+				}
+				else
+				{
+					$scope.variant = 'add';
+
+				}
+				
 			};
+			
+
+			
+
+			
 		});

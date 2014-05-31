@@ -16,7 +16,7 @@
                 	</div>
             	</td>
             	<td data-title="'Akcje'">
-                	<a ng-if="!dashboard.$edit" href="" class="btn btn-primary btn-xs" ng-click="">Edytuj</a>
+                	<a ng-if="!dashboard.$edit" href="" class="btn btn-primary btn-xs" ng-click="launchEditModal(dashboard)">Edytuj</a>
                 	<a ng-if="dashboard.$edit" href="" class="btn btn-primary btn-xs" ng-click="dashboard.$edit = false; updateDashboard(dashboard)">Zapisz</a>
                 	<a ng-if="dashboard.$edit" href="" class="btn btn-danger btn-xs" ng-click="dashboard.$edit = false; reloadList()">Anuluj</a>
                 	<a ng-if="!dashboard.$edit" href="" class="btn btn-danger btn-xs" ng-click="removeDashboard(dashboard)">Usuń</a>
