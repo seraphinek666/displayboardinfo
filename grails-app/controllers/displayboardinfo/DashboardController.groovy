@@ -32,8 +32,11 @@ class DashboardController {
 		}
 	}
 
-	def edit(Dashboard dashboardInstance) {
-		respond dashboardInstance
+	def findById() {
+		def dashboardFromDB = Dashboard.find { d -> id == request.JSON.id };
+		def components = Component.find { c -> dashboard.id == request.JSON.id };
+		def responseData = ['dashboard' : dashboard, 'components' : components];
+		render responseData as JSON;
 	}
 
 	@Transactional
@@ -67,6 +70,10 @@ class DashboardController {
 		System.out.println("test");
 		int idDashboard = request.JSON.dashboard.id;
 		Dashboard dashboard =  Dashboard.find { d -> id == idDashboard };
+		def components = Component.find { c -> dashboard.id == idDashboard };
+		for(Component c : components) {
+			c.delete();
+		}
 		dashboard.delete();
 	}
 }
