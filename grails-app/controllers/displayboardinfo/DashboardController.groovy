@@ -7,8 +7,6 @@ import grails.converters.JSON
 @Transactional(readOnly = true)
 class DashboardController {
 
-	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
 	def list() {
 		render Dashboard.all as JSON;
 	}
