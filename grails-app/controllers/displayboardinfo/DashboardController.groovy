@@ -70,7 +70,7 @@ class DashboardController {
 		System.out.println("test");
 		int idDashboard = request.JSON.dashboard.id;
 		Dashboard dashboardFromDb =  Dashboard.find { d -> id == idDashboard };
-		def components = Component.find { c -> dashboard == dashboardFromDb };
+		def components = Component.findAll { c -> dashboard == dashboardFromDb };
 		for(Component c : components) {
 			c.delete();
 		}
