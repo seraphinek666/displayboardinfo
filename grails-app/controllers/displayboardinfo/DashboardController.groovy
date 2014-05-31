@@ -7,16 +7,6 @@ import grails.converters.JSON
 @Transactional(readOnly = true)
 class DashboardController {
 
-	/**
-	 * Po długich bojach udało mi się dokończyć podstawowy mechanizm dodawania tych dashboard'ów.
-	 Powinno teraz sypać POST'em z JSONEM w postaci:
-	 {"name":"nowy","components":[{"location":"west","type":"zegar","config":""},{"location":"east","type":"lekarz","config":2}],"template":{"name":"template1","url":"/displayboardinfo/view/dashboard/dashboard_template1.html"}}
-	 Mamy: nazwa całego panelu, później komponenty i ich type i config. Config to po prostu id lekarza albo id gabinetu, dla zegarka i reklamy pozostaje puste pole. Można później dorobić różne rodzaje zegarków to wtedy też będzie przesyłało id. Komponentów jest tyle na ile jest podzielony template. W sekcji template mamy jego nazwę i url (url jest mi potrzebny do działania, później przy zapisie do bazy można go pominąć, wystarczy sama jego nazwa).
-	 Sama nazwa poszczególnych komponentów wydaje mi się zbędna. Będzie generowane coś w stylu Gabinet + nr, Lekarz + nazwa itd.
-	 Potrzebuję metod do zapisu do bazy i do pobrania z bazy dashboardów. Jak to będzie to dorobię ich wyświetlanie na liście i usuwanie. Jeśli edycja nie będzie zbyt trudna to też ją zrobię. 
-	 */
-
-
 	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 	def list() {
@@ -27,9 +17,6 @@ class DashboardController {
 	def save() {
 		def json = request.JSON.dashboard;
 		Dashboard dashboard = new Dashboard();
-
-		System.out.println(json);
-
 		dashboard.name = json.name;
 		dashboard.template = json.template.name;
 		dashboard.save();
@@ -80,6 +67,8 @@ class DashboardController {
 
 	@Transactional
 	def delete() {
+		
+		System.out.println("test");
 		int idDashboard = request.JSON.id;
 		Dashboard dashboard =  Dashboard.findBy { d -> id == idDashboard } as JSON;
 		dashboard.delete();
