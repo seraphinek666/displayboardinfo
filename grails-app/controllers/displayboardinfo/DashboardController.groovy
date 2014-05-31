@@ -62,7 +62,7 @@ class DashboardController {
 	def delete() {		
 		System.out.println("test");
 		int idDashboard = request.JSON.dashboard.id;
-		Dashboard dashboard =  Dashboard.find { d -> id == idDashboard } as JSON;
+		Dashboard dashboard =  Dashboard.find { d -> id == idDashboard };
 		dashboard.delete();
 		render 'Success' as JSON
 	}
