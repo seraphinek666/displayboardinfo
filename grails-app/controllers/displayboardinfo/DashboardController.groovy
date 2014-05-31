@@ -34,7 +34,7 @@ class DashboardController {
 
 	def findById() {
 		def dashboardFromDB = Dashboard.find { d -> id == request.JSON.id };
-		def components = Component.find { c -> dashboard.id == request.JSON.id };
+		def components = Component.findAll { c -> dashboard.id == request.JSON.id };
 		def responseData = ['dashboard' : dashboard, 'components' : components];
 		render responseData as JSON;
 	}
@@ -70,7 +70,7 @@ class DashboardController {
 		System.out.println("test");
 		int idDashboard = request.JSON.dashboard.id;
 		Dashboard dashboardFromDb =  Dashboard.find { d -> id == idDashboard };
-		def components = Component.find { c -> dashboard == dashboardFromDb };
+		def components = Component.findAll { c -> dashboard == dashboardFromDb };
 		for(Component c : components) {
 			c.delete();
 		}
