@@ -11,11 +11,15 @@
                 	<span ng-if="!dashboard.$edit">{{dashboard.name}}</span>
                 	<div ng-if="dashboard.$edit"><input class="form-control" type="text" ng-model="dashboard.name" /></div>
             	</td>
+            	<td data-title="'Układ'" sortable="'template'" filter="{ 'template': 'text' }">
+                	<span ng-if="!dashboard.$edit">{{dashboard.template}}</span>
+                	<div ng-if="dashboard.$edit"><input class="form-control" type="text" ng-model="dashboard.template" /></div>
+            	</td>
             	<td data-title="'Akcje'">
                 	<a ng-if="!dashboard.$edit" href="" class="btn btn-primary btn-xs" ng-click="">Edytuj</a>
                 	<a ng-if="dashboard.$edit" href="" class="btn btn-primary btn-xs" ng-click="">Zapisz</a>
                 	<a ng-if="dashboard.$edit" href="" class="btn btn-danger btn-xs" ng-click="">Anuluj</a>
-                	<a ng-if="!dashboard.$edit" href="" class="btn btn-danger btn-xs" ng-click="">Usuń</a>
+                	<a ng-if="!dashboard.$edit" href="" class="btn btn-danger btn-xs" ng-click="removeDashboard(dashboard)">Usuń</a>
             	</td>
             </tr>
     </table>

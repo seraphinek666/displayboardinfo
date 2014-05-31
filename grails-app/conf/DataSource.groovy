@@ -14,7 +14,7 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create" // one of 'create', 'create-drop', 'update',     'validate', ''
+            dbCreate = "update" // one of 'create', 'create-drop', 'update',     'validate', ''
             url = "jdbc:mysql://localhost:3306/test"
             dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			readOnly = false
@@ -22,7 +22,7 @@ environments {
     }
     test {
         dataSource {
-            dbCreate = "create" // one of 'create', 'create-drop', 'update',     'validate', ''
+            dbCreate = "update" // one of 'create', 'create-drop', 'update',     'validate', ''
             url = "jdbc:mysql://localhost:3306/test"
             dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			readOnly = false
