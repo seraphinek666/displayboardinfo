@@ -28,11 +28,6 @@ class DashboardController {
 		}
 	}
 
-	def getDashboardById() {
-		int idDashboard = request.JSON.id;
-		render Dashboard.findBy { d -> id == idDashboard } as JSON;
-	}
-
 	def edit(Dashboard dashboardInstance) {
 		respond dashboardInstance
 	}
@@ -64,11 +59,10 @@ class DashboardController {
 	}
 
 	@Transactional
-	def delete() {
-		
+	def delete() {		
 		System.out.println("test");
-		int idDashboard = request.JSON.id;
-		Dashboard dashboard =  Dashboard.findBy { d -> id == idDashboard } as JSON;
+		int idDashboard = request.JSON.dashboard.id;
+		Dashboard dashboard =  Dashboard.find { d -> id == idDashboard } as JSON;
 		dashboard.delete();
 		render 'Success' as JSON
 	}
