@@ -8,6 +8,10 @@ import grails.converters.JSON
 class DashboardController {
 
 	def list() {
+		def all = Dashboard.all;
+//		for(Dashboard d : all) {
+//			d
+//		}
 		render Dashboard.all as JSON;
 	}
 
@@ -64,6 +68,5 @@ class DashboardController {
 		int idDashboard = request.JSON.dashboard.id;
 		Dashboard dashboard =  Dashboard.find { d -> id == idDashboard };
 		dashboard.delete();
-		render 'Success' as JSON
 	}
 }
