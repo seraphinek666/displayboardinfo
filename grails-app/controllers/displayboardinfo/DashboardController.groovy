@@ -17,8 +17,6 @@ class DashboardController {
 	 */
 
 
-	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
 	def list() {
 		render Dashboard.all as JSON;
 	}
