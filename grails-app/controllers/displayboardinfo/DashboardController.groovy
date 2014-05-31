@@ -34,7 +34,7 @@ class DashboardController {
 
 	def findById() {
 		def dashboardFromDB = Dashboard.find { d -> id == request.JSON.id };
-		def components = Component.find { c -> dashboard.id == request.JSON.id };
+		def components = Component.findAll { c -> dashboard.id == request.JSON.id };
 		def responseData = ['dashboard' : dashboard, 'components' : components];
 		render responseData as JSON;
 	}
