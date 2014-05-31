@@ -69,11 +69,11 @@ class DashboardController {
 	def delete() {		
 		System.out.println("test");
 		int idDashboard = request.JSON.dashboard.id;
-		Dashboard dashboard =  Dashboard.find { d -> id == idDashboard };
-		def components = Component.find { c -> dashboard.id == idDashboard };
+		Dashboard dashboardFromDb =  Dashboard.find { d -> id == idDashboard };
+		def components = Component.find { c -> dashboard == dashboardFromDb };
 		for(Component c : components) {
 			c.delete();
 		}
-		dashboard.delete();
+		dashboardFromDb.delete();
 	}
 }
