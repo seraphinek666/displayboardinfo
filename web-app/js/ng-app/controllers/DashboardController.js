@@ -30,7 +30,13 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					 $scope.reloadList();
 			     });
 			    };
-		
+			    
+			$scope.dashboardToEdit = function(dashboardToEdit) {
+				 BaseService.post(DisplayBoardInfo.config.url.dashboard.find, { dashboard: dashboardToEdit }).then(function(response) {
+					 $scope.launchModal(response); 
+			     });
+			};
+			 
 			$scope.fetchPhysicians();
 
 			$scope.tableParams = new ngTableParams({
@@ -62,33 +68,10 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					$defer.resolve($scope.dashboardsLocal.slice((params.page() - 1)* params.count(), params.page()* params.count()));
 				}
 			});
-
 			
-			$scope.launchEditModal = function(dashboardToEdit) {
-				$scope.dashboardToEdit = dashboardToEdit;
+			$scope.launchModal = function(dashboard) {
 				$scope.fetchPhysicians();
-				var modalInstance = $modal
-				.open({
-					templateUrl : '/displayboardinfo/view/dashboard/newDashboardModal.html',
-					controller : ModalInstanceCtrl,
-					resolve : {
-						physicians : function() {
-							return $scope.physicians;
-						},
-						dashboardToEdit : function() {
-							return $scope.dashboardToEdit;
-						}
-					}
-				});
-
-		modalInstance.result.then(function($dashboard) {
-			$scope.reloadList()
-		});
-			}
-			
-			$scope.launchModal = function() {
-				$scope.fetchPhysicians();
-
+								
 				var modalInstance = $modal
 						.open({
 							templateUrl : '/displayboardinfo/view/dashboard/newDashboardModal.html',
@@ -98,13 +81,13 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 									return $scope.physicians;
 								},
 								dashboardToEdit : function() {
-									return '';
+									return dashboard;
 								}
 							}
 						});
 
-				modalInstance.result.then(function($dashboard) {
-					$scope.reloadList()
+				modalInstance.result.then(function() {
+					$scope.reloadList();
 				});
 			};
 			
@@ -153,16 +136,26 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					$scope.south.type = '';
 					$scope.south.config = '';
 				};
-				
+				 
 				 $scope.updateDashboard = function (dashboardToUpdate) {
-					 BaseService.post(DisplayBoardInfo.config.url.dashboard.update, { dashboard: dashboardToUpdate}).then(function(response) {
+					if ($scope.west.type) {
+						$scope.dashboard.components.push($scope.west);
+					}
+					if ($scope.east.type) {
+						$scope.dashboard.components.push($scope.east);
+					}
+					if ($scope.north.type) {
+						$scope.dashboard.components.push($scope.north);
+					}
+					if ($scope.south.type) {
+						$scope.dashboard.components.push($scope.south);
+					}
+					 BaseService.post(DisplayBoardInfo.config.url.dashboard.update, { dashboard: dashboardToUpdate }).then(function(response) {
 						 $scope.reloadList();
-				     });
-					 
-					 $modalInstance.close($scope.dashboard);
+						 $modalInstance.close();
+					 }); 
 				 };
-				
-				
+				 
 				$scope.addDashboard = function() {
 					if ($scope.west.type) {
 						$scope.dashboard.components.push($scope.west);
@@ -188,7 +181,7 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 				};
 
 				$scope.cancelModal = function() {
-					$modalInstance.dismiss('cancelled')
+					$modalInstance.dismiss('cancelled');
 				};
 
 				// obsluga wzorcow tablicy
@@ -233,7 +226,7 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					name : 'lekarz',
 					type : 'PhysiciansTermList'
 				}, {
-					name : 'pylenie',
+					name : 'kalendarz pyleń',
 					type : 'CalendarWidget'
 				}, {
 					name : 'reklama',
@@ -246,25 +239,44 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 				if(dashboardToEdit)
 				{
 					$scope.variant = 'edit';
-					$scope.dashboard.name = dashboardToEdit.name;
+					$scope.dashboard.name = dashboardToEdit.dashboard.name;
 					
 					for (var i = 0; i < $scope.templates.length; i++){
-						if($scope.templates[i].name==dashboardToEdit.template)
+						if($scope.templates[i].name==dashboardToEdit.dashboard.template)
 						{
 							$scope.dashboard.template = $scope.templates[i]; 
+						}
+					}
+					
+					for (var i = 0; i < dashboardToEdit.components.length; i++){
+						if(dashboardToEdit.components[i].location=='west')
+						{
+							$scope.west.type = dashboardToEdit.components[i].type.name;
+							$scope.west.config = dashboardToEdit.components[i].configuration; 
+						}
+						if(dashboardToEdit.components[i].location=='east')
+						{
+							$scope.east.type = dashboardToEdit.components[i].type.name;
+							$scope.east.config = dashboardToEdit.components[i].configuration; 
+						}
+						if(dashboardToEdit.components[i].location=='north')
+						{
+							$scope.north.type = dashboardToEdit.components[i].type.name;
+							$scope.north.config = dashboardToEdit.components[i].configuration; 
+						}
+						if(dashboardToEdit.components[i].location=='south')
+						{
+							$scope.south.type = dashboardToEdit.components[i].type.name;
+							$scope.south.config = dashboardToEdit.components[i].configuration; 
 						}
 					}
 				}
 				else
 				{
 					$scope.variant = 'add';
-
 				}
 				
 			};
-			
-
-			
-
+		
 			
 		});
