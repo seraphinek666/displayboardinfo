@@ -12,7 +12,8 @@ import java.awt.Toolkit;
 
 import org.apache.ivy.core.event.download.StartArtifactDownloadEvent;
 
-import grails.converters.JSON
+import grails.converters.deep.JSON
+
 import groovy.ui.SystemOutputInterceptor;
 
 
@@ -23,7 +24,14 @@ class TermController {
 		def json = request.JSON;
 		Physician physicianToGet = Physician.find{physician -> id == json.physician_id};
 		try {
-			render Term.findAllByPhysician(physicianToGet) as JSON;
+			def terms = Term.findAll { t -> physician == physicianToGet};
+			for(Term term : terms) {
+				def patient = term.patient;
+				def physician = term.physician;
+				def room = term.room;
+				term.refresh();
+			}
+			render terms as JSON;
 		} catch (Exception e) {
 			response.status = 500
 			render e

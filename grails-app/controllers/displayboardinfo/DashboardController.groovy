@@ -36,37 +36,40 @@ class DashboardController {
 	}
 
 	def findById() {
-		def json = request.JSON.dashboard;
-		def dashboardFromDB = Dashboard.find { d -> id == json.id };
+		def json = request.JSON;
+		def idDashboard = null;
+		if(json.dashboard != null) {
+			idDashboard = json.dashboard.id;
+		} else {
+			idDashboard = json.id;
+		}
+		def dashboardFromDB = Dashboard.find { d -> id == idDashboard };
 		def components = Component.findAll { c -> dashboard == dashboardFromDB };
 		def responseData = ['dashboard' : dashboardFromDB, 'components' : components];
 		render responseData as JSON;
 	}
 
 	@Transactional
-	def update(Dashboard dashboardInstance) {		
-		if (dashboardInstance == null) {
-			notFound()
-			return
+	def update() {		
+		def json = request.JSON.dashboard;
+		Dashboard dashboardFromDb = Dashboard.find { d -> id == json.id };
+		dashboardFromDb.name = json.name;
+		dashboardFromDb.template = json.template.name;
+		dashboardFromDb.save();
+		def components = Component.findAll { c -> dashboard == dashboardFromDb };
+		for(Component c : components) {
+			c.delete();
 		}
-
-		if (dashboardInstance.hasErrors()) {
-			respond dashboardInstance.errors, view:'edit'
-			return
+		for(component in json.components) {
+			Component componentToSave = new Component();
+			componentToSave.type = component.type;
+			componentToSave.configuration = component.config;
+			componentToSave.location = component.location;
+			componentToSave.dashboard = dashboardFromDb;
+			componentToSave.save();
 		}
-
-		dashboardInstance.save flush:true
-
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.updated.message', args: [
-					message(code: 'Dashboard.label', default: 'Dashboard'),
-					dashboardInstance.id
-				])
-				redirect dashboardInstance
-			}
-			'*'{ respond dashboardInstance, [status: OK] }
-		}
+		
+		render 'Success'
 	}
 
 	@Transactional

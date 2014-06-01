@@ -11,6 +11,6 @@ class Component {
 	Dashboard dashboard;
 	
     static constraints = {
-		configuration nullable:true
+		configuration nullable:true, length:10000
     }
 }

@@ -13,12 +13,14 @@ class Term {
 	Patient patient;
 	Boolean allDay;
 	Boolean completed;
-	
-	
-    static constraints = {
-    }
-	
-	static mapping = {
-		id name: 'id_term'
+
+
+
+	static constraints = {
+		physician nullable:true
+		room nullable:true
+		patient nullable:true
 	}
+
+	static mapping = { id name: 'id_term' }
 }

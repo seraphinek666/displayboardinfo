@@ -240,6 +240,7 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 				{
 					$scope.variant = 'edit';
 					$scope.dashboard.name = dashboardToEdit.dashboard.name;
+					$scope.dashboard.id = dashboardToEdit.dashboard.id;
 					
 					for (var i = 0; i < $scope.templates.length; i++){
 						if($scope.templates[i].name==dashboardToEdit.dashboard.template)

@@ -1,6 +1,5 @@
 <!doctype html>
 
-<!-- Adding 'ng-app' tells Angular to start its magic at this point in the DOM -->
 <html>
 <head>
 <r:require modules="grailsEvents" />
@@ -9,9 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=9" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="/displayboardinfo/js/lib/jquery-2.1.0.min.js"></script>
-<script src="/displayboardinfo/js/lib/jssor.slider.min.js"></script>
-<script src="/displayboardinfo/js/lib/json2.js"></script>
+
+
+<!-- Include the basic styles -->
+<link type="text/css" rel="Stylesheet" href="/displayboardinfo/css/bjqs.css" />
 <link rel="stylesheet"
 	href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">
 <link href="/displayboardinfo/css/bootstrap.min.css" rel="stylesheet">
@@ -27,104 +27,44 @@
 	href="${resource(dir: 'font-awesome/css', file: 'font-awesome.min.css')}"
 	type="text/css">
 
-<style type="text/css">
-html,body {
-	height: 100%;
-}
 
-body {
-	display: table;
-	margin: 0 auto;
-	background: rgba(255, 255, 255, 1);
-	background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1)
-		0%, rgba(230, 230, 230, 1) 70%, rgba(214, 214, 214, 1) 100%);
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%,,
-		color-stop(0%, rgba(255, 255, 255, 1)),
-		color-stop(70%, rgba(230, 230, 230, 1)),
-		color-stop(100%, rgba(214, 214, 214, 1)));
-	background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1)
-		0%, rgba(230, 230, 230, 1) 70%, rgba(214, 214, 214, 1) 100%);
-	background: -o-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1)
-		0%, rgba(230, 230, 230, 1) 70%, rgba(214, 214, 214, 1) 100%);
-	background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 1)
-		0%, rgba(230, 230, 230, 1) 70%, rgba(214, 214, 214, 1) 100%);
-	background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%,
-		rgba(230, 230, 230, 1) 70%, rgba(214, 214, 214, 1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff',
-		endColorstr='#d6d6d6', GradientType=1);
-}
-
-.redirectPanel {
-	height: 100%;
-	display: table-cell;
-	vertical-align: middle;
-	width: 200px;
-	height: 200px;
-}
-</style>
-
+<r:layoutResources/> 
 </head>
-
 <body>
-
-
-
-	<div id="page-wrapper" style="margin: 50px; width:1000px;">
-
-		
-
-
-
-		<!-- 
-		<div id="alergy">
-			<script>
-				$(function() {
-					$('#alergy').load(
-							'/displayboardinfo/view/component/alergy.html')
-				});
-			</script>
-		</div>
-		<div id="clock">
-			<script>
-				$(function() {
-					$('#clock').load(
-							'/displayboardinfo/view/component/clock.html')
-				});
-			</script>
-
-		</div>
-		<div id="infobox">
-			<script>
-				$(function() {
-					$('#infobox').load(
-							'/displayboardinfo/view/component/infobox.html')
-				});
-			</script>
-
-		</div>
-		<div id="advertisement">
-			<script>
-				$(function() {
-					$('#advertisement')
-							.load(
-									'/displayboardinfo/view/component/advertisement.html')
-				});
-			</script>
-
-		</div>
-		<div id="termList">
-			<script>
-				$(function() {
-					$('#termList').load(
-							'/displayboardinfo/view/component/termList.html')
-				});
-			</script>
-
-		</div>
-			-->
+	<div id="page-wrapper" style="margin: 50px auto; width:1000px; height:700px">
 	</div>
+	
+	
+	
+	<script src="/displayboardinfo/js/lib/jquery-2.1.0.min.js"></script>
+<script src="/displayboardinfo/js/lib/jquery.slides.js"></script>
+<script src="/displayboardinfo/js/lib/bjqs-1.3.js"></script>
+<script src="/displayboardinfo/js/lib/json2.js"></script>
+<script src="/displayboardinfo/js/lib/jquery.clock.js"></script>
+	<script src="/displayboardinfo/js/lib/angular.min.js"></script>
+	<script src="/displayboardinfo/js/lib/angular-route.min.js"></script>
+	<script src="/displayboardinfo/js/lib/angular-translate.min.js"></script>
+	<script src="/displayboardinfo/js/lib/angular-cookies.js"></script>
+	<script src="/displayboardinfo/js/lib/angular-sanitize.js"></script>
+	<script src="/displayboardinfo/js/lib/bootstrap.min.js"></script>
+	<script src="/displayboardinfo/js/lib/ng-table.js"></script>
+	<script src="/displayboardinfo/js/lib/toaster.js"></script>
+	<script src="/displayboardinfo/js/lib/angular-md5.js"></script>
+	<script src="/displayboardinfo/js/lib/dhtmlxscheduler.js"></script>
+	<script src="/displayboardinfo/js/lib/dhtmlxscheduler_minical.js"></script>
+	<script src="/displayboardinfo/js/lib/calendar.js"></script>
+	<script src="/displayboardinfo/js/lib/jquery-ui.custom.min.js"></script>
+	<script src="/displayboardinfo/js/lib/fullcalendar.min.js"></script>
+	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
+	<script
+		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 
-	<!-- /#page-wrapper -->
+	<script
+		src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
+
+	
+	
+	
 <script>
 			$(function() {
 				$('#page-wrapper').append('<span style="margin: 0 auto">Wybierz jeden z dostępnych dashboardów</span>');
@@ -137,22 +77,131 @@ body {
 									'<br/><button class="btn btn-default" style="margin: 0 auto" onClick="loadDashboard(' + val.id
 											+ ')">' + val.name + '</button>');
 						});
+						
 					},
 					dataType : 'json'
 				})
+
+				 
 			});
 
-			function createInfoArea(configuration) {
-				return $('<div class="panel panel-success" style="float: left; margin: 10px;">' +
+			function replaceAll(find, replace, str) {
+				  return str.replace(new RegExp(find, 'g'), replace);
+				}
+			
+		
+			
+			function createInfoArea(configuration, elementToAppend) {
+			$(elementToAppend).addClass('panel panel-default').append($('<div class="panel panel-success" style="float: left; margin: 10px;">' +
 				'<div class="panel-heading">' +
 				'	<h3 class="panel-title">' + configuration.split(";")[0] + '</h3>' +
 				'</div>' +
 				'<div class="panel-body" id="information">' + configuration.split(";")[1] +
 				'</div>' +
-			'</div>').html();
+			'</div>').html());
 			}
 
+			function createCalendarWidget(configuration, elementToAppend) {
+				var url = 'https://www.kichacze.pl/Serwis_pylkowy/mapa_pylen.aspx?ID=' + configuration; 
+				$.ajax({
+				    type: 'GET',
+				    url: 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + url + '"'),
+				    dataType: 'xml',
+				    success: function(data) {
+				    	$(elementToAppend).addClass('panel panel-success').append($('<div class="panel panel-info" style="width: 500px; float:left; margin:10px;">' +
+				 	           ' <div class="panel-heading">' +
+				 	              '<h3 class="panel-title">Pylenie roślin</h3>' +
+				 	            '</div>' +
+				 	            '<div id="alergy-content" class="panel-body">' + replaceAll('/_layout','/displayboardinfo/_layout',replaceAll('/_Layout','/_layout',data.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[14].childNodes[7].childNodes[8].childNodes[1].childNodes[3].innerHTML)) +
+				 	          
+				 	           ' </div>' +
+				 	         ' </div>').html());
+				         
+				    },
+				    async:   false,
+				    error: function(data) {
+						console.log(data);
+					    }
+				});
+			}
+
+			function createClockWidget(elementToAppend) {
+				$(elementToAppend).addClass('panel panel-warning').append(
+						'<div class="panel-heading">'+
+						'<h3 class="panel-title">Zegar</h3>'+
+					'</div>'+
+					'<div class="panel-body">'+
+						'<ul id="analog-clock" class="analog">'+
+							'<li class="hour"></li>'+
+							'<li class="min"></li>'+
+							'<li class="sec"></li>'+
+						'</ul>'+
+						
+					'</div>'
+
+
+						);
+				
+					$('#analog-clock').clock({
+						offset: '+2',
+						type : 'analog'
+					});
+
+			}
+
+			function createPhysiciansTermList(configuration, elementToAppend, id) {
+				$(elementToAppend).addClass('panel panel-info').append('<div class="panel-heading">' +
+						'<h3 class="panel-title">Dzisiejsze wizyty</h3>' +
+						'</div>' +
+						'<div class="table-responsive">' +
+							'<table id="termList' + id + '"' +
+								' class="table table-striped table-bordered table-hover" width="500">' +
+								'<thead>' +
+									'<tr>' +
+										'<th>Czas</th>' +
+										'<th>Pacjent</th>' +
+										'<th>Pokój / Piętro</th>' +
+										'<th>Lekarz</th>' +
+									'</tr>' +
+								'</thead>' +
+								'<tbody>' +
+								'</tbody>' +
+							'</table>' +
+						'</div>');
+				$.ajax({
+					  type: "POST",
+					  url: '/displayboardinfo/term/listPhysEvents/',
+					  data: JSON.stringify({ physician_id: configuration}),
+					  contentType: 'application/json; charset=utf-8',
+					  success: function( data ) {
+						  $.each( data, function( key, val ) {
+							   	$('#termList' + id + ' > tbody:last').append('<tr>' + '<td>' + val.start + '</td>'+ '<td>' + val.patient.pesel + '</td>'+ '<td>' + val.room.number + ' / ' + val.room.floor + '</td>' + '<td>' + val.physician.title + ' ' + val.physician.name + ' ' + val.physician.surname+ ' ' + '</td>' + '</tr>');
+							  });					  
+							},
+					  dataType: 'json'})
+			}
 			
+			function createAdvertisementArea(configuration, elementToAppend, id) {
+				var arrayOfUrls = configuration.split(';');
+
+$(elementToAppend).addClass('panel panel-danger').append(
+'<div class="panel-heading"><h3 class="panel-title">Przestrzeń reklamowa</h3></div>' +
+'<div id="advertisement' + id +'" class="panel-body"><ul class="bjqs"></ul></div>');
+
+
+				$.each(arrayOfUrls, function(i, url) {
+					$('#advertisement' + id + ' ul').append('<li><img u="' + i + '" src="' + url + '" /></li>');
+					});
+
+				 $('#advertisement' + id).bjqs({
+				        'height' : 320,
+				        'width' : 620,
+				        showcontrols : false,
+				        automatic : true,
+				        'responsive' : true
+				    });
+
+			}
 			
 			function loadDashboard(idDashboard) {
 				$('#page-wrapper').empty();
@@ -198,20 +247,19 @@ body {
 						$.each(data.components, function(i, component) {
 							switch(component.type.name) {
 							case 'AdvertisementArea':
-								$('#'+component.location).append(createAdvertisementArea(component.configuration));
+								createAdvertisementArea(component.configuration, '#'+component.location, component.id);
 							    break;
 							case 'ClockWidget':
-								$('#'+component.location).append(createClockWidget());
+								createClockWidget('#'+component.location);
 							    break;
 							case 'CalendarWidget':
-								$('#'+component.location).append(createCalendarWidget(component.configuration));
+								createCalendarWidget(component.configuration, '#'+component.location);
 							    break;
 							case 'InfoArea':
-								var html = createInfoArea(component.configuration);
-								$('#'+component.location).addClass('panel panel-default').append(html);
+								createInfoArea(component.configuration, '#'+component.location);
 							    break;
 							case 'PhysiciansTermList':
-								$('#'+component.location).append(createPhysiciansTermList(component.configuration));
+								createPhysiciansTermList(component.configuration, '#'+component.location);
 							    break;
 							default:
 								 break;
@@ -223,34 +271,17 @@ body {
 					dataType : 'json'
 				})
 			}
+
+
+		
 		</script>
 
 
 
-	<script src="/displayboardinfo/js/lib/jquery.clock.js"></script>
-	<script src="/displayboardinfo/js/lib/angular.min.js"></script>
-	<script src="/displayboardinfo/js/lib/angular-route.min.js"></script>
-	<script src="/displayboardinfo/js/lib/angular-translate.min.js"></script>
-	<script src="/displayboardinfo/js/lib/angular-cookies.js"></script>
-	<script src="/displayboardinfo/js/lib/angular-sanitize.js"></script>
-	<script src="/displayboardinfo/js/lib/bootstrap.min.js"></script>
-	<script src="/displayboardinfo/js/lib/ng-table.js"></script>
-	<script src="/displayboardinfo/js/lib/toaster.js"></script>
-	<script src="/displayboardinfo/js/lib/angular-md5.js"></script>
-	<script src="/displayboardinfo/js/lib/dhtmlxscheduler.js"></script>
-	<script src="/displayboardinfo/js/lib/dhtmlxscheduler_minical.js"></script>
-	<script src="/displayboardinfo/js/lib/calendar.js"></script>
-	<script src="/displayboardinfo/js/lib/jquery-ui.custom.min.js"></script>
-	<script src="/displayboardinfo/js/lib/fullcalendar.min.js"></script>
-	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
-	<script
-		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
-
-	<script
-		src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
+	
 
 
 
-
+<r:layoutResources/> 
 </body>
 </html>
