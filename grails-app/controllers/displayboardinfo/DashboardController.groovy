@@ -44,7 +44,7 @@ class DashboardController {
 	}
 
 	@Transactional
-	def update(Dashboard dashboardInstance) {
+	def update(Dashboard dashboardInstance) {		
 		if (dashboardInstance == null) {
 			notFound()
 			return

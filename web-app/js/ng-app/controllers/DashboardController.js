@@ -68,29 +68,6 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					$defer.resolve($scope.dashboardsLocal.slice((params.page() - 1)* params.count(), params.page()* params.count()));
 				}
 			});
-
-			
-//			$scope.launchEditModal = function(dashboard) {
-//				$scope.dashboardToEdit = dashboard;
-//				$scope.fetchPhysicians();
-//				var modalInstance = $modal
-//				.open({
-//					templateUrl : '/displayboardinfo/view/dashboard/newDashboardModal.html',
-//					controller : ModalInstanceCtrl,
-//					resolve : {
-//						physicians : function() {
-//							return $scope.physicians;
-//						},
-//						dashboardToEdit : function() {
-//							return $scope.dashboardToEdit;
-//						}
-//					}
-//				});
-//
-//				modalInstance.result.then(function() {
-//					$scope.reloadList();
-//				});
-//			};
 			
 			$scope.launchModal = function(dashboard) {
 				$scope.fetchPhysicians();
@@ -161,6 +138,18 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 				};
 				 
 				 $scope.updateDashboard = function (dashboardToUpdate) {
+					if ($scope.west.type) {
+						$scope.dashboard.components.push($scope.west);
+					}
+					if ($scope.east.type) {
+						$scope.dashboard.components.push($scope.east);
+					}
+					if ($scope.north.type) {
+						$scope.dashboard.components.push($scope.north);
+					}
+					if ($scope.south.type) {
+						$scope.dashboard.components.push($scope.south);
+					}
 					 BaseService.post(DisplayBoardInfo.config.url.dashboard.update, { dashboard: dashboardToUpdate }).then(function(response) {
 						 $scope.reloadList();
 						 $modalInstance.close();
@@ -183,9 +172,8 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					
 					BaseService.post(DisplayBoardInfo.config.url.dashboard.save, { dashboard : $scope.dashboard }).then(function(response) {
 						$scope.reloadList();
+						$modalInstance.close();
 				    }); 
-					
-					$modalInstance.close();
 				};
 
 				$scope.cancelModal = function() {
