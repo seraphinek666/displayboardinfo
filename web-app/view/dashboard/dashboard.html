@@ -2,7 +2,7 @@
 	<div class="dictionaryButtons">
 	<button ng-click="tableParams.sorting({})" class="btn btn-default pull-right dictionaryHeaderButtons">Wyczyść sortowanie</button>
     <button ng-click="tableParams.filter({})" class="btn btn-default pull-right dictionaryHeaderButtons">Wyczyść filtrowanie</button>
-    <button class="btn btn-warning dictionaryHeaderButtons" ng-click="launchModal()">Dodaj talicę</button>
+    <button class="btn btn-warning dictionaryHeaderButtons" ng-click="launchModal('')">Dodaj talicę</button>
 	</div>
 	<table ng-table="tableParams" show-filter="true" class="table">
             <tr ng-repeat="dashboard in dashboardsLocal">
@@ -16,9 +16,7 @@
                 	</div>
             	</td>
             	<td data-title="'Akcje'">
-                	<a ng-if="!dashboard.$edit" href="" class="btn btn-primary btn-xs" ng-click="launchEditModal(dashboard)">Edytuj</a>
-                	<a ng-if="dashboard.$edit" href="" class="btn btn-primary btn-xs" ng-click="dashboard.$edit = false; updateDashboard(dashboard)">Zapisz</a>
-                	<a ng-if="dashboard.$edit" href="" class="btn btn-danger btn-xs" ng-click="dashboard.$edit = false; reloadList()">Anuluj</a>
+                	<a ng-if="!dashboard.$edit" href="" class="btn btn-primary btn-xs" ng-click="dashboardToEdit(dashboard)">Edytuj</a>
                 	<a ng-if="!dashboard.$edit" href="" class="btn btn-danger btn-xs" ng-click="removeDashboard(dashboard)">Usuń</a>
             	</td>
             </tr>

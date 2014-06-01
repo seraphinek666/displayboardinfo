@@ -129,7 +129,8 @@ DisplayBoardInfo.config = {
 			save : '/displayboardinfo/dashboard/save/',
 			update : '/displayboardinfo/dashboard/update/',
 			remove : '/displayboardinfo/dashboard/delete/',
-			list : '/displayboardinfo/dashboard/list/'
+			list : '/displayboardinfo/dashboard/list/',
+			find : '/displayboardinfo/dashboard/findById/'
 		}
 	},
 	column : {
