@@ -182,6 +182,7 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 							{
 								dashboard : $scope.dashboard
 							}).then(function(response) {
+								$modalInstance.dismiss('cancelled')
 					});
 
 				};
@@ -232,7 +233,7 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 					name : 'lekarz',
 					type : 'PhysiciansTermList'
 				}, {
-					name : 'gabinet',
+					name : 'pylenie',
 					type : 'CalendarWidget'
 				}, {
 					name : 'reklama',
