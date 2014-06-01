@@ -6,6 +6,7 @@ class Component {
 
 	int id;
 	ComponentType type;
+	String location;
 	String configuration;
 	Dashboard dashboard;
 	

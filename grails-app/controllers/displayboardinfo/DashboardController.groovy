@@ -9,9 +9,9 @@ class DashboardController {
 
 	def list() {
 		def all = Dashboard.all;
-//		for(Dashboard d : all) {
-//			d
-//		}
+		//		for(Dashboard d : all) {
+		//			d
+		//		}
 		render Dashboard.all as JSON;
 	}
 
@@ -27,15 +27,19 @@ class DashboardController {
 			Component componentToSave = new Component();
 			componentToSave.type = component.type;
 			componentToSave.configuration = component.config;
+			componentToSave.location = component.location;
 			componentToSave.dashboard = dashboard;
 			componentToSave.save();
 		}
+		
+		render 'Success'
 	}
 
 	def findById() {
-		def dashboardFromDB = Dashboard.find { d -> id == request.JSON.id };
-		def components = Component.findAll { c -> dashboard.id == request.JSON.id };
-		def responseData = ['dashboard' : dashboard, 'components' : components];
+		def json = request.JSON;
+		def dashboardFromDB = Dashboard.find { d -> id == json.id };
+		def components = Component.findAll { c -> dashboard == dashboardFromDB };
+		def responseData = ['dashboard' : dashboardFromDB, 'components' : components];
 		render responseData as JSON;
 	}
 
@@ -66,7 +70,7 @@ class DashboardController {
 	}
 
 	@Transactional
-	def delete() {		
+	def delete() {
 		int idDashboard = request.JSON.dashboard.id;
 		Dashboard dashboardFromDb =  Dashboard.find { d -> id == idDashboard };
 		def components = Component.findAll { c -> dashboard == dashboardFromDb };
@@ -74,5 +78,6 @@ class DashboardController {
 			c.delete();
 		}
 		dashboardFromDb.delete();
+		render 'Success'
 	}
 }

@@ -4,8 +4,10 @@ class SecurityFilters {
 	def filters = {
 		loginCheck(controller: '*', action: '*') {
 			before = {
-				if (session.user == null && !actionName.equals('authorize') && !request.forwardURI.equals('/displayboardinfo/')) {
-					def x = request.forwardURI;
+				def x = request.forwardURI;
+				def d = request.getHeader('referer');
+				
+				if (session.user == null && !actionName.equals('authorize') && !request.forwardURI.equals('/displayboardinfo/') && !d.contains('/displayboardinfo/client/')) {
 					response.sendError(401)
 					return false
 				}
