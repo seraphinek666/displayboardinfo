@@ -58,7 +58,7 @@
 
 .example_panel {
 	border-style: dotted;
-	border-width: medium;
+	border-width: 1px;
 	height: 100%;
 	float: left;
 }
