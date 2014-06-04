@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="container-fluid">
-   		<div class="included_content">
-    		<div class="example_panel" style="height: 50%; width: 100%">
+   		<div class="included_content panel panel-default">
+    		<div class="example_panel panel-body" style="height: 50%; width: 100%">
     				<select ng-model="north.type" ng-options="item.type as item.name for item in components" ng-change="clear(north)" required>
     			<option value="">--Wybierz komponent--</option>
     			</select>
@@ -16,7 +16,7 @@
     			</select>
    				</div>
     		</div>
-    		<div class="example_panel" style="height: 50%; width: 100%">
+    		<div class="example_panel panel-body" style="height: 50%; width: 100%">
     				<select ng-model="south.type" ng-options="item.type as item.name for item in components" ng-change="clear(south)" required>
     			<option value="">--Wybierz komponent--</option>
     			</select>

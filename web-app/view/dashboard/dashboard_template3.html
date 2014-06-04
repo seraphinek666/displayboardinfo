@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="container-fluid">
-		<div class="included_content">
-			<div class="example_panel" style="height: 30%; width: 100%;">
+		<div class="included_content panel panel-default">
+			<div class="example_panel panel-body" style="height: 30%; width: 100%;">
 				<select ng-model="north.type"
 					ng-options="item.type as item.name for item in components"
 					ng-change="clear(north)" required>
@@ -24,8 +24,8 @@
 					</select>
 				</div>
 			</div>
-			<div class="example_panel" style="height: 70%; width: 100%">
-				<div class="example_panel" style="width: 35%;">
+			<div class="example_panel panel-body" style="height: 70%; width: 100%">
+				<div class="example_panel panel-body" style="width: 35%;">
 					<select ng-model="west.type"
 						ng-options="item.type as item.name for item in components"
 						ng-change="clear(west)" required>
@@ -51,7 +51,7 @@
 
 
 				</div>
-				<div class="example_panel" style="width: 65%;">
+				<div class="example_panel panel-body" style="width: 65%;">
 					<select ng-model="east.type"
 						ng-options="item.type as item.name for item in components"
 						ng-change="clear(east)" required>
