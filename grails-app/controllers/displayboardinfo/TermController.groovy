@@ -54,6 +54,7 @@ class TermController {
 		Term termInstance = request.JSON.term;		
 		try {
 			termInstance.save();
+			event([namespace: 'browser', topic: "termAdded", data: [message: termInstance]]);
 			render 'Success' 
 		} catch (Exception e) {
 			response.status = 500
@@ -79,6 +80,12 @@ class TermController {
 			toUpdate.allDay = json.term.allDay;
 			toUpdate.completed = json.term.completed;
 			toUpdate.save();
+			
+			if(json.term.completed) {
+//				event for:'browser' , topic:'termClosed', data:[:]
+				event([namespace: 'browser', topic: "termClosed", data: [message: toUpdate]]);
+//				broadcaster['/atmosphere/test'].broadcast('Hello world!')
+			}
 			render 'Success'
 		} catch (Exception e) {
 			response.status = 500

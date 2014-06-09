@@ -92,13 +92,11 @@
 		
 			
 			function createInfoArea(configuration, elementToAppend) {
-			$(elementToAppend).addClass('panel panel-default').append($('<div class="panel panel-success" style="float: left; margin: 10px;">' +
-				'<div class="panel-heading">' +
+			$(elementToAppend).addClass('panel panel-success').append('<div class="panel-heading">' +
 				'	<h3 class="panel-title">' + configuration.split(";")[0] + '</h3>' +
 				'</div>' +
 				'<div class="panel-body" id="information">' + configuration.split(";")[1] +
-				'</div>' +
-			'</div>').html());
+				'</div>');
 			}
 
 			function createCalendarWidget(configuration, elementToAppend) {
@@ -149,6 +147,49 @@
 
 			}
 
+function reloadPhysList(id, configuration) {
+	$('#termList' + id + ' tr').not(function(){if ($(this).has('th').length){return true}}).remove();
+	$.ajax({
+		  type: "POST",
+		  url: '/displayboardinfo/term/listPhysEvents/',
+		  data: JSON.stringify({ physician_id: configuration}),
+		  contentType: 'application/json; charset=utf-8',
+		  success: function( data ) {
+			  $.each( data, function( key, val ) {
+				  	var date = new Date(val.start);
+				  	if(date.getHours() < 10) {
+					  	var hourString = '0' + date.getHours();
+					  	} else {
+						  	var hourString = date.getHours()
+						  	}
+				  	if(date.getMinutes() < 10) {
+					  	var minuteString = '0' + date.getMinutes();
+					  	} else {
+						  	var minuteString = date.getMinutes()
+						  	}
+					
+
+				  	
+				  	var dateString = hourString + ":" + minuteString;
+				   	$('#termList' + id + ' > tbody:last').append('<tr>' + '<td>' + dateString + '</td>'+'<td>' + 'czas_oczekiwania' + '</td>'+ '<td>' + val.patient.pesel + '</td>'+ '<td>' + val.room.number + ' / ' + val.room.floor + '</td>' + '<td>' + val.physician.title + ' ' + val.physician.name + ' ' + val.physician.surname+ ' ' + '</td>' + '</tr>');
+				  });					  
+				},
+		  dataType: 'json'})
+
+	
+}	 
+function configureWebSocket() {
+var grailsEvents = new grails.Events("${createLink(uri: '')}");
+
+grailsEvents.on('termAdded-' + configuration, function(data){
+	 alert(data);
+	 }); 
+
+grailsEvents.on('termClosed-' + configuration, function(data){
+		alert(data);
+}); 
+}
+			
 			function createPhysiciansTermList(configuration, elementToAppend, id) {
 				$(elementToAppend).addClass('panel panel-info').append('<div class="panel-heading">' +
 						'<h3 class="panel-title">Dzisiejsze wizyty</h3>' +
@@ -158,7 +199,8 @@
 								' class="table table-striped table-bordered table-hover" width="500">' +
 								'<thead>' +
 									'<tr>' +
-										'<th>Czas</th>' +
+										'<th>Termin wizyty</th>' +
+										'<th>Czas oczekiwania</th>' +
 										'<th>Pacjent</th>' +
 										'<th>Pokój / Piętro</th>' +
 										'<th>Lekarz</th>' +
@@ -168,17 +210,9 @@
 								'</tbody>' +
 							'</table>' +
 						'</div>');
-				$.ajax({
-					  type: "POST",
-					  url: '/displayboardinfo/term/listPhysEvents/',
-					  data: JSON.stringify({ physician_id: configuration}),
-					  contentType: 'application/json; charset=utf-8',
-					  success: function( data ) {
-						  $.each( data, function( key, val ) {
-							   	$('#termList' + id + ' > tbody:last').append('<tr>' + '<td>' + val.start + '</td>'+ '<td>' + val.patient.pesel + '</td>'+ '<td>' + val.room.number + ' / ' + val.room.floor + '</td>' + '<td>' + val.physician.title + ' ' + val.physician.name + ' ' + val.physician.surname+ ' ' + '</td>' + '</tr>');
-							  });					  
-							},
-					  dataType: 'json'})
+				
+				 setInterval(reloadPhysList(id, configuration), 5000);
+				
 			}
 			
 			function createAdvertisementArea(configuration, elementToAppend, id) {
@@ -259,7 +293,7 @@ $(elementToAppend).addClass('panel panel-danger').append(
 								createInfoArea(component.configuration, '#'+component.location);
 							    break;
 							case 'PhysiciansTermList':
-								createPhysiciansTermList(component.configuration, '#'+component.location);
+								createPhysiciansTermList(component.configuration, '#'+component.location, component.id);
 							    break;
 							default:
 								 break;
