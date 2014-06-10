@@ -25,12 +25,19 @@ class TermController {
 		Physician physicianToGet = Physician.find{physician -> id == json.physician_id};
 		try {
 			def terms = Term.findAll { t -> physician == physicianToGet};
-			for(Term term : terms) {
-				def patient = term.patient;
-				def physician = term.physician;
-				def room = term.room;
-				term.refresh();
-			}
+		
+			render terms as JSON;
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}
+	
+	def listPhysEventsForToday() {
+		def json = request.JSON;
+		Physician physicianToGet = Physician.find{physician -> id == json.physician_id };
+		try {
+			def terms = Term.findAll { t -> physician == physicianToGet && completed == false && start >= new Date().clearTime() && end <= (new Date() +1)};
 			render terms as JSON;
 		} catch (Exception e) {
 			response.status = 500

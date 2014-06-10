@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 class Term {
 
 	int id_term;
-	Timestamp start;
-	Timestamp end;
+	Date start;
+	Date end;
 	String title;
 	Physician physician;
 	Room room;

@@ -146,38 +146,7 @@
 					});
 
 			}
-
-function reloadPhysList(id, configuration) {
-	$('#termList' + id + ' tr').not(function(){if ($(this).has('th').length){return true}}).remove();
-	$.ajax({
-		  type: "POST",
-		  url: '/displayboardinfo/term/listPhysEvents/',
-		  data: JSON.stringify({ physician_id: configuration}),
-		  contentType: 'application/json; charset=utf-8',
-		  success: function( data ) {
-			  $.each( data, function( key, val ) {
-				  	var date = new Date(val.start);
-				  	if(date.getHours() < 10) {
-					  	var hourString = '0' + date.getHours();
-					  	} else {
-						  	var hourString = date.getHours()
-						  	}
-				  	if(date.getMinutes() < 10) {
-					  	var minuteString = '0' + date.getMinutes();
-					  	} else {
-						  	var minuteString = date.getMinutes()
-						  	}
-					
-
-				  	
-				  	var dateString = hourString + ":" + minuteString;
-				   	$('#termList' + id + ' > tbody:last').append('<tr>' + '<td>' + dateString + '</td>'+'<td>' + 'czas_oczekiwania' + '</td>'+ '<td>' + val.patient.pesel + '</td>'+ '<td>' + val.room.number + ' / ' + val.room.floor + '</td>' + '<td>' + val.physician.title + ' ' + val.physician.name + ' ' + val.physician.surname+ ' ' + '</td>' + '</tr>');
-				  });					  
-				},
-		  dataType: 'json'})
-
-	
-}	 
+	 
 function configureWebSocket() {
 var grailsEvents = new grails.Events("${createLink(uri: '')}");
 
@@ -210,8 +179,65 @@ grailsEvents.on('termClosed-' + configuration, function(data){
 								'</tbody>' +
 							'</table>' +
 						'</div>');
+
+				$.id = id;
+				$.configuration = configuration;
 				
-				 setInterval(reloadPhysList(id, configuration), 5000);
+				 setInterval(function() {
+				
+							$('#termList' + $.id + ' tr').not(function(){if ($(this).has('th').length){return true}}).remove();
+							$.ajax({
+								  type: "POST",
+								  url: '/displayboardinfo/term/listPhysEventsForToday/',
+								  data: JSON.stringify({ physician_id: $.configuration}),
+								  contentType: 'application/json; charset=utf-8',
+								  success: function( data ) {
+									  var isLate = false;
+									  var isWarn = false;
+									  var html = '';
+									  $.each( data, function( key, val ) {
+										  	var date = new Date(val.start);
+										  	if(date.getHours() < 10) {
+											  	var hourString = '0' + date.getHours();
+											  	} else {
+												  	var hourString = date.getHours()
+												  	}
+										  	if(date.getMinutes() < 10) {
+											  	var minuteString = '0' + date.getMinutes();
+											  	} else {
+												  	var minuteString = date.getMinutes()
+												  	}
+											
+
+										  	var newDate = new Date();
+										  	var dateString = hourString + ":" + minuteString;
+											var classs = '';
+											if(newDate > new Date(val.end) || (newDate > new Date(val.start) && isLate)) {
+												classs = 'class="danger"';
+												isLate = true;
+												isWarn = false;
+											} else if (!(newDate > new Date(val.end)) && isLate) {
+												classs = 'class="warning"';
+												isLate = false;
+												isWarn = true;
+											} else if (!isLate && isWarn) {
+												isWarn = false;
+												classs = '';	
+											} else if(!isLate && !isWarn) {
+												classs = 'class="success"';
+											}
+											
+											html +=	'<tr ' + classs + '>' + '<td>' + dateString + '</td>'+'<td>' + 'czas_oczekiwania' + '</td>'+ '<td>' + val.patient.pesel + '</td>'+ '<td>' + val.room.number + ' / ' + val.room.floor + '</td>' + '<td>' + val.physician.title + ' ' + val.physician.name + ' ' + val.physician.surname+ ' ' + '</td>' + '</tr>';					  	
+										   
+										  });
+										  $('#termList' + $.id + ' tbody').html(html);					  
+										},
+								  dataType: 'json'})
+
+
+
+
+					 }, 5000);
 				
 			}
 			
