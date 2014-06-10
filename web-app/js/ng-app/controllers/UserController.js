@@ -79,6 +79,7 @@ app.controller('UserController', function ($scope, $routeParams, $location, $tra
 		  
 	var ModalInstanceCtrl = function ($scope, $modalInstance) {
 			$scope.user = {login : '', password:'', userType:''};
+			$scope.password = {plain:''};
 			$scope.userTypes = [{id:'1', type:'Administrator'},{id:'2', type:'Lekarz'},{id:'3', type:'Asystentka'}]
 		
 			$scope.checkIfLoginExist = function(){
@@ -90,11 +91,12 @@ app.controller('UserController', function ($scope, $routeParams, $location, $tra
 			$scope.addUser = function () {
 				userExist = $scope.checkIfLoginExist(); 
 				if (!userExist){
-					$modalInstance.close($scope.user);
 					
-					$scope.user.password = md5.createHash($scope.user.password);
+					$scope.user.password = md5.createHash($scope.password.plain);
+					
 					BaseService.post(DisplayBoardInfo.config.url.user.save, { user: $scope.user}).then(function(response) {
-				     });
+						$modalInstance.close($scope.user);
+				    });
 				 }
 				 return userExist;
 			};
