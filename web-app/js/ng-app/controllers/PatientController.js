@@ -79,12 +79,12 @@ app.controller('PatientController', function ($scope, $routeParams, $location, $
 			$scope.patient = {name : '', surname:'', pesel:'', id:''};
 		
 			$scope.addPatient = function () {
-				$modalInstance.close($scope.patient);
 				 BaseService.post(DisplayBoardInfo.config.url.patient.save, { patient: $scope.patient}).then(function(response) {
-			     });
+					 $modalInstance.close($scope.patient);
+				 });
 			};
 
-			$scope.cancelModal = function () {$modalInstance.dismiss('cancelled')};
+//			$scope.cancelModal = function () {$modalInstance.dismiss('cancelled')};
 	};
     
 });

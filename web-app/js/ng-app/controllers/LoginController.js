@@ -1,10 +1,10 @@
 app.controller('LoginController', function($scope, $routeParams, $location,
-		$translate, BaseService, $dialogs, $cookieStore) {
+		$translate, BaseService, $dialogs, $cookieStore, md5) {
 
 	$scope.login = function() {
 		var credentials = {
 			username : this.username,
-			password : this.password
+			password :  md5.createHash(this.password)
 		};
 
 		BaseService.post(DisplayBoardInfo.config.url.login.authorize, {

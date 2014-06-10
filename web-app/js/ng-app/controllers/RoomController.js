@@ -77,12 +77,12 @@ app.controller('RoomController', function ($scope, $routeParams, $location, $tra
 			$scope.room = {number : '', floor:''};
 		
 			$scope.addRoom = function () {
-				$modalInstance.close($scope.room);
 				 BaseService.post(DisplayBoardInfo.config.url.room.save, { room: $scope.room}).then(function(response) {
-			     });
+						$modalInstance.close($scope.room);
+				 });
 			};
 
-			$scope.cancelModal = function () {$modalInstance.dismiss('cancelled')};
+//			$scope.cancelModal = function () {$modalInstance.dismiss('cancelled')};
 	};
 
     

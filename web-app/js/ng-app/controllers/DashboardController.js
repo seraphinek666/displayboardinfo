@@ -175,7 +175,7 @@ app.controller('DashboardController',function($scope, $routeParams, $location, $
 							{
 								dashboard : $scope.dashboard
 							}).then(function(response) {
-								$modalInstance.dismiss('cancelled')
+								$modalInstance.close();
 					});
 
 				};
