@@ -185,7 +185,7 @@ grailsEvents.on('termClosed-' + configuration, function(data){
 				
 				 setInterval(function() {
 				
-							$('#termList' + $.id + ' tr').not(function(){if ($(this).has('th').length){return true}}).remove();
+							//$('#termList' + $.id + ' tr').not(function(){if ($(this).has('th').length){return true}}).remove();
 							$.ajax({
 								  type: "POST",
 								  url: '/displayboardinfo/term/listPhysEventsForToday/',
@@ -207,9 +207,21 @@ grailsEvents.on('termClosed-' + configuration, function(data){
 											  	} else {
 												  	var minuteString = date.getMinutes()
 												  	}
-											
 
-										  	var newDate = new Date();
+										  	var newDate2 = new Date();
+										  	newDate2.setHours(0,0,0,0);
+											var waitingTimeSec = (date.getTime() - new Date().getTime())/1000;
+											var lateTime = waitingTimeSec < 0;
+											var totalSec = Math.abs(waitingTimeSec);
+											var hours = parseInt( totalSec / 3600 ) % 24;
+											var minutes = parseInt( totalSec / 60 ) % 60;
+											var seconds = totalSec % 60;
+											if(lateTime) {
+												var waitingTime = "OPÓŹNIENIE";
+												} else {
+													var waitingTime = (hours < 10 ? "0" + hours : hours) + "h " + (minutes < 10 ? "0" + minutes : minutes) + "m";
+													}
+											var newDate = new Date();
 										  	var dateString = hourString + ":" + minuteString;
 											var classs = '';
 											if(newDate > new Date(val.end) || (newDate > new Date(val.start) && isLate)) {
@@ -222,12 +234,12 @@ grailsEvents.on('termClosed-' + configuration, function(data){
 												isWarn = true;
 											} else if (!isLate && isWarn) {
 												isWarn = false;
-												classs = '';	
+												classs = 'class="default"';	
 											} else if(!isLate && !isWarn) {
 												classs = 'class="success"';
 											}
 											
-											html +=	'<tr ' + classs + '>' + '<td>' + dateString + '</td>'+'<td>' + 'czas_oczekiwania' + '</td>'+ '<td>' + val.patient.pesel + '</td>'+ '<td>' + val.room.number + ' / ' + val.room.floor + '</td>' + '<td>' + val.physician.title + ' ' + val.physician.name + ' ' + val.physician.surname+ ' ' + '</td>' + '</tr>';					  	
+											html +=	'<tr ' + classs + '>' + '<td>' + dateString + '</td>'+'<td>' + waitingTime + '</td>'+ '<td>' + val.patient.pesel + '</td>'+ '<td>' + val.room.number + ' / ' + val.room.floor + '</td>' + '<td>' + val.physician.title + ' ' + val.physician.name + ' ' + val.physician.surname+ ' ' + '</td>' + '</tr>';					  	
 										   
 										  });
 										  $('#termList' + $.id + ' tbody').html(html);					  
