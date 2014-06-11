@@ -163,11 +163,8 @@
 	<script src="/displayboardinfo/js/lib/calendar.js"></script>
 	<script src="/displayboardinfo/js/lib/fullcalendar.min.js"></script>
 	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
-	<script
-		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
-
-	<script
-		src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
+<script src="/displayboardinfo/js/lib/sortable.js"></script>
+	<script src="/displayboardinfo/js/lib/ui-bootstrap-tpls-0.10.0.js"></script>
 
 	<script src="/displayboardinfo/js/ng-app/directive/Dialog.js"></script>
 

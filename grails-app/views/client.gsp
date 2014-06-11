@@ -56,16 +56,92 @@
 	<script src="/displayboardinfo/js/lib/jquery-ui.custom.min.js"></script>
 	<script src="/displayboardinfo/js/lib/fullcalendar.min.js"></script>
 	<script src="/displayboardinfo/js/lib/dialogs.min.js"></script>
-	<script
-		src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
-
-	<script
-		src="//rawgithub.com/angular-ui/ui-sortable/master/src/sortable.js"></script>
+	<script src="/displayboardinfo/js/lib/sortable.js"></script>
+	<script src="/displayboardinfo/js/lib/ui-bootstrap-tpls-0.10.0.js"></script>
 
 	
 	
 	
 <script>
+
+
+function reloadData() {
+	$.ajax({
+		  type: "POST",
+		  url: '/displayboardinfo/term/listPhysEventsForToday/',
+		  data: JSON.stringify({ physician_id: $.configuration}),
+		  contentType: 'application/json; charset=utf-8',
+		  success: function( data ) {
+			  var isLate = false;
+			  var isWarn = false;
+			  var html = '';
+			  $.each( data, function( key, val ) {
+				  	var date = new Date(val.start);
+				  	var dateEnd = new Date(val.end);
+				  	if(date.getHours() < 10) {
+					  	var hourString = '0' + date.getHours();
+					  	} else {
+						  	var hourString = date.getHours()
+						  	}
+				  	if(date.getMinutes() < 10) {
+					  	var minuteString = '0' + date.getMinutes();
+					  	} else {
+						  	var minuteString = date.getMinutes()
+						  	}
+
+				  	var newDate2 = new Date();
+				  	newDate2.setHours(0,0,0,0);
+					var waitingTimeSec = (dateEnd.getTime() - new Date().getTime())/1000;
+					var lateTime = waitingTimeSec < 0;
+					var totalSec = Math.abs(waitingTimeSec);
+					var hours = parseInt( totalSec / 3600 ) % 24;
+					var minutes = parseInt( totalSec / 60 ) % 60;
+					var seconds = totalSec % 60;
+					if(lateTime) {
+						var waitingTime = "OPÓŹNIENIE";
+						} else {
+							var waitingTime = (hours < 10 ? "0" + hours : hours) + "h " + (minutes < 10 ? "0" + minutes : minutes) + "m";
+							}
+					var newDate = new Date();
+				  	var dateString = hourString + ":" + minuteString;
+					var classs = '';
+					if(newDate > new Date(val.end)) {
+						classs = 'class="danger"';
+						waitingTime = "OPÓŹNIONE (W TRAKCIE)";
+						isLate = true;
+						isWarn = false;
+					} else if (newDate > new Date(val.start) && isLate) { 
+						classs = 'class="danger"';
+						waitingTime = "OPÓŹNIONE";
+						isLate = true;
+						isWarn = false;
+
+					} else if (!(newDate > new Date(val.end) || (newDate > new Date(val.start))) && isLate) {
+						classs = 'class="warning"';
+						isLate = false;
+						isWarn = true;
+					} else if (!isLate && isWarn) {
+						isWarn = false;
+						classs = 'class="info"';	
+					} else if(!isLate && !isWarn && !(newDate > new Date(val.end) || (newDate > new Date(val.start)))) {
+						classs = 'class="success"';
+					}
+					
+					html +=	'<tr ' + classs + '>' + '<td>' + dateString + '</td>'+'<td>' + waitingTime + '</td>'+ '<td>' + val.patient.pesel + '</td>'+ '<td>' + val.room.number + ' / ' + val.room.floor + '</td>' + '<td>' + val.physician.title + ' ' + val.physician.name + ' ' + val.physician.surname+ ' ' + '</td>' + '</tr>';					  	
+				   
+				  });
+				  $('#termList' + $.id + ' tbody').html(html);					  
+				},
+		  dataType: 'json'})
+
+
+
+
+
+
+}
+
+
 			$(function() {
 				$('#page-wrapper').append('<span style="margin: 0 auto">Wybierz jeden z dostępnych dashboardów</span>');
 				$.ajax({
@@ -151,13 +227,15 @@ function configureWebSocket() {
 var grailsEvents = new grails.Events("${createLink(uri: '')}");
 
 grailsEvents.on('termAdded-' + configuration, function(data){
-	 alert(data);
+	 reloadData(data);
 	 }); 
 
 grailsEvents.on('termClosed-' + configuration, function(data){
-		alert(data);
+	reloadData(data);
 }); 
 }
+
+
 			
 			function createPhysiciansTermList(configuration, elementToAppend, id) {
 				$(elementToAppend).addClass('panel panel-info').append('<div class="panel-heading">' +
@@ -182,7 +260,7 @@ grailsEvents.on('termClosed-' + configuration, function(data){
 
 				$.id = id;
 				$.configuration = configuration;
-				
+				reloadData();
 				 setInterval(function() {
 				
 							//$('#termList' + $.id + ' tr').not(function(){if ($(this).has('th').length){return true}}).remove();
@@ -197,6 +275,7 @@ grailsEvents.on('termClosed-' + configuration, function(data){
 									  var html = '';
 									  $.each( data, function( key, val ) {
 										  	var date = new Date(val.start);
+										  	var dateEnd = new Date(val.end);
 										  	if(date.getHours() < 10) {
 											  	var hourString = '0' + date.getHours();
 											  	} else {
@@ -210,7 +289,7 @@ grailsEvents.on('termClosed-' + configuration, function(data){
 
 										  	var newDate2 = new Date();
 										  	newDate2.setHours(0,0,0,0);
-											var waitingTimeSec = (date.getTime() - new Date().getTime())/1000;
+											var waitingTimeSec = (dateEnd.getTime() - new Date().getTime())/1000;
 											var lateTime = waitingTimeSec < 0;
 											var totalSec = Math.abs(waitingTimeSec);
 											var hours = parseInt( totalSec / 3600 ) % 24;
@@ -224,18 +303,25 @@ grailsEvents.on('termClosed-' + configuration, function(data){
 											var newDate = new Date();
 										  	var dateString = hourString + ":" + minuteString;
 											var classs = '';
-											if(newDate > new Date(val.end) || (newDate > new Date(val.start) && isLate)) {
+											if(newDate > new Date(val.end)) {
 												classs = 'class="danger"';
+												waitingTime = "OPÓŹNIONE (W TRAKCIE)";
 												isLate = true;
 												isWarn = false;
-											} else if (!(newDate > new Date(val.end)) && isLate) {
+											} else if (newDate > new Date(val.start) && isLate) { 
+												classs = 'class="danger"';
+												waitingTime = "OPÓŹNIONE";
+												isLate = true;
+												isWarn = false;
+
+											} else if (!(newDate > new Date(val.end) || (newDate > new Date(val.start))) && isLate) {
 												classs = 'class="warning"';
 												isLate = false;
 												isWarn = true;
 											} else if (!isLate && isWarn) {
 												isWarn = false;
-												classs = 'class="default"';	
-											} else if(!isLate && !isWarn) {
+												classs = 'class="info"';	
+											} else if(!isLate && !isWarn && !(newDate > new Date(val.end) || (newDate > new Date(val.start)))) {
 												classs = 'class="success"';
 											}
 											
@@ -249,7 +335,7 @@ grailsEvents.on('termClosed-' + configuration, function(data){
 
 
 
-					 }, 5000);
+					 }, 2000);
 				
 			}
 			
