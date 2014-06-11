@@ -1,0 +1,23 @@
+
+<div class="panel panel-default" style="float: left; margin: 10px;">
+	<div class="panel-heading">
+		<h3 class="panel-title">Zegar</h3>
+	</div>
+	<div class="panel-body">
+		<ul id="analog-clock" class="analog">
+			<li class="hour"></li>
+			<li class="min"></li>
+			<li class="sec"></li>
+			<li class="meridiem"></li>
+		</ul>
+		<script>
+			$(function() {
+				$('#analog-clock').clock({
+					offset : '+5',
+					type : 'analog'
+				});
+
+			});
+		</script>
+	</div>
+</div>

@@ -13,6 +13,13 @@
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
+events.push.servlet.initParams = [
+	'org.atmosphere.cpr.cometSupport': 'org.atmosphere.container.Tomcat7CometSupport',
+	"org.atmosphere.cpr.CometSupport.maxInactiveActivity": "100000"
+]
+
+tomcat.nio=true
+
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
 grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
 grails.mime.types = [ // the first one is the default format
@@ -37,6 +44,7 @@ grails.mime.types = [ // the first one is the default format
 // What URL patterns should be processed by the resources plugin
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
 grails.resources.adhoc.excludes = ['/WEB-INF/**']
+grails.resources.rewrite.css = false
 
 // Legacy setting for codec used to encode data with ${}
 grails.views.default.codec = "html"
@@ -82,7 +90,7 @@ grails.exceptionresolver.params.exclude = ['password']
 
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
-
+grails.gorm.failOnError=true
 environments {
     development {
         grails.logging.jul.usebridge = true
@@ -112,4 +120,16 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+
+	appenders {
+		// console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+		// file name:'file', file:'app.log'
+	}
+
+	// By default, messages are logged at the warn level to the console and the app.log
+	root {
+		warn 'stdout'
+		// warn 'stdout','file'
+		additivity = true
+	}
 }

@@ -1,5 +1,5 @@
 modules = {
     application {
-        resource url:'js/application.js'
+        resource url:'js/ng-app/application.js'
     }
 }

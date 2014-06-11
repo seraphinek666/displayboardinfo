@@ -1,0 +1,40 @@
+<div ng-controller="TablesController" class="Absolute-Center">   
+	  <div>
+	  	<table class="adminTables">
+	  		<tr>
+	  			<td><label class="control-label" for="physician">Lekarz:</label>
+	  			<td><label class="control-label" for="room">Gabinet:</label>
+	  			<td><label class="control-label" for="patient">Pacjent:</label> 
+	  		</tr>
+	  		<tr> 
+				<td class="adminTablesTD"><select class="form-control" name="physician" id="physician"
+                	ng-model="selectedPhysician" 
+                	ng-options="physician as physician.title+' '+physician.name+' '+physician.surname for physician in physicians"
+    				ng-change="setSelectedPhysicianID(selectedPhysician); fetchPhysicianEvents(selectedPhysician);" required>
+                		<option value="">--Wybierz lekarza--</option>
+            		</select>
+            	<td class="adminTablesTD"><select class="form-control" name="room" id="room"
+                	ng-model="selectedRoom" 
+                	ng-options="room as room.number+' /piętro '+room.floor for room in rooms"
+    				ng-change="setSelectedRoomID(selectedRoom); fetchRoomEvents(selectedRoom);" required>
+                		<option value="">--Wybierz gabinet--</option>
+            		</select>
+            	<td><select class="form-control" name="patient" id="patient"
+                	ng-model="selectedPatient" 
+                	ng-options="patient as patient.surname+' '+patient.name for patient in patients"
+    				ng-change="setSelectedPatientID(selectedPatient)" required>
+                		<option value="">--Wybierz pacjenta--</option>
+            		</select>
+            </tr>
+            <tr>
+            	<td colspan='3' class="eventActions">
+            		<button class="btn btn-primary" ng-click="launchModal()">Edytuj</button>
+         			<button class="btn btn-danger" ng-click="removeEvent()">Usuń</button>
+         		</td>
+            </tr>
+         </table>
+	  </div> 
+	  
+	  <div class="calendar" id="calendar" ui-calendar="uiConfig.calendar" config="uiConfig.calendar" calendar="myCalendar1" class="span8 calendar" 
+	  		ng-model="eventSources" style="height:1000px; width:800px;"></div> 	  
+</div>

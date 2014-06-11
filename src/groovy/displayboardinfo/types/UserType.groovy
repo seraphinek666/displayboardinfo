@@ -1,5 +1,5 @@
 package displayboardinfo.types
 
 enum UserType {
-	Admin,Physician,Secretary
+	Administrator,Lekarz,Asystentka
 }

@@ -3,102 +3,57 @@ package displayboardinfo
 
 
 import static org.springframework.http.HttpStatus.*
+
+import java.awt.Toolkit;
+
+import grails.converters.JSON
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
+@Transactional
 class PatientController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def list() {
+		render Patient.all as JSON;
+	}
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Patient.list(params), model:[patientInstanceCount: Patient.count()]
-    }
+	@Transactional
+	def save() {		
+		Patient patientInstance = request.JSON.patient;		
+		try {
+			patientInstance.save();
+			render 'Success' 
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}
 
-    def show(Patient patientInstance) {
-        respond patientInstance
-    }
-
-    def create() {
-        respond new Patient(params)
-    }
-
-    @Transactional
-    def save(Patient patientInstance) {
-        if (patientInstance == null) {
-            notFound()
-            return
-        }
-
-        if (patientInstance.hasErrors()) {
-            respond patientInstance.errors, view:'create'
-            return
-        }
-
-        patientInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'patientInstance.label', default: 'Patient'), patientInstance.id])
-                redirect patientInstance
-            }
-            '*' { respond patientInstance, [status: CREATED] }
-        }
-    }
-
-    def edit(Patient patientInstance) {
-        respond patientInstance
-    }
-
-    @Transactional
-    def update(Patient patientInstance) {
-        if (patientInstance == null) {
-            notFound()
-            return
-        }
-
-        if (patientInstance.hasErrors()) {
-            respond patientInstance.errors, view:'edit'
-            return
-        }
-
-        patientInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Patient.label', default: 'Patient'), patientInstance.id])
-                redirect patientInstance
-            }
-            '*'{ respond patientInstance, [status: OK] }
-        }
-    }
-
-    @Transactional
-    def delete(Patient patientInstance) {
-
-        if (patientInstance == null) {
-            notFound()
-            return
-        }
-
-        patientInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Patient.label', default: 'Patient'), patientInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'patientInstance.label', default: 'Patient'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
+	@Transactional
+	def update() {
+		def json = request.JSON;
+		try {
+			Patient toUpdate = Patient.find{patient -> id == json.patient.id};
+			toUpdate.name = json.patient.name;
+			toUpdate.surname = json.patient.surname;
+			toUpdate.pesel = json.patient.pesel;
+			toUpdate.save();
+			render 'Success'
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}
+	
+	@Transactional
+	def delete() {
+		def json = request.JSON;
+		try {
+			Patient toDelete = Patient.find{patient -> id == json.patient.id};
+			toDelete.delete();
+			render 'Success'
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}	
 }

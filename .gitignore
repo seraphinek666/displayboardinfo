@@ -1,3 +1,7 @@
 /target
 /target-eclipse
 /.settings
+/bin
+web-app/WEB-INF/atmosphere-decorators.xml
+web-app/WEB-INF/atmosphere-decorators.xml
+web-app/WEB-INF/context.xml

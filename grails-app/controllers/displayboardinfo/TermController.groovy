@@ -3,102 +3,113 @@ package displayboardinfo
 
 
 import static org.springframework.http.HttpStatus.*
+
+import java.sql.Timestamp;
+
 import grails.transaction.Transactional
+
+import java.awt.Toolkit;
+
+import org.apache.ivy.core.event.download.StartArtifactDownloadEvent;
+
+import grails.converters.deep.JSON
+
+import groovy.ui.SystemOutputInterceptor;
+
 
 @Transactional(readOnly = true)
 class TermController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def listPhysEvents() {
+		def json = request.JSON;
+		Physician physicianToGet = Physician.find{physician -> id == json.physician_id};
+		try {
+			def terms = Term.findAll { t -> physician == physicianToGet};
+		
+			render terms as JSON;
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}
+	
+	def listPhysEventsForToday() {
+		def json = request.JSON;
+		Physician physicianToGet = Physician.find{physician -> id == json.physician_id };
+		try {
+			def terms = Term.findAll { t -> physician == physicianToGet && completed == false && start >= new Date().clearTime() && end <= (new Date() +1)};
+			render terms as JSON;
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}
+	
+	def listRoomEvents() {
+		def json = request.JSON;
+		Room roomToGet = Room.find{room -> id == json.room_id};
+		try {
+			render Term.findAllByRoom(roomToGet) as JSON;
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Term.list(params), model:[termInstanceCount: Term.count()]
-    }
+	@Transactional
+	def save() {		
+		Term termInstance = request.JSON.term;		
+		try {
+			termInstance.save();
+			event([namespace: 'browser', topic: "termAdded", data: [message: termInstance]]);
+			render 'Success' 
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}
 
-    def show(Term termInstance) {
-        respond termInstance
-    }
-
-    def create() {
-        respond new Term(params)
-    }
-
-    @Transactional
-    def save(Term termInstance) {
-        if (termInstance == null) {
-            notFound()
-            return
-        }
-
-        if (termInstance.hasErrors()) {
-            respond termInstance.errors, view:'create'
-            return
-        }
-
-        termInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'termInstance.label', default: 'Term'), termInstance.id])
-                redirect termInstance
-            }
-            '*' { respond termInstance, [status: CREATED] }
-        }
-    }
-
-    def edit(Term termInstance) {
-        respond termInstance
-    }
-
-    @Transactional
-    def update(Term termInstance) {
-        if (termInstance == null) {
-            notFound()
-            return
-        }
-
-        if (termInstance.hasErrors()) {
-            respond termInstance.errors, view:'edit'
-            return
-        }
-
-        termInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Term.label', default: 'Term'), termInstance.id])
-                redirect termInstance
-            }
-            '*'{ respond termInstance, [status: OK] }
-        }
-    }
-
-    @Transactional
-    def delete(Term termInstance) {
-
-        if (termInstance == null) {
-            notFound()
-            return
-        }
-
-        termInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Term.label', default: 'Term'), termInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'termInstance.label', default: 'Term'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
+	@Transactional
+	def update() {
+		def json = request.JSON;
+		try {
+			Term toUpdate = Term.find{term -> id_term == json.term.id_term};
+			Physician physician = Physician.find{physician -> id == json.term.physician.id};
+			Patient patient = Patient.find{patient -> id == json.term.patient.id};
+			Room room = Room.find{room -> id == json.term.room.id};
+			
+			toUpdate.start = new Timestamp(json.term.start);
+			toUpdate.end = new Timestamp(json.term.end);
+			toUpdate.title = json.term.title;
+			toUpdate.physician = physician;
+			toUpdate.room = room;
+			toUpdate.patient = patient;
+			toUpdate.allDay = json.term.allDay;
+			toUpdate.completed = json.term.completed;
+			toUpdate.save();
+			
+			if(json.term.completed) {
+//				event for:'browser' , topic:'termClosed', data:[:]
+				event([namespace: 'browser', topic: "termClosed", data: [message: toUpdate]]);
+//				broadcaster['/atmosphere/test'].broadcast('Hello world!')
+			}
+			render 'Success'
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}
+	
+	@Transactional
+	def delete() {
+		def json = request.JSON;
+		try {
+			Term toDelete = Term.find{term -> id_term == json.term.id_term};
+			toDelete.delete();
+			render 'Success'
+		} catch (Exception e) {
+			response.status = 500
+			render e
+		}
+	}
 }

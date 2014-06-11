@@ -5,10 +5,12 @@ import displayboardinfo.types.ComponentType;
 class Component {
 
 	int id;
+	ComponentType type;
+	String location;
+	String configuration;
 	Dashboard dashboard;
-	ComponentType componentType;
-	Map<String,String> configuration;
 	
     static constraints = {
+		configuration nullable:true, length:10000
     }
 }

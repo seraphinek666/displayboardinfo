@@ -1,0 +1,46 @@
+.dictionaryHeaderButtons{
+	margin-top: 20px;
+	margin-bottom: 35px;
+}
+
+.userExistAlert {
+	color:red;
+	font-style: italic;
+}
+
+.adminTables {
+	width:800px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+.adminTablesTD {
+	padding:0 15px 0 0;
+}
+
+.eventActions {
+	text-align: right;
+	padding-top: 10px;
+}
+
+.dailySchedulePhysician {
+	margin-top: 20px;
+	margin-bottom: 35px;
+}
+
+.physicianSelectInDailySchedule {
+	max-width: 300px;
+}
+
+.completedCheckbox{
+	text-align: center;
+}
+
+.dailyScheduleSetupTable{
+	width: 100%;
+	margin: 0px;
+}
+
+.currentDay{
+	text-align: right;
+}

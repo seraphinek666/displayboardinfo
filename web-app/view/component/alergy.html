@@ -1,0 +1,32 @@
+
+<div class="panel panel-info" style="width: 500px; float:left; margin:10px;">
+            <div class="panel-heading">
+              <h3 class="panel-title">Pylenie roślin</h3>
+            </div>
+            <div id="alergy-content" class="panel-body">
+             <script>
+
+	function replaceAll(find, replace, str) {
+		  return str.replace(new RegExp(find, 'g'), replace);
+		}
+	
+		$(function() {			
+			var url = 'https://www.kichacze.pl/Serwis_pylkowy/mapa_pylen.aspx?ID=6'; // website you want to scrape
+			$.ajax({
+			    type: 'GET',
+			    url: 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + url + '"'),
+			    dataType: 'xml',
+			    success: function(data) {
+			        
+			        $('#alergy-content').html(replaceAll('/_layout','/displayboardinfo/_layout',replaceAll('/_Layout','/_layout',data.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[14].childNodes[7].childNodes[8].childNodes[1].childNodes[3].innerHTML)));
+			    },
+			    error: function(data) {
+					console.log(data);
+				    }
+			});
+		});
+	</script>
+            </div>
+          </div>
+
+

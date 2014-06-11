@@ -1,13 +1,11 @@
 package displayboardinfo
 
-import displayboardinfo.types.DashboardType
-
 
 class Dashboard {
 
 	int id;
-	DashboardType type;
-	Map<String,Component> components;
+	String template;
+	String name;
 	
     static constraints = {
     }
